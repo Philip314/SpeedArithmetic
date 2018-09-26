@@ -1,8 +1,11 @@
 package main.question;
 
+import java.util.Random;
+
 public class Question {
 	
 	private String operator;
+	private int difficulty;
 	private boolean correct;
 	private int firstNumber;
 	private int secondNumber;
@@ -15,6 +18,14 @@ public class Question {
 
 	public void setOperator(String operator) {
 		this.operator = operator;
+	}
+
+	public int getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(int difficulty) {
+		this.difficulty = difficulty;
 	}
 
 	public boolean isCorrect() {
@@ -55,6 +66,18 @@ public class Question {
 
 	public void setUserAnswer(int userAnswer) {
 		this.userAnswer = userAnswer;
+	}
+	
+	public int generateNumber(int lower, int upper) {
+		
+		Random random = new Random();
+		
+		return random.ints(lower, upper).findFirst().getAsInt();
+	}
+	
+	@Override
+	public String toString() {
+		return firstNumber + " " + operator + " " + secondNumber;
 	}
 	
 }
