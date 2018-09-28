@@ -7,15 +7,15 @@ public class QuestionSubtraction extends Question {
 		setDifficulty(difficulty);
 		switch(difficulty) {
 		case 1:
-			setFirstNumber(generateNumber(1, 11));
+			setFirstNumber(generateNumber(2, 11));
 			setSecondNumber(generateNumber(1, getFirstNumber()));
 			break;
 		case 2:
-			setFirstNumber(generateNumber(1, 101));
+			setFirstNumber(generateNumber(2, 101));
 			setSecondNumber(generateNumber(1, getFirstNumber()));
 			break;
 		case 3:
-			setFirstNumber(generateNumber(1, 1001));
+			setFirstNumber(generateNumber(2, 1001));
 			setSecondNumber(generateNumber(1, getFirstNumber()));
 			break;
 		}
