@@ -3,6 +3,7 @@ package main;
 import java.util.Scanner;
 
 import main.test.TestAddition;
+import main.test.TestSubtraction;
 
 public class SpeedArithmetic {
 	
@@ -41,6 +42,8 @@ public class SpeedArithmetic {
 				test.getQuestions().stream().forEach(System.out::println);
 				break;
 			case "-":
+				TestSubtraction testSubtract = new TestSubtraction(difficulty);
+				testSubtract.getQuestions().stream().forEach(System.out::println);
 				break;
 			case "*":
 				break;
