@@ -3,6 +3,7 @@ package main;
 import java.util.Scanner;
 
 import main.test.TestAddition;
+import main.test.TestDivision;
 import main.test.TestMultiplication;
 import main.test.TestSubtraction;
 
@@ -26,7 +27,7 @@ public class SpeedArithmetic {
 		}
 		
 		// Ask user for difficulty
-		System.out.println("Which difficult would you like? (1, 2, 3)");
+		System.out.println("Which difficulty would you like? (1, 2, 3)");
 		int difficulty;
 		while (true) {
 			difficulty = scanner.nextInt();
@@ -51,6 +52,8 @@ public class SpeedArithmetic {
 				testMultiply.getQuestions().stream().forEach(System.out::println);
 				break;
 			case "/":
+				TestDivision testDivision = new TestDivision(difficulty);
+				testDivision.getQuestions().stream().forEach(System.out::println);
 				break;
 			default:
 				break;
