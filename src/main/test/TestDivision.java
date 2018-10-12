@@ -10,7 +10,7 @@ public class TestDivision extends Test {
 	
 	public TestDivision(int difficulty) {
 		setDifficulty(difficulty);
-		setOperator("+");
+		setOperator("/");
 		generateDivisionQuestions();
 	}
 	
