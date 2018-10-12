@@ -7,16 +7,16 @@ public class QuestionMultiplication extends Question {
 		setDifficulty(difficulty);
 		switch(difficulty) {
 		case 1:
-			setFirstNumber(generateNumber(1, 11));
-			setSecondNumber(generateNumber(1, 11));
+			setFirstNumber(generateNumber(LOWER, EASY_UPPER));
+			setSecondNumber(generateNumber(LOWER, EASY_UPPER));
 			break;
 		case 2:
-			setFirstNumber(generateNumber(1, 101));
-			setSecondNumber(generateNumber(1, 101));
+			setFirstNumber(generateNumber(LOWER, MED_UPPER));
+			setSecondNumber(generateNumber(LOWER, MED_UPPER));
 			break;
 		case 3:
-			setFirstNumber(generateNumber(1, 1001));
-			setSecondNumber(generateNumber(1, 1001));
+			setFirstNumber(generateNumber(LOWER, HARD_UPPER));
+			setSecondNumber(generateNumber(LOWER, HARD_UPPER));
 			break;
 		}
 		setAnswer(getFirstNumber() + getSecondNumber());

@@ -2,11 +2,6 @@ package main.question;
 
 public class QuestionDivision extends Question {
 	
-	public static final int LOWER = 1;
-	public static final int EASY_UPPER = 11;
-	public static final int MED_UPPER = 101;
-	public static final int HARD_UPPER = 1001;
-	
 	public QuestionDivision(int difficulty) {
 		setOperator("/");
 		setDifficulty(difficulty);

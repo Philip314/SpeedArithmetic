@@ -12,6 +12,11 @@ public class Question {
 	private int answer;
 	private int userAnswer;
 	
+	public static final int LOWER = 1;
+	public static final int EASY_UPPER = 11;
+	public static final int MED_UPPER = 101;
+	public static final int HARD_UPPER = 1001;
+	
 	public String getOperator() {
 		return operator;
 	}
