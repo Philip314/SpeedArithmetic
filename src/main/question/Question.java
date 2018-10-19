@@ -17,6 +17,8 @@ public class Question {
 	public static final int MED_UPPER = 101;
 	public static final int HARD_UPPER = 1001;
 	
+	public static final int SUBTRACT_LOWER = 2;
+	
 	public String getOperator() {
 		return operator;
 	}
@@ -78,6 +80,94 @@ public class Question {
 		Random random = new Random();
 		
 		return random.ints(lower, upper).findFirst().getAsInt();
+	}
+	
+	public void generateAdditionQuestion(int difficulty) {
+		setOperator("+");
+		setDifficulty(difficulty);
+		switch(difficulty) {
+		case 1:
+			setFirstNumber(generateNumber(LOWER, EASY_UPPER));
+			setSecondNumber(generateNumber(LOWER, EASY_UPPER));
+			break;
+		case 2:
+			setFirstNumber(generateNumber(LOWER, MED_UPPER));
+			setSecondNumber(generateNumber(LOWER, MED_UPPER));
+			break;
+		case 3:
+			setFirstNumber(generateNumber(LOWER, HARD_UPPER));
+			setSecondNumber(generateNumber(LOWER, HARD_UPPER));
+			break;
+		}
+		setAnswer(getFirstNumber() + getSecondNumber());
+	}
+	
+	public void generateSubtractionQuestion(int difficulty) {
+		setOperator("-");
+		setDifficulty(difficulty);
+		switch(difficulty) {
+		case 1:
+			setFirstNumber(generateNumber(SUBTRACT_LOWER, EASY_UPPER));
+			setSecondNumber(generateNumber(LOWER, getFirstNumber()));
+			break;
+		case 2:
+			setFirstNumber(generateNumber(SUBTRACT_LOWER, MED_UPPER));
+			setSecondNumber(generateNumber(LOWER, getFirstNumber()));
+			break;
+		case 3:
+			setFirstNumber(generateNumber(SUBTRACT_LOWER, HARD_UPPER));
+			setSecondNumber(generateNumber(LOWER, getFirstNumber()));
+			break;
+		}
+		setAnswer(getFirstNumber() - getSecondNumber());
+	}
+	
+	public void generateMultiplicationQuestion(int difficulty) {
+		setOperator("*");
+		setDifficulty(difficulty);
+		switch(difficulty) {
+		case 1:
+			setFirstNumber(generateNumber(LOWER, EASY_UPPER));
+			setSecondNumber(generateNumber(LOWER, EASY_UPPER));
+			break;
+		case 2:
+			setFirstNumber(generateNumber(LOWER, MED_UPPER));
+			setSecondNumber(generateNumber(LOWER, MED_UPPER));
+			break;
+		case 3:
+			setFirstNumber(generateNumber(LOWER, HARD_UPPER));
+			setSecondNumber(generateNumber(LOWER, HARD_UPPER));
+			break;
+		}
+		setAnswer(getFirstNumber() * getSecondNumber());
+	}
+	
+	public void generateDivisionQuestion(int difficulty) {
+		setOperator("/");
+		setDifficulty(difficulty);
+		switch(difficulty) {
+		case 1:
+			generateDivisibleNumbers(generateNumber(LOWER, EASY_UPPER), generateNumber(LOWER, EASY_UPPER), EASY_UPPER);
+			break;
+		case 2:
+			generateDivisibleNumbers(generateNumber(LOWER, MED_UPPER), generateNumber(LOWER, MED_UPPER), MED_UPPER);
+			break;
+		case 3:
+			generateDivisibleNumbers(generateNumber(LOWER, HARD_UPPER), generateNumber(LOWER, HARD_UPPER), HARD_UPPER);
+			break;
+		}
+		setAnswer(getFirstNumber() / getSecondNumber());
+	}
+	
+	private void generateDivisibleNumbers(int first, int second, int upper) {
+		if (first % second == 0 && first != second) {
+			setFirstNumber(first);
+			setSecondNumber(second);
+		} else {
+			first = generateNumber(LOWER, upper);
+			second = generateNumber(LOWER, upper);
+			generateDivisibleNumbers(first, second, upper);
+		}
 	}
 	
 	@Override

@@ -2,14 +2,8 @@ package main;
 
 import java.util.Scanner;
 
-import main.question.QuestionAddition;
-import main.question.QuestionDivision;
-import main.question.QuestionMultiplication;
-import main.question.QuestionSubtraction;
-import main.test.TestAddition;
-import main.test.TestDivision;
-import main.test.TestMultiplication;
-import main.test.TestSubtraction;
+import main.question.Question;
+import main.test.Test;
 
 public class SpeedArithmetic {
 	
@@ -48,89 +42,40 @@ public class SpeedArithmetic {
 		}
 		
 		int answer;
+		Test test = new Test(difficulty, operation);
 		switch(operation) {
 			case "+":
-				TestAddition test = new TestAddition(difficulty);
-				for (QuestionAddition q : test.getQuestions()) {
-					System.out.println(q);
-					while (true) {
-						try {
-							answer = scanner.nextInt();
-							q.setUserAnswer(answer);
-							break;
-						} catch (Exception e) {
-							System.out.println("Invalid input. Please input a number");
-							scanner.next();
-						}
-					}
-				}
-				for (QuestionAddition q: test.getQuestions()) {
-					System.out.println("YOU: " + q.getUserAnswer());
-					System.out.println("CORRECT: " + q.getAnswer());
-				}
+				test.generateAdditionQuestions();
 				break;
 			case "-":
-				TestSubtraction testSubtract = new TestSubtraction(difficulty);
-				for (QuestionSubtraction q : testSubtract.getQuestions()) {
-					System.out.println(q);
-					while (true) {
-						try {
-							answer = scanner.nextInt();
-							q.setUserAnswer(answer);
-							break;
-						} catch (Exception e) {
-							System.out.println("Invalid input. Please input a number");
-							scanner.next();
-						}
-					}
-				}
-				for (QuestionSubtraction q: testSubtract.getQuestions()) {
-					System.out.println("YOU: " + q.getUserAnswer());
-					System.out.println("CORRECT: " + q.getAnswer());
-				}
+				test.generateSubtractionQuestions();
 				break;
 			case "*":
-				TestMultiplication testMultiply = new TestMultiplication(difficulty);
-				for (QuestionMultiplication q : testMultiply.getQuestions()) {
-					System.out.println(q);
-					while (true) {
-						try {
-							answer = scanner.nextInt();
-							q.setUserAnswer(answer);
-							break;
-						} catch (Exception e) {
-							System.out.println("Invalid input. Please input a number");
-							scanner.next();
-						}
-					}
-				}
-				for (QuestionMultiplication q: testMultiply.getQuestions()) {
-					System.out.println("YOU: " + q.getUserAnswer());
-					System.out.println("CORRECT: " + q.getAnswer());
-				}
+				test.generateMultiplicationQuestions();
 				break;
 			case "/":
-				TestDivision testDivision = new TestDivision(difficulty);
-				for (QuestionDivision q : testDivision.getQuestions()) {
-					System.out.println(q);
-					while (true) {
-						try {
-							answer = scanner.nextInt();
-							q.setUserAnswer(answer);
-							break;
-						} catch (Exception e) {
-							System.out.println("Invalid input. Please input a number");
-							scanner.next();
-						}
-					}
-				}
-				for (QuestionDivision q: testDivision.getQuestions()) {
-					System.out.println("YOU: " + q.getUserAnswer());
-					System.out.println("CORRECT: " + q.getAnswer());
-				}
+				test.generateDivisionQuestions();
 				break;
 			default:
 				break;
+		}
+		
+		for (Question q : test.getQuestions()) {
+			System.out.println(q);
+			while (true) {
+				try {
+					answer = scanner.nextInt();
+					q.setUserAnswer(answer);
+					break;
+				} catch (Exception e) {
+					System.out.println("Invalid input. Please input a number");
+					scanner.next();
+				}
+			}
+		}
+		for (Question q: test.getQuestions()) {
+			System.out.println("YOU: " + q.getUserAnswer());
+			System.out.println("CORRECT: " + q.getAnswer());
 		}
 		
 		scanner.close();
