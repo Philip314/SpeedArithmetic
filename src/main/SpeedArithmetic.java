@@ -2,6 +2,7 @@ package main;
 
 import java.util.Scanner;
 
+import main.question.QuestionAddition;
 import main.test.TestAddition;
 import main.test.TestDivision;
 import main.test.TestMultiplication;
@@ -30,18 +31,40 @@ public class SpeedArithmetic {
 		System.out.println("Which difficulty would you like? (1, 2, 3)");
 		int difficulty;
 		while (true) {
-			difficulty = scanner.nextInt();
-			if(difficulty == 1 || difficulty == 2 || difficulty == 3) {
-				break;
-			} else {
-				System.out.println("Invalid input. Please input one of the difficulties: 1, 2, 3");
+			try {
+				difficulty = scanner.nextInt();
+				if(difficulty == 1 || difficulty == 2 || difficulty == 3) {
+					break;
+				} else {
+					System.out.println("Invalid input. Please input one of the difficulties: 1, 2, 3");
+				}
+			} catch (Exception e) {
+				System.out.println("Invalid input. Please input a number");
+				scanner.next();
 			}
 		}
 		
+		int answer;
 		switch(operation) {
 			case "+":
 				TestAddition test = new TestAddition(difficulty);
-				test.getQuestions().stream().forEach(System.out::println);
+				for (QuestionAddition q : test.getQuestions()) {
+					System.out.println(q);
+					while (true) {
+						try {
+							answer = scanner.nextInt();
+							q.setUserAnswer(answer);
+							break;
+						} catch (Exception e) {
+							System.out.println("Invalid input. Please input a number");
+							scanner.next();
+						}
+					}
+				}
+				for (QuestionAddition q: test.getQuestions()) {
+					System.out.println("YOU: " + q.getUserAnswer());
+					System.out.println("CORRECT: " + q.getAnswer());
+				}
 				break;
 			case "-":
 				TestSubtraction testSubtract = new TestSubtraction(difficulty);
