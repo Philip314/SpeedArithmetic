@@ -3,6 +3,8 @@ package main;
 import java.util.Scanner;
 
 import main.question.QuestionAddition;
+import main.question.QuestionDivision;
+import main.question.QuestionMultiplication;
 import main.question.QuestionSubtraction;
 import main.test.TestAddition;
 import main.test.TestDivision;
@@ -89,11 +91,43 @@ public class SpeedArithmetic {
 				break;
 			case "*":
 				TestMultiplication testMultiply = new TestMultiplication(difficulty);
-				testMultiply.getQuestions().stream().forEach(System.out::println);
+				for (QuestionMultiplication q : testMultiply.getQuestions()) {
+					System.out.println(q);
+					while (true) {
+						try {
+							answer = scanner.nextInt();
+							q.setUserAnswer(answer);
+							break;
+						} catch (Exception e) {
+							System.out.println("Invalid input. Please input a number");
+							scanner.next();
+						}
+					}
+				}
+				for (QuestionMultiplication q: testMultiply.getQuestions()) {
+					System.out.println("YOU: " + q.getUserAnswer());
+					System.out.println("CORRECT: " + q.getAnswer());
+				}
 				break;
 			case "/":
 				TestDivision testDivision = new TestDivision(difficulty);
-				testDivision.getQuestions().stream().forEach(System.out::println);
+				for (QuestionDivision q : testDivision.getQuestions()) {
+					System.out.println(q);
+					while (true) {
+						try {
+							answer = scanner.nextInt();
+							q.setUserAnswer(answer);
+							break;
+						} catch (Exception e) {
+							System.out.println("Invalid input. Please input a number");
+							scanner.next();
+						}
+					}
+				}
+				for (QuestionDivision q: testDivision.getQuestions()) {
+					System.out.println("YOU: " + q.getUserAnswer());
+					System.out.println("CORRECT: " + q.getAnswer());
+				}
 				break;
 			default:
 				break;
