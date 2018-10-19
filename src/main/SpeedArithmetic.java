@@ -74,8 +74,8 @@ public class SpeedArithmetic {
 			}
 		}
 		for (Question q: test.getQuestions()) {
-			System.out.println("YOU: " + q.getUserAnswer());
-			System.out.println("CORRECT: " + q.getAnswer());
+			System.out.println(q.toString() + " = " + q.getAnswer());
+			System.out.println("Your answer is: " + q.getUserAnswer());
 		}
 		
 		scanner.close();
