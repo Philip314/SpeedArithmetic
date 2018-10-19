@@ -3,6 +3,7 @@ package main;
 import java.util.Scanner;
 
 import main.question.QuestionAddition;
+import main.question.QuestionSubtraction;
 import main.test.TestAddition;
 import main.test.TestDivision;
 import main.test.TestMultiplication;
@@ -68,7 +69,23 @@ public class SpeedArithmetic {
 				break;
 			case "-":
 				TestSubtraction testSubtract = new TestSubtraction(difficulty);
-				testSubtract.getQuestions().stream().forEach(System.out::println);
+				for (QuestionSubtraction q : testSubtract.getQuestions()) {
+					System.out.println(q);
+					while (true) {
+						try {
+							answer = scanner.nextInt();
+							q.setUserAnswer(answer);
+							break;
+						} catch (Exception e) {
+							System.out.println("Invalid input. Please input a number");
+							scanner.next();
+						}
+					}
+				}
+				for (QuestionSubtraction q: testSubtract.getQuestions()) {
+					System.out.println("YOU: " + q.getUserAnswer());
+					System.out.println("CORRECT: " + q.getAnswer());
+				}
 				break;
 			case "*":
 				TestMultiplication testMultiply = new TestMultiplication(difficulty);
