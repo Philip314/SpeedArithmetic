@@ -19,7 +19,7 @@ public class QuestionMultiplication extends Question {
 			setSecondNumber(generateNumber(LOWER, HARD_UPPER));
 			break;
 		}
-		setAnswer(getFirstNumber() + getSecondNumber());
+		setAnswer(getFirstNumber() * getSecondNumber());
 	}
 	
 }

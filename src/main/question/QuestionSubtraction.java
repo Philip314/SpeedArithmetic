@@ -21,7 +21,7 @@ public class QuestionSubtraction extends Question {
 			setSecondNumber(generateNumber(LOWER, getFirstNumber()));
 			break;
 		}
-		setAnswer(getFirstNumber() + getSecondNumber());
+		setAnswer(getFirstNumber() - getSecondNumber());
 	}
 	
 }

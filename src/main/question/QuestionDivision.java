@@ -16,7 +16,7 @@ public class QuestionDivision extends Question {
 			generateDivisibleNumbers(generateNumber(LOWER, HARD_UPPER), generateNumber(LOWER, HARD_UPPER), HARD_UPPER);
 			break;
 		}
-		setAnswer(getFirstNumber() + getSecondNumber());
+		setAnswer(getFirstNumber() / getSecondNumber());
 	}
 	
 	public void generateDivisibleNumbers(int first, int second, int upper) {
