@@ -2,10 +2,8 @@ package main;
 
 import java.util.Scanner;
 
-import main.test.TestAddition;
-import main.test.TestDivision;
-import main.test.TestMultiplication;
-import main.test.TestSubtraction;
+import main.question.Question;
+import main.test.Test;
 
 public class SpeedArithmetic {
 	
@@ -30,34 +28,61 @@ public class SpeedArithmetic {
 		System.out.println("Which difficulty would you like? (1, 2, 3)");
 		int difficulty;
 		while (true) {
-			difficulty = scanner.nextInt();
-			if(difficulty == 1 || difficulty == 2 || difficulty == 3) {
-				break;
-			} else {
-				System.out.println("Invalid input. Please input one of the difficulties: 1, 2, 3");
+			try {
+				difficulty = scanner.nextInt();
+				if(difficulty == 1 || difficulty == 2 || difficulty == 3) {
+					break;
+				} else {
+					System.out.println("Invalid input. Please input one of the difficulties: 1, 2, 3");
+				}
+			} catch (Exception e) {
+				System.out.println("Invalid input. Please input a number");
+				scanner.next();
 			}
 		}
 		
+		// Generate questions for test
+		int answer;
+		Test test = new Test(difficulty, operation);
 		switch(operation) {
 			case "+":
-				TestAddition test = new TestAddition(difficulty);
-				test.getQuestions().stream().forEach(System.out::println);
+				test.generateAdditionQuestions();
 				break;
 			case "-":
-				TestSubtraction testSubtract = new TestSubtraction(difficulty);
-				testSubtract.getQuestions().stream().forEach(System.out::println);
+				test.generateSubtractionQuestions();
 				break;
 			case "*":
-				TestMultiplication testMultiply = new TestMultiplication(difficulty);
-				testMultiply.getQuestions().stream().forEach(System.out::println);
+				test.generateMultiplicationQuestions();
 				break;
 			case "/":
-				TestDivision testDivision = new TestDivision(difficulty);
-				testDivision.getQuestions().stream().forEach(System.out::println);
+				test.generateDivisionQuestions();
 				break;
 			default:
 				break;
 		}
+		
+		// Ask user the questions
+		for (Question q : test.getQuestions()) {
+			System.out.println(q);
+			while (true) {
+				try {
+					answer = scanner.nextInt();
+					q.setUserAnswer(answer);
+					break;
+				} catch (Exception e) {
+					System.out.println("Invalid input. Please input a number");
+					scanner.next();
+				}
+			}
+			q.markQuestion();
+		}
+		test.markTest();
+		
+		// Output results
+		for (Question q: test.getQuestions()) {
+			System.out.println(q.toString() + " = " + q.getAnswer() + " Your answer is " + q.getUserAnswer());
+		}
+		System.out.println("Test result: " + test.getNumberOfCorrectAnswers() + "/10");
 		
 		scanner.close();
 		
