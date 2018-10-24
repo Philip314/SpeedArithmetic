@@ -170,6 +170,14 @@ public class Question {
 		}
 	}
 	
+	public void markQuestion() {
+		if (userAnswer == answer) {
+			correct = true;
+		} else {
+			correct = false;
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return firstNumber + " " + operator + " " + secondNumber;

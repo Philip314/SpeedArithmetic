@@ -74,12 +74,12 @@ public class SpeedArithmetic {
 					scanner.next();
 				}
 			}
+			q.markQuestion();
 		}
 		
 		// Output results
 		for (Question q: test.getQuestions()) {
-			System.out.println(q.toString() + " = " + q.getAnswer());
-			System.out.println("Your answer is: " + q.getUserAnswer());
+			System.out.println(q.toString() + " = " + q.getAnswer() + " Your answer is: " + q.getUserAnswer());
 		}
 		
 		scanner.close();
