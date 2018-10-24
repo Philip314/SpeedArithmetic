@@ -76,11 +76,13 @@ public class SpeedArithmetic {
 			}
 			q.markQuestion();
 		}
+		test.markTest();
 		
 		// Output results
 		for (Question q: test.getQuestions()) {
-			System.out.println(q.toString() + " = " + q.getAnswer() + " Your answer is: " + q.getUserAnswer());
+			System.out.println(q.toString() + " = " + q.getAnswer() + " Your answer is " + q.getUserAnswer());
 		}
+		System.out.println("Test result: " + test.getNumberOfCorrectAnswers() + "/10");
 		
 		scanner.close();
 		

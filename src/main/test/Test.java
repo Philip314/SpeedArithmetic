@@ -92,4 +92,14 @@ public class Test {
 		setQuestions(generateQuestions);
 	}
 	
+	public void markTest() {
+		for (Question q : questions) {
+			if (q.isCorrect()) {
+				numberOfCorrectAnswers++;
+			} else {
+				numberOfIncorrectAnswers++;
+			}
+		}
+	}
+	
 }
