@@ -41,6 +41,7 @@ public class SpeedArithmetic {
 			}
 		}
 		
+		// Generate questions for test
 		int answer;
 		Test test = new Test(difficulty, operation);
 		switch(operation) {
@@ -60,6 +61,7 @@ public class SpeedArithmetic {
 				break;
 		}
 		
+		// Ask user the questions
 		for (Question q : test.getQuestions()) {
 			System.out.println(q);
 			while (true) {
@@ -73,6 +75,8 @@ public class SpeedArithmetic {
 				}
 			}
 		}
+		
+		// Output results
 		for (Question q: test.getQuestions()) {
 			System.out.println(q.toString() + " = " + q.getAnswer());
 			System.out.println("Your answer is: " + q.getUserAnswer());
