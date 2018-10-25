@@ -2,8 +2,8 @@ package main;
 
 import java.util.Scanner;
 
+import main.arithmetictest.ArithmeticTest;
 import main.question.Question;
-import main.test.Test;
 
 public class SpeedArithmetic {
 	
@@ -43,7 +43,7 @@ public class SpeedArithmetic {
 		
 		// Generate questions for test
 		int answer;
-		Test test = new Test(difficulty, operation);
+		ArithmeticTest test = new ArithmeticTest(difficulty, operation);
 		switch(operation) {
 			case "+":
 				test.generateAdditionQuestions();

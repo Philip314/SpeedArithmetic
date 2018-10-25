@@ -1,10 +1,10 @@
-package main.test;
+package main.arithmetictest;
 
 import java.util.ArrayList;
 
 import main.question.Question;
 
-public class Test {
+public class ArithmeticTest {
 	
 	private int difficulty;
 	private String operator;
@@ -13,7 +13,7 @@ public class Test {
 	
 	private ArrayList<Question> questions;
 	
-	public Test(int difficulty, String operator) {
+	public ArithmeticTest(int difficulty, String operator) {
 		setDifficulty(difficulty);
 		setOperator(operator);
 	}
