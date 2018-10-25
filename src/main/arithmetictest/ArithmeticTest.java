@@ -22,7 +22,11 @@ public class ArithmeticTest {
 		return difficulty;
 	}
 	public void setDifficulty(int difficulty) {
-		this.difficulty = difficulty;
+		if (difficulty == 1 || difficulty == 2 || difficulty == 3) {
+			this.difficulty = difficulty;
+		} else {
+			throw new IllegalArgumentException("Only 1, 2, or 3 is allowed");
+		}
 	}
 	public String getOperator() {
 		return operator;

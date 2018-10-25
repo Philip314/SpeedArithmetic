@@ -20,4 +20,17 @@ public class ArithmeticTestTest {
 		});
 	}
 	
+	@Test
+	public void assignValidDifficultyExceptionNotThrown() {
+		ArithmeticTest test = new ArithmeticTest(1,"+");
+		Assert.assertTrue(true);
+	}
+	
+	@Test
+	public void assignInvalidDifficultyExceptionThrown() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			ArithmeticTest test = new ArithmeticTest(4, "+");
+		});
+	}
+	
 }
