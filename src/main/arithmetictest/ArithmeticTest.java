@@ -31,9 +31,8 @@ public class ArithmeticTest {
 		if (operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/")) {
 			this.operator = operator;
 		} else {
-			throw new IllegalArgumentException("Invalid input. Please input one of the operators: +, -, *, /");
+			throw new IllegalArgumentException("Only +, -, *, or / is allowed");
 		}
-		
 	}
 	
 	public int getNumberOfCorrectAnswers() {

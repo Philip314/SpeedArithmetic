@@ -43,7 +43,12 @@ public class SpeedArithmetic {
 		
 		// Generate questions for test
 		int answer;
-		ArithmeticTest test = new ArithmeticTest(difficulty, operation);
+		ArithmeticTest test = null;
+		try {
+			test = new ArithmeticTest(difficulty, operation);
+		} catch (Exception e) {
+			e.getMessage();
+		}
 		switch(operation) {
 			case "+":
 				test.generateAdditionQuestions();
