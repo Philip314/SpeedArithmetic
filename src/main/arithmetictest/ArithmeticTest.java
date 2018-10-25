@@ -28,7 +28,12 @@ public class ArithmeticTest {
 		return operator;
 	}
 	public void setOperator(String operator) {
-		this.operator = operator;
+		if (operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/")) {
+			this.operator = operator;
+		} else {
+			throw new IllegalArgumentException("Invalid input. Please input one of the operators: +, -, *, /");
+		}
+		
 	}
 	
 	public int getNumberOfCorrectAnswers() {
