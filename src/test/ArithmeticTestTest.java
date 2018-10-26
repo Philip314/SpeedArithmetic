@@ -33,4 +33,19 @@ public class ArithmeticTestTest {
 		});
 	}
 	
+	@Test
+	public void generateAdditionQuestionsWithSameOperatorExceptionNotThrown() {
+		ArithmeticTest test = new ArithmeticTest(1, "+");
+		test.generateAdditionQuestions();
+		Assert.assertTrue(true);
+	}
+	
+	@Test
+	public void generateAdditionQuestionsWithDifferentOperatorExceptionThrown() {
+		Assertions.assertThrows(RuntimeException.class, () -> {
+			ArithmeticTest test = new ArithmeticTest(1, "/");
+			test.generateAdditionQuestions();
+		});
+	}
+	
 }
