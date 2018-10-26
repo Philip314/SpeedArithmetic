@@ -37,4 +37,28 @@ public class QuestionTest {
 		});
 	}
 	
+	@Test
+	public void generateNumberCorrectlyBetweenUpperAndLowerBoundExceptionNotThrown() {
+		Question q = new Question();
+		int number = q.generateNumber(1, 11);
+		Assert.assertTrue(number >= 1);
+		Assert.assertTrue(number <= 10);
+	}
+	
+	@Test
+	public void generateNumberIncorrectlyWithSmallerBoundNumberExceptionThrown() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Question q = new Question();
+			q.generateNumber(5, 1);
+		});
+	}
+	
+	@Test
+	public void generateNumberIncorrectlyWithEqualNumbersExceptionThrown() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Question q = new Question();
+			q.generateNumber(5, 5);
+		});
+	}
+	
 }
