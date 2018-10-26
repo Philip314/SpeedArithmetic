@@ -22,4 +22,19 @@ public class QuestionTest {
 		});
 	}
 	
+	@Test
+	public void assignValidDifficultyExceptionNotThrown() {
+		Question q = new Question();
+		q.setDifficulty(1);
+		Assert.assertTrue(true);
+	}
+	
+	@Test
+	public void assignInvalidDifficultyExceptionThrown() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Question q = new Question();
+			q.setDifficulty(4);
+		});
+	}
+	
 }
