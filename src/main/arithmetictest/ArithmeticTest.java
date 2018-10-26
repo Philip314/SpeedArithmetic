@@ -114,6 +114,7 @@ public class ArithmeticTest {
 	
 	public void markTest() {
 		for (Question q : questions) {
+			q.markQuestion();
 			if (q.isCorrect()) {
 				numberOfCorrectAnswers++;
 			} else {

@@ -79,7 +79,6 @@ public class SpeedArithmetic {
 					scanner.next();
 				}
 			}
-			q.markQuestion();
 		}
 		test.markTest();
 		

@@ -4,6 +4,7 @@ import org.junit.*;
 import org.junit.jupiter.api.Assertions;
 
 import main.arithmetictest.ArithmeticTest;
+import main.question.Question;
 
 public class ArithmeticTestTest {
 	
@@ -91,6 +92,18 @@ public class ArithmeticTestTest {
 			ArithmeticTest test = new ArithmeticTest(1, "+");
 			test.generateDivisionQuestions();
 		});
+	}
+	
+	@Test
+	public void markTestCorrectlySameNumberOfCorrectAndIncorrectAnswers() {
+		ArithmeticTest test = new ArithmeticTest(1, "+");
+		test.generateAdditionQuestions();
+		for (Question q : test.getQuestions()) {
+			q.setUserAnswer(q.getAnswer());
+		}
+		test.markTest();
+		Assert.assertEquals(10, test.getNumberOfCorrectAnswers());
+		Assert.assertEquals(0, test.getNumberOfIncorrectAnswers());
 	}
 	
 }
