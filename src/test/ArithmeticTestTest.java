@@ -48,4 +48,49 @@ public class ArithmeticTestTest {
 		});
 	}
 	
+	@Test
+	public void generateSubtractionQuestionsWithSameOperatorExceptionNotThrown() {
+		ArithmeticTest test = new ArithmeticTest(1, "-");
+		test.generateSubtractionQuestions();
+		Assert.assertTrue(true);
+	}
+	
+	@Test
+	public void generateSubtractionQuestionsWithDifferentOperatorExceptionThrown() {
+		Assertions.assertThrows(RuntimeException.class, () -> {
+			ArithmeticTest test = new ArithmeticTest(1, "/");
+			test.generateSubtractionQuestions();
+		});
+	}
+	
+	@Test
+	public void generateMultiplicationQuestionsWithSameOperatorExceptionNotThrown() {
+		ArithmeticTest test = new ArithmeticTest(1, "*");
+		test.generateMultiplicationQuestions();
+		Assert.assertTrue(true);
+	}
+	
+	@Test
+	public void generateMultiplicationQuestionsWithDifferentOperatorExceptionThrown() {
+		Assertions.assertThrows(RuntimeException.class, () -> {
+			ArithmeticTest test = new ArithmeticTest(1, "/");
+			test.generateMultiplicationQuestions();
+		});
+	}
+	
+	@Test
+	public void generateDivisionQuestionsWithSameOperatorExceptionNotThrown() {
+		ArithmeticTest test = new ArithmeticTest(1, "/");
+		test.generateDivisionQuestions();
+		Assert.assertTrue(true);
+	}
+	
+	@Test
+	public void generateDivisionQuestionsWithDifferentOperatorExceptionThrown() {
+		Assertions.assertThrows(RuntimeException.class, () -> {
+			ArithmeticTest test = new ArithmeticTest(1, "+");
+			test.generateDivisionQuestions();
+		});
+	}
+	
 }
