@@ -24,7 +24,11 @@ public class Question {
 	}
 
 	public void setOperator(String operator) {
-		this.operator = operator;
+		if (operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/")) {
+			this.operator = operator;
+		} else {
+			throw new IllegalArgumentException("Only +, -, *, or / is allowed");
+		}
 	}
 
 	public int getDifficulty() {
