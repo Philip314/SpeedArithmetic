@@ -2,12 +2,22 @@ package main;
 
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 import main.arithmetictest.ArithmeticTest;
 import main.question.Question;
+import main.userinterface.UserInterface;
 
-public class SpeedArithmetic {
+public class SpeedArithmetic extends Application {
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		UserInterface.mainMenu();
+	}
 	
 	public static void main (String[] args) {
+		launch(args);
+		/*
 		System.out.println("Welcome to SpeedArithmetic");
 		
 		Scanner scanner = new Scanner(System.in);
@@ -89,7 +99,7 @@ public class SpeedArithmetic {
 		System.out.println("Test result: " + test.getNumberOfCorrectAnswers() + "/10");
 		
 		scanner.close();
-		
+		*/
 	}
 	
 }
