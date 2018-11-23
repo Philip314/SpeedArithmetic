@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -49,8 +50,27 @@ public class UserInterface {
 		
 		BorderPane borderPane = new BorderPane();
 		
+		Button level1 = new Button("Level 1");
+		Label level1Info = new Label("Numbers will be 1 to 10");
+		Button level2 = new Button("Level 2");
+		Label level2Info = new Label("Numbers will be 1 to 100");
+		Button level3 = new Button("Level 3");
+		Label level3Info = new Label("Numbers will be 1 to 1000");
+		
+		HBox level1Row = new HBox();
+		level1Row.getChildren().addAll(level1, level1Info);
+		level1Row.setSpacing(10);
+		
+		HBox level2Row = new HBox();
+		level2Row.getChildren().addAll(level2, level2Info);
+		level2Row.setSpacing(10);
+		
+		HBox level3Row = new HBox();
+		level3Row.getChildren().addAll(level3, level3Info);
+		level3Row.setSpacing(10);
+		
 		VBox vbox = new VBox();
-		vbox.getChildren().addAll(new Label("Difficulty"), new Label("Please select a difficulty"));
+		vbox.getChildren().addAll(new Label("Difficulty"), new Label("Please select a difficulty"), level1Row, level2Row, level3Row);
 		vbox.setPadding(new Insets(10,10,10,10));
 		vbox.setSpacing(10);
 		
