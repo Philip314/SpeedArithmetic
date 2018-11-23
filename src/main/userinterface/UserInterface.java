@@ -5,16 +5,14 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
 
 public class UserInterface {
-	
-	private EventHandler<ActionEvent> a;
 	
 	public static void mainMenu() {
 		Stage stage = new Stage();
@@ -69,8 +67,13 @@ public class UserInterface {
 		level3Row.getChildren().addAll(level3, level3Info);
 		level3Row.setSpacing(10);
 		
+		Label operatorTitle = new Label("Operator");
+		Label operatorInfo = new Label("Please select which operation you would like to practice");
+		ChoiceBox<String> operators = new ChoiceBox<String>();
+		operators.getItems().addAll("+", "-", "*", "/");
+		
 		VBox vbox = new VBox();
-		vbox.getChildren().addAll(new Label("Difficulty"), new Label("Please select a difficulty"), level1Row, level2Row, level3Row);
+		vbox.getChildren().addAll(new Label("Difficulty"), new Label("Please select a difficulty"), level1Row, level2Row, level3Row, operatorTitle, operatorInfo, operators);
 		vbox.setPadding(new Insets(10,10,10,10));
 		vbox.setSpacing(10);
 		
