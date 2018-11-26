@@ -1,5 +1,6 @@
 package main.userinterface;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -75,8 +76,21 @@ public class UserInterface {
 		ChoiceBox<String> operators = new ChoiceBox<String>();
 		operators.getItems().addAll("+", "-", "*", "/");
 		
+		Button createTest = new Button("Create test");
+		Label warning = new Label();
+		createTest.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				if (difficulty.getValue() != null && operators.getValue() != null) {
+					warning.setText("");
+				} else {
+					warning.setText("Please select a difficulty and operator");
+				}
+			}
+		});
+		
 		VBox vbox = new VBox();
-		vbox.getChildren().addAll(difficultyTitle, difficultyInfo, difficultyRow, operatorTitle, operatorInfo, operators);
+		vbox.getChildren().addAll(difficultyTitle, difficultyInfo, difficultyRow, operatorTitle, operatorInfo, operators, createTest, warning);
 		vbox.setPadding(new Insets(10,10,10,10));
 		vbox.setSpacing(10);
 		
