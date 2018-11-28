@@ -106,7 +106,14 @@ public class UserInterface {
 		
 		BorderPane borderPane = new BorderPane();
 		
-		//borderPane.setCenter();
+		Label testTitle = new Label("Test");
+		
+		VBox vbox = new VBox();
+		vbox.getChildren().addAll(testTitle);
+		vbox.setPadding(new Insets(10,10,10,10));
+		vbox.setSpacing(10);
+		
+		borderPane.setCenter(vbox);
 		Scene scene = new Scene(borderPane, 500, 300);
 		
 		stage.setTitle("SpeedArithmetic");
