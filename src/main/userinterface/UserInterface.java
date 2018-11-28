@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -116,8 +117,17 @@ public class UserInterface {
 		vbox.setPadding(new Insets(10,10,10,10));
 		vbox.setSpacing(10);
 		
+		for (int i=0; i< test.getQuestions().size(); i++) {
+			Label label = new Label("Question " + (i+1) + ": " + test.getQuestions().get(i));
+			TextField textField = new TextField();
+			HBox question = new HBox();
+			question.setSpacing(10);
+			question.getChildren().addAll(label, textField);
+			vbox.getChildren().add(question);
+		}
+		
 		borderPane.setCenter(vbox);
-		Scene scene = new Scene(borderPane, 500, 300);
+		Scene scene = new Scene(borderPane, 500, 500);
 		
 		stage.setTitle("SpeedArithmetic");
 		stage.setScene(scene);
