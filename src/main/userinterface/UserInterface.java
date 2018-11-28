@@ -12,6 +12,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
+import main.arithmetictest.ArithmeticTest;
+import main.arithmetictest.ArithmeticTestManager;
 
 public class UserInterface {
 	
@@ -52,17 +54,17 @@ public class UserInterface {
 		Label difficultyTitle = new Label("Difficulty");
 		Label difficultyInfo = new Label("Please select a difficulty");
 		Label levelInfo = new Label("");
-		ChoiceBox<String> difficulty = new ChoiceBox<String>();
-		difficulty.getItems().addAll("Level 1", "Level 2", "Level 3");
+		ChoiceBox<Integer> difficulty = new ChoiceBox<Integer>();
+		difficulty.getItems().addAll(1, 2, 3);
 		difficulty.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				switch(difficulty.getValue()) {
-					case "Level 1": levelInfo.setText("Numbers will be 1 to 10");
+					case 1: levelInfo.setText("Numbers will be 1 to 10");
 						break;
-					case "Level 2": levelInfo.setText("Numbers will be 1 to 100");
+					case 2: levelInfo.setText("Numbers will be 1 to 100");
 						break;
-					case "Level 3": levelInfo.setText("Numbers will be 1 to 1000");
+					case 3: levelInfo.setText("Numbers will be 1 to 1000");
 						break;
 				}
 			}
@@ -82,7 +84,8 @@ public class UserInterface {
 			@Override
 			public void handle(ActionEvent event) {
 				if (difficulty.getValue() != null && operators.getValue() != null) {
-					showTest(stage);
+					ArithmeticTest test = ArithmeticTestManager.createTest(difficulty.getValue(), operators.getValue());
+					showTest(stage, test);
 				} else {
 					warning.setText("Please select a difficulty and operator");
 				}
@@ -102,7 +105,7 @@ public class UserInterface {
 		stage.show();
 	}
 	
-	public static void showTest(Stage stage) {
+	public static void showTest(Stage stage, ArithmeticTest test) {
 		
 		BorderPane borderPane = new BorderPane();
 		
