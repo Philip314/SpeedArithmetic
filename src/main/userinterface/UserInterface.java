@@ -1,6 +1,5 @@
 package main.userinterface;
 
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -18,6 +17,12 @@ import main.arithmetictest.ArithmeticTestManager;
 
 public class UserInterface {
 	
+	private static final String TITLE = "SpeedArithmetic";
+	private static final int WIDTH = 400;
+	private static final int HEIGHT = 500;
+	private static final int SPACING = 10;
+	private static final Insets PADDING = new Insets(10,10,10,10); 
+	
 	public static void mainMenu() {
 		Stage stage = new Stage();
 		
@@ -32,18 +37,18 @@ public class UserInterface {
 			}
 		});
 		hbox.getChildren().addAll(createTest, new Button("Create account"));
-		hbox.setPadding(new Insets(20,0,0,0));
-		hbox.setSpacing(10);
+		hbox.setPadding(PADDING);
+		hbox.setSpacing(SPACING);
 		
 		VBox vbox = new VBox();
-		vbox.getChildren().addAll(new Label("SpeedArithmetic"), new Label("This is a program to train your arithmetic skills"), hbox);
-		vbox.setPadding(new Insets(10,10,10,10));
-		vbox.setSpacing(10);
+		vbox.getChildren().addAll(new Label(TITLE), new Label("This is a program to train your arithmetic skills"), hbox);
+		vbox.setPadding(PADDING);
+		vbox.setSpacing(SPACING);
 		
 		borderPane.setCenter(vbox);
-		Scene scene = new Scene(borderPane, 500, 300);
+		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
-		stage.setTitle("SpeedArithmetic");
+		stage.setTitle(TITLE);
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -72,7 +77,7 @@ public class UserInterface {
 		});
 		HBox difficultyRow = new HBox();
 		difficultyRow.getChildren().addAll(difficulty, levelInfo);
-		difficultyRow.setSpacing(10);
+		difficultyRow.setSpacing(SPACING);
 		
 		Label operatorTitle = new Label("Operator");
 		Label operatorInfo = new Label("Please select which operation you would like to practice");
@@ -95,13 +100,13 @@ public class UserInterface {
 		
 		VBox vbox = new VBox();
 		vbox.getChildren().addAll(difficultyTitle, difficultyInfo, difficultyRow, operatorTitle, operatorInfo, operators, createTest, warning);
-		vbox.setPadding(new Insets(10,10,10,10));
-		vbox.setSpacing(10);
+		vbox.setPadding(PADDING);
+		vbox.setSpacing(SPACING);
 		
 		borderPane.setCenter(vbox);
-		Scene scene = new Scene(borderPane, 500, 300);
+		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
-		stage.setTitle("SpeedArithmetic");
+		stage.setTitle(TITLE);
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -114,22 +119,22 @@ public class UserInterface {
 		
 		VBox vbox = new VBox();
 		vbox.getChildren().addAll(testTitle);
-		vbox.setPadding(new Insets(10,10,10,10));
-		vbox.setSpacing(10);
+		vbox.setPadding(PADDING);
+		vbox.setSpacing(SPACING);
 		
 		for (int i=0; i< test.getQuestions().size(); i++) {
 			Label label = new Label("Question " + (i+1) + ": " + test.getQuestions().get(i));
 			TextField textField = new TextField();
 			HBox question = new HBox();
-			question.setSpacing(10);
+			question.setSpacing(SPACING);
 			question.getChildren().addAll(label, textField);
 			vbox.getChildren().add(question);
 		}
 		
 		borderPane.setCenter(vbox);
-		Scene scene = new Scene(borderPane, 500, 500);
+		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
-		stage.setTitle("SpeedArithmetic");
+		stage.setTitle(TITLE);
 		stage.setScene(scene);
 		stage.show();
 		
