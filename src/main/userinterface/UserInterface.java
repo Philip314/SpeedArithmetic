@@ -82,7 +82,7 @@ public class UserInterface {
 			@Override
 			public void handle(ActionEvent event) {
 				if (difficulty.getValue() != null && operators.getValue() != null) {
-					warning.setText("");
+					showTest(stage);
 				} else {
 					warning.setText("Please select a difficulty and operator");
 				}
@@ -100,6 +100,19 @@ public class UserInterface {
 		stage.setTitle("SpeedArithmetic");
 		stage.setScene(scene);
 		stage.show();
+	}
+	
+	public static void showTest(Stage stage) {
+		
+		BorderPane borderPane = new BorderPane();
+		
+		//borderPane.setCenter();
+		Scene scene = new Scene(borderPane, 500, 300);
+		
+		stage.setTitle("SpeedArithmetic");
+		stage.setScene(scene);
+		stage.show();
+		
 	}
 	
 }
