@@ -109,7 +109,7 @@ public class UserInterface {
 		
 		BorderPane borderPane = new BorderPane();
 		
-		Label testTitle = new Label("Test");
+		Label testTitle = new Label("Test \n Difficulty: " + test.getDifficulty() + "\n Operator: " + test.getOperator());
 		
 		VBox vbox = new VBox();
 		vbox.getChildren().addAll(testTitle);
