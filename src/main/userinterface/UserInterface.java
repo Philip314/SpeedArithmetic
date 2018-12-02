@@ -1,8 +1,11 @@
 package main.userinterface;
 
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -54,7 +57,6 @@ public class UserInterface {
 	}
 	
 	public static void createTest(Stage stage) {
-		
 		BorderPane borderPane = new BorderPane();
 		
 		Label difficultyTitle = new Label("Difficulty");
@@ -112,7 +114,6 @@ public class UserInterface {
 	}
 	
 	public static void showTest(Stage stage, ArithmeticTest test) {
-		
 		BorderPane borderPane = new BorderPane();
 		
 		Label testTitle = new Label("Test \n Difficulty: " + test.getDifficulty() + "\n Operator: " + test.getOperator());
@@ -131,13 +132,49 @@ public class UserInterface {
 			vbox.getChildren().add(question);
 		}
 		
+		Button submitTest = new Button("Submit");
+		submitTest.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				ArrayList<String> userAnswers = new ArrayList<String>();
+				for (Node nodeHBox : vbox.getChildren()) {
+					if (nodeHBox instanceof HBox) {
+						for (Node nodeTextField : ((HBox) nodeHBox).getChildren()) {
+							if (nodeTextField instanceof TextField) {
+								userAnswers.add(((TextField) nodeTextField).getText());
+							}
+						}
+					}
+				}
+				showResults(stage, userAnswers);
+			}
+		});
+		
+		vbox.getChildren().add(submitTest);
+		
 		borderPane.setCenter(vbox);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
 		stage.setTitle(TITLE);
 		stage.setScene(scene);
 		stage.show();
+	}
+	
+	public static void showResults(Stage stage, ArrayList<String> userAnswers) {
+		BorderPane borderPane = new BorderPane();
 		
+		Label resultTitle = new Label("Test results");
+		VBox vbox = new VBox();
+		vbox.getChildren().addAll(resultTitle);
+		vbox.setPadding(PADDING);
+		vbox.setSpacing(SPACING);
+		
+		borderPane.setCenter(vbox);
+		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
+		
+		stage.setTitle(TITLE);
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 }
