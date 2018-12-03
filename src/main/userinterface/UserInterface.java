@@ -161,7 +161,7 @@ public class UserInterface {
 				}
 				if (validInput) {
 					ArithmeticTestManager.assignAnswers(test, userAnswers);
-					showResults(stage, userAnswers);
+					showResults(stage, test);
 				} else {
 					invalidInputWarning.setText("Answers must be a number");
 				}
@@ -178,7 +178,7 @@ public class UserInterface {
 		stage.show();
 	}
 	
-	public static void showResults(Stage stage, ArrayList<String> userAnswers) {
+	public static void showResults(Stage stage, ArithmeticTest test) {
 		BorderPane borderPane = new BorderPane();
 		
 		Label resultTitle = new Label("Test results");
@@ -186,6 +186,16 @@ public class UserInterface {
 		vbox.getChildren().addAll(resultTitle);
 		vbox.setPadding(PADDING);
 		vbox.setSpacing(SPACING);
+		
+		for (int i=0; i< test.getQuestions().size(); i++) {
+			Label label = new Label("Question " + (i+1) + ": " + test.getQuestions().get(i));
+			Label userAnswer = new Label(Integer.toString(test.getQuestions().get(i).getUserAnswer()));
+			Label correctAnswer = new Label(Integer.toString(test.getQuestions().get(i).getAnswer()));
+			HBox question = new HBox();
+			question.setSpacing(SPACING);
+			question.getChildren().addAll(label, userAnswer, correctAnswer);
+			vbox.getChildren().add(question);
+		}
 		
 		borderPane.setCenter(vbox);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
