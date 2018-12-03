@@ -132,25 +132,40 @@ public class UserInterface {
 			vbox.getChildren().add(question);
 		}
 		
+		Label invalidInputWarning = new Label();
 		Button submitTest = new Button("Submit");
 		submitTest.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				ArrayList<String> userAnswers = new ArrayList<String>();
+				boolean validInput = true;
 				for (Node nodeHBox : vbox.getChildren()) {
 					if (nodeHBox instanceof HBox) {
 						for (Node nodeTextField : ((HBox) nodeHBox).getChildren()) {
 							if (nodeTextField instanceof TextField) {
-								userAnswers.add(((TextField) nodeTextField).getText());
+								String answer = ((TextField) nodeTextField).getText();
+								try {
+									if (!answer.equals("")) {
+										Integer.parseInt(answer);
+										userAnswers.add(answer);
+									}
+								} catch (Exception e) {
+									validInput = false;
+									break;
+								}
 							}
 						}
 					}
 				}
-				showResults(stage, userAnswers);
+				if (validInput) {
+					showResults(stage, userAnswers);
+				} else {
+					invalidInputWarning.setText("Answers must be a number");
+				}
 			}
 		});
 		
-		vbox.getChildren().add(submitTest);
+		vbox.getChildren().addAll(submitTest, invalidInputWarning);
 		
 		borderPane.setCenter(vbox);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
