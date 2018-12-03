@@ -148,6 +148,8 @@ public class UserInterface {
 									if (!answer.equals("")) {
 										Integer.parseInt(answer);
 										userAnswers.add(answer);
+									} else if (answer.equals("")) {
+										userAnswers.add(null);
 									}
 								} catch (Exception e) {
 									validInput = false;
@@ -158,6 +160,7 @@ public class UserInterface {
 					}
 				}
 				if (validInput) {
+					ArithmeticTestManager.assignAnswers(test, userAnswers);
 					showResults(stage, userAnswers);
 				} else {
 					invalidInputWarning.setText("Answers must be a number");
