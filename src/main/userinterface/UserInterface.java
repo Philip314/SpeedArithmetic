@@ -188,12 +188,19 @@ public class UserInterface {
 		vbox.setSpacing(SPACING);
 		
 		for (int i=0; i< test.getQuestions().size(); i++) {
-			Label label = new Label("Question " + (i+1) + ": " + test.getQuestions().get(i));
-			Label userAnswer = new Label(Integer.toString(test.getQuestions().get(i).getUserAnswer()));
-			Label correctAnswer = new Label(Integer.toString(test.getQuestions().get(i).getAnswer()));
+			String correctAnswer = Integer.toString(test.getQuestions().get(i).getAnswer());
+			Label label = new Label("Question " + (i+1) + ": " + test.getQuestions().get(i) + " = " + correctAnswer);
+			int userAnswerInt = test.getQuestions().get(i).getUserAnswer();
+			Label userAnswer = new Label();
+			if (userAnswerInt == -1) {
+				userAnswer.setText("Your answer is: N/A");
+			} else {
+				userAnswer.setText("Your answer is: " + Integer.toString(test.getQuestions().get(i).getUserAnswer()));
+			}
+			
 			HBox question = new HBox();
 			question.setSpacing(SPACING);
-			question.getChildren().addAll(label, userAnswer, correctAnswer);
+			question.getChildren().addAll(label, userAnswer);
 			vbox.getChildren().add(question);
 		}
 		
