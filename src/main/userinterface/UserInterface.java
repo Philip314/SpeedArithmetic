@@ -18,6 +18,11 @@ import javafx.stage.*;
 import main.arithmetictest.ArithmeticTest;
 import main.arithmetictest.ArithmeticTestManager;
 
+/*
+ * This class is for the GUI.
+ * Each method is a different interface.
+ */
+
 public class UserInterface {
 	
 	private static final String TITLE = "SpeedArithmetic";

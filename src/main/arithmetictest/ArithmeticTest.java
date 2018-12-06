@@ -2,6 +2,13 @@ package main.arithmetictest;
 
 import java.util.ArrayList;
 
+/*
+ * This is the main class that holds the arithmetic test.
+ * This class holds multiple Question objects.
+ * This class can be adapted to different difficulty and arithmetic operators.
+ * 
+ */
+
 import main.question.Question;
 
 public class ArithmeticTest {

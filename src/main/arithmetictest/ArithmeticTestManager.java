@@ -2,6 +2,10 @@ package main.arithmetictest;
 
 import java.util.ArrayList;
 
+/*
+ * This class is for methods that interact with the ArithmeticTest class.
+ */
+
 public class ArithmeticTestManager {
 	
 	public static ArithmeticTest createTest(int difficulty, String operator) {

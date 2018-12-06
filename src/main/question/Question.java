@@ -2,6 +2,11 @@ package main.question;
 
 import java.util.Random;
 
+/*
+ * This class is to hold the question for the ArithmeticTest class.
+ * It contains variables for each part of a question.
+ */
+
 public class Question {
 	
 	private String operator;
