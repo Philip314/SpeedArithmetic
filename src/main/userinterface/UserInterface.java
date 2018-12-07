@@ -2,8 +2,6 @@ package main.userinterface;
 
 import java.util.ArrayList;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -32,7 +30,7 @@ public class UserInterface {
 	private static final int SPACING = 10;
 	private static final Insets PADDING = new Insets(10,10,10,10);
 	
-	
+	// The header for each interface
 	private static VBox quitToMain(Stage stage) {
 		Button quit = new Button("Main menu");
 		VBox header = new VBox();
@@ -46,24 +44,21 @@ public class UserInterface {
 		
 		BorderPane borderPane = new BorderPane();
 		
+		// A row of buttons
 		HBox hbox = new HBox();
 		Button createTest = new Button("Create test");
-		createTest.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				createTest(stage);
-			}
-		});
+		createTest.setOnAction(actionEvent -> createTest(stage));
 		hbox.getChildren().addAll(createTest, new Button("Create account"));
 		hbox.setPadding(PADDING);
 		hbox.setSpacing(SPACING);
 		
-		VBox vbox = new VBox();
-		vbox.getChildren().addAll(new Label(TITLE), new Label("This is a program to train your arithmetic skills"), hbox);
-		vbox.setPadding(PADDING);
-		vbox.setSpacing(SPACING);
+		// Title and introduction
+		VBox mainV = new VBox();
+		mainV.getChildren().addAll(new Label(TITLE), new Label("This is a program to train your arithmetic skills"), hbox);
+		mainV.setPadding(PADDING);
+		mainV.setSpacing(SPACING);
 		
-		borderPane.setCenter(vbox);
+		borderPane.setCenter(mainV);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
 		stage.setTitle(TITLE);
@@ -74,56 +69,53 @@ public class UserInterface {
 	public static void createTest(Stage stage) {
 		BorderPane borderPane = new BorderPane();
 		
+		// Select difficulty
 		Label difficultyTitle = new Label("Difficulty");
 		Label difficultyInfo = new Label("Please select a difficulty");
 		Label levelInfo = new Label("");
 		ChoiceBox<Integer> difficulty = new ChoiceBox<Integer>();
 		difficulty.getItems().addAll(1, 2, 3);
-		difficulty.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				switch(difficulty.getValue()) {
-					case 1: levelInfo.setText("Numbers will be 1 to 10");
-						break;
-					case 2: levelInfo.setText("Numbers will be 1 to 100");
-						break;
-					case 3: levelInfo.setText("Numbers will be 1 to 1000");
-						break;
-				}
+		difficulty.setOnAction(actionEvent -> {
+			switch(difficulty.getValue()) {
+				case 1: levelInfo.setText("Numbers will be 1 to 10");
+					break;
+				case 2: levelInfo.setText("Numbers will be 1 to 100");
+					break;
+				case 3: levelInfo.setText("Numbers will be 1 to 1000");
+					break;
 			}
 		});
 		HBox difficultyRow = new HBox();
 		difficultyRow.getChildren().addAll(difficulty, levelInfo);
 		difficultyRow.setSpacing(SPACING);
 		
+		// Select operator
 		Label operatorTitle = new Label("Operator");
 		Label operatorInfo = new Label("Please select which operation you would like to practice");
 		ChoiceBox<String> operators = new ChoiceBox<String>();
 		operators.getItems().addAll("+", "-", "*", "/");
 		
+		// Create test
 		Button createTest = new Button("Create test");
 		Label warning = new Label();
-		createTest.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				if (difficulty.getValue() != null && operators.getValue() != null) {
-					ArithmeticTest test = ArithmeticTestManager.createTest(difficulty.getValue(), operators.getValue());
-					showTest(stage, test);
-				} else {
-					warning.setText("Please select a difficulty and operator");
-				}
+		createTest.setOnAction(actionEvent -> {
+			if (difficulty.getValue() != null && operators.getValue() != null) {
+				ArithmeticTest test = ArithmeticTestManager.createTest(difficulty.getValue(), operators.getValue());
+				showTest(stage, test);
+			} else {
+				warning.setText("Please select a difficulty and operator");
 			}
 		});
 		
-		VBox vbox = new VBox();
-		vbox.getChildren().addAll(difficultyTitle, difficultyInfo, difficultyRow, operatorTitle, operatorInfo, operators, createTest, warning);
-		vbox.setPadding(PADDING);
-		vbox.setSpacing(SPACING);
+		VBox mainV = new VBox();
+		mainV.getChildren().addAll(difficultyTitle, difficultyInfo, difficultyRow, operatorTitle, operatorInfo, operators, createTest, warning);
+		mainV.setPadding(PADDING);
+		mainV.setSpacing(SPACING);
 		
 		
 		
 		borderPane.setTop(quitToMain(stage));
-		borderPane.setCenter(vbox);
+		borderPane.setCenter(mainV);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
 		stage.setTitle(TITLE);
@@ -136,28 +128,28 @@ public class UserInterface {
 		
 		Label testTitle = new Label("Test \n Difficulty: " + test.getDifficulty() + "\n Operator: " + test.getOperator());
 		
-		VBox vbox = new VBox();
-		vbox.getChildren().addAll(testTitle);
-		vbox.setPadding(PADDING);
-		vbox.setSpacing(SPACING);
+		VBox mainV = new VBox();
+		mainV.getChildren().addAll(testTitle);
+		mainV.setPadding(PADDING);
+		mainV.setSpacing(SPACING);
 		
+		// List questions and textfields
 		for (int i=0; i< test.getQuestions().size(); i++) {
 			Label label = new Label("Question " + (i+1) + ": " + test.getQuestions().get(i));
 			TextField textField = new TextField();
 			HBox question = new HBox();
 			question.setSpacing(SPACING);
 			question.getChildren().addAll(label, textField);
-			vbox.getChildren().add(question);
+			mainV.getChildren().add(question);
 		}
 		
+		// Submit test and to validate the input are numbers
 		Label invalidInputWarning = new Label();
 		Button submitTest = new Button("Submit");
-		submitTest.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				ArrayList<String> userAnswers = new ArrayList<String>();
+		submitTest.setOnAction(actionEvent -> {
+			ArrayList<String> userAnswers = new ArrayList<String>();
 				boolean validInput = true;
-				for (Node nodeHBox : vbox.getChildren()) {
+				for (Node nodeHBox : mainV.getChildren()) {
 					if (nodeHBox instanceof HBox) {
 						for (Node nodeTextField : ((HBox) nodeHBox).getChildren()) {
 							if (nodeTextField instanceof TextField) {
@@ -183,13 +175,12 @@ public class UserInterface {
 				} else {
 					invalidInputWarning.setText("Answers must be a number");
 				}
-			}
 		});
 		
-		vbox.getChildren().addAll(submitTest, invalidInputWarning);
+		mainV.getChildren().addAll(submitTest, invalidInputWarning);
 		
 		borderPane.setTop(quitToMain(stage));
-		borderPane.setCenter(vbox);
+		borderPane.setCenter(mainV);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
 		stage.setTitle(TITLE);
@@ -201,11 +192,12 @@ public class UserInterface {
 		BorderPane borderPane = new BorderPane();
 		
 		Label resultTitle = new Label("Test results");
-		VBox vbox = new VBox();
-		vbox.getChildren().addAll(resultTitle);
-		vbox.setPadding(PADDING);
-		vbox.setSpacing(SPACING);
+		VBox mainV = new VBox();
+		mainV.getChildren().addAll(resultTitle);
+		mainV.setPadding(PADDING);
+		mainV.setSpacing(SPACING);
 		
+		// Display questions and answers
 		for (int i=0; i< test.getQuestions().size(); i++) {
 			String correctAnswer = Integer.toString(test.getQuestions().get(i).getAnswer());
 			Label label = new Label("Question " + (i+1) + ": " + test.getQuestions().get(i) + " = " + correctAnswer);
@@ -220,11 +212,11 @@ public class UserInterface {
 			HBox question = new HBox();
 			question.setSpacing(SPACING);
 			question.getChildren().addAll(label, userAnswer);
-			vbox.getChildren().add(question);
+			mainV.getChildren().add(question);
 		}
 		
 		borderPane.setTop(quitToMain(stage));
-		borderPane.setCenter(vbox);
+		borderPane.setCenter(mainV);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
 		stage.setTitle(TITLE);
