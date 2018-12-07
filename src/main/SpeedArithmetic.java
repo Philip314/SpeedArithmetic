@@ -12,7 +12,7 @@ public class SpeedArithmetic extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		UserInterface.mainMenu();
+		UserInterface.mainMenu(primaryStage);
 	}
 	
 	public static void main (String[] args) {

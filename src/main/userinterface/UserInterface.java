@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,12 +28,21 @@ public class UserInterface {
 	
 	private static final String TITLE = "SpeedArithmetic";
 	private static final int WIDTH = 400;
-	private static final int HEIGHT = 500;
+	private static final int HEIGHT = 550;
 	private static final int SPACING = 10;
-	private static final Insets PADDING = new Insets(10,10,10,10); 
+	private static final Insets PADDING = new Insets(10,10,10,10);
 	
-	public static void mainMenu() {
-		Stage stage = new Stage();
+	
+	private static VBox quitToMain(Stage stage) {
+		Button quit = new Button("Main menu");
+		VBox header = new VBox();
+		quit.setOnAction(actionEvent -> mainMenu(stage));
+		header.getChildren().add(quit);
+		header.setAlignment(Pos.BASELINE_RIGHT);
+		return header;
+	}
+	
+	public static void mainMenu(Stage stage) {
 		
 		BorderPane borderPane = new BorderPane();
 		
@@ -110,6 +120,9 @@ public class UserInterface {
 		vbox.setPadding(PADDING);
 		vbox.setSpacing(SPACING);
 		
+		
+		
+		borderPane.setTop(quitToMain(stage));
 		borderPane.setCenter(vbox);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
@@ -175,6 +188,7 @@ public class UserInterface {
 		
 		vbox.getChildren().addAll(submitTest, invalidInputWarning);
 		
+		borderPane.setTop(quitToMain(stage));
 		borderPane.setCenter(vbox);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
@@ -209,6 +223,7 @@ public class UserInterface {
 			vbox.getChildren().add(question);
 		}
 		
+		borderPane.setTop(quitToMain(stage));
 		borderPane.setCenter(vbox);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
