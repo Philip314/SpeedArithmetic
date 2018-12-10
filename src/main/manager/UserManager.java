@@ -1,5 +1,6 @@
 package main.manager;
 
+import main.arithmetictest.ArithmeticTest;
 import main.user.User;
 
 /*
@@ -8,7 +9,7 @@ import main.user.User;
 
 public class UserManager {
 	
-	public static User activeUser;
+	private static User activeUser = null;
 	
 	public static User getActiveUser() {
 		return activeUser;
@@ -22,6 +23,12 @@ public class UserManager {
 		User user = new User();
 		user.setUsername(username);
 		setActiveUser(user);
+	}
+	
+	public static void saveTest(ArithmeticTest test) {
+		if (activeUser != null) {
+			activeUser.addTest(test);
+		}
 	}
 	
 }

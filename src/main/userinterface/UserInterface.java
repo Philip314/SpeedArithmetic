@@ -186,6 +186,7 @@ public class UserInterface {
 				}
 				if (validInput) {
 					ArithmeticTestManager.assignAnswers(test, userAnswers);
+					UserManager.saveTest(test);
 					showResults(stage, test);
 				} else {
 					invalidInputWarning.setText("Answers must be a number");
