@@ -62,7 +62,9 @@ public class UserInterface {
 		createTest.setOnAction(actionEvent -> createTest(stage));
 		Button createAccount = new Button("Create account");
 		createAccount.setOnAction(actionEvent -> createUser(stage));
-		hbox.getChildren().addAll(createTest, createAccount);
+		Button accountDetails = new Button("Account details");
+		accountDetails.setOnAction(actionEvent -> accountDetails(stage));
+		hbox.getChildren().addAll(createTest, createAccount, accountDetails);
 		hbox.setPadding(PADDING);
 		hbox.setSpacing(SPACING);
 		
@@ -263,6 +265,26 @@ public class UserInterface {
 		
 		VBox mainV = new VBox();
 		mainV.getChildren().addAll(createUserTitle, usernameRow, submitUsername, warning);
+		mainV.setPadding(PADDING);
+		mainV.setSpacing(SPACING);
+		
+		borderPane.setTop(header(stage));
+		borderPane.setCenter(mainV);
+		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
+		
+		stage.setTitle(TITLE);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public static void accountDetails(Stage stage) {
+		BorderPane borderPane = new BorderPane();
+		
+		Label accountDetailsTitle = new Label("Account details");
+		
+		
+		VBox mainV = new VBox();
+		mainV.getChildren().addAll(accountDetailsTitle);
 		mainV.setPadding(PADDING);
 		mainV.setSpacing(SPACING);
 		
