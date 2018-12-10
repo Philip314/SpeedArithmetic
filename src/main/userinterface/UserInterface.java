@@ -3,7 +3,6 @@ package main.userinterface;
 import java.util.ArrayList;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -73,6 +72,7 @@ public class UserInterface {
 		mainV.setPadding(PADDING);
 		mainV.setSpacing(SPACING);
 		
+		borderPane.setTop(header(stage));
 		borderPane.setCenter(mainV);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
