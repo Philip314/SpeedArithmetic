@@ -1,6 +1,8 @@
-package main.arithmetictest;
+package main.manager;
 
 import java.util.ArrayList;
+
+import main.arithmetictest.ArithmeticTest;
 
 /*
  * This class is for methods that interact with the ArithmeticTest class.

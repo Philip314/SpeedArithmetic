@@ -9,13 +9,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
 import main.arithmetictest.ArithmeticTest;
-import main.arithmetictest.ArithmeticTestManager;
+import main.manager.ArithmeticTestManager;
+import main.manager.UserManager;
 
 /*
  * This class is for the GUI.
@@ -31,13 +34,23 @@ public class UserInterface {
 	private static final Insets PADDING = new Insets(10,10,10,10);
 	
 	// The header for each interface
-	private static VBox quitToMain(Stage stage) {
-		Button quit = new Button("Main menu");
-		VBox header = new VBox();
-		quit.setOnAction(actionEvent -> mainMenu(stage));
-		header.getChildren().add(quit);
-		header.setAlignment(Pos.BASELINE_RIGHT);
-		return header;
+	private static ToolBar header(Stage stage) {
+		// Main menu button on the right
+		Button mainMenu = new Button("Main menu");
+		mainMenu.setOnAction(actionEvent -> mainMenu(stage));
+		
+		// Username on the left
+		String username = "(No account)";
+		try {
+			username = UserManager.getActiveUser().getUsername();
+		} catch (NullPointerException e) {
+		}
+		Label usernameLabel = new Label(username);
+		
+		ToolBar toolBar = new ToolBar();
+		toolBar.getItems().addAll(usernameLabel, new Separator(), mainMenu);
+		
+		return toolBar;
 	}
 	
 	public static void mainMenu(Stage stage) {
@@ -48,7 +61,9 @@ public class UserInterface {
 		HBox hbox = new HBox();
 		Button createTest = new Button("Create test");
 		createTest.setOnAction(actionEvent -> createTest(stage));
-		hbox.getChildren().addAll(createTest, new Button("Create account"));
+		Button createAccount = new Button("Create account");
+		createAccount.setOnAction(actionEvent -> createUser(stage));
+		hbox.getChildren().addAll(createTest, createAccount);
 		hbox.setPadding(PADDING);
 		hbox.setSpacing(SPACING);
 		
@@ -114,7 +129,7 @@ public class UserInterface {
 		
 		
 		
-		borderPane.setTop(quitToMain(stage));
+		borderPane.setTop(header(stage));
 		borderPane.setCenter(mainV);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
@@ -179,7 +194,7 @@ public class UserInterface {
 		
 		mainV.getChildren().addAll(submitTest, invalidInputWarning);
 		
-		borderPane.setTop(quitToMain(stage));
+		borderPane.setTop(header(stage));
 		borderPane.setCenter(mainV);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
@@ -215,7 +230,42 @@ public class UserInterface {
 			mainV.getChildren().add(question);
 		}
 		
-		borderPane.setTop(quitToMain(stage));
+		borderPane.setTop(header(stage));
+		borderPane.setCenter(mainV);
+		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
+		
+		stage.setTitle(TITLE);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public static void createUser(Stage stage) {
+		BorderPane borderPane = new BorderPane();
+		
+		Label createUserTitle = new Label("Create account");
+		HBox usernameRow = new HBox();
+		usernameRow.setSpacing(SPACING);
+		Label usernameLabel = new Label("Enter username");
+		TextField usernameInput = new TextField();
+		Label warning = new Label();
+		usernameRow.getChildren().addAll(usernameLabel, usernameInput);
+		Button submitUsername = new Button("Create account");
+		submitUsername.setOnAction(actionEvent -> {
+			String username = usernameInput.getText();
+			if (username.equals("") || username.trim().length() == 0) {
+				warning.setText("Please enter a valid username");
+			} else {
+				UserManager.createUser(username);
+				mainMenu(stage);
+			}
+		});
+		
+		VBox mainV = new VBox();
+		mainV.getChildren().addAll(createUserTitle, usernameRow, submitUsername, warning);
+		mainV.setPadding(PADDING);
+		mainV.setSpacing(SPACING);
+		
+		borderPane.setTop(header(stage));
 		borderPane.setCenter(mainV);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 		
