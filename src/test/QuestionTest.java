@@ -10,16 +10,8 @@ public class QuestionTest {
 	@Test
 	public void assignValidOperatorExceptionNotThrown() {
 		Question q = new Question();
-		q.setOperator("+");
+		q.setOperator(Question.Operator.ADD);
 		Assert.assertTrue(true);
-	}
-	
-	@Test
-	public void assignValidOperatorExceptionThrown() {
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Question q = new Question();
-			q.setOperator("//");
-		});
 	}
 	
 	@Test

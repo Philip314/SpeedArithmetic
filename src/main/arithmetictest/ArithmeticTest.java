@@ -10,17 +10,18 @@ import java.util.ArrayList;
  */
 
 import main.question.Question;
+import main.question.Question.Operator;
 
 public class ArithmeticTest {
 	
 	private int difficulty;
-	private String operator;
+	private Operator operator;
 	private int numberOfCorrectAnswers;
 	private int numberOfIncorrectAnswers;
 	
 	private ArrayList<Question> questions;
 	
-	public ArithmeticTest(int difficulty, String operator) {
+	public ArithmeticTest(int difficulty, Operator operator) {
 		setDifficulty(difficulty);
 		setOperator(operator);
 	}
@@ -28,6 +29,7 @@ public class ArithmeticTest {
 	public int getDifficulty() {
 		return difficulty;
 	}
+	
 	public void setDifficulty(int difficulty) {
 		if (difficulty == 1 || difficulty == 2 || difficulty == 3) {
 			this.difficulty = difficulty;
@@ -35,15 +37,13 @@ public class ArithmeticTest {
 			throw new IllegalArgumentException("Only 1, 2, or 3 is allowed");
 		}
 	}
-	public String getOperator() {
+	
+	public Operator getOperator() {
 		return operator;
 	}
-	public void setOperator(String operator) {
-		if (operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/")) {
-			this.operator = operator;
-		} else {
-			throw new IllegalArgumentException("Only +, -, *, or / is allowed");
-		}
+	
+	public void setOperator(Operator operator) {
+		this.operator = operator;
 	}
 	
 	public int getNumberOfCorrectAnswers() {
@@ -68,7 +68,7 @@ public class ArithmeticTest {
 	}
 	
 	public void generateAdditionQuestions() {
-		if (!getOperator().equals("+")) {
+		if (!getOperator().equals(Operator.ADD)) {
 			throw new RuntimeException("Operator does not match the type of question about to be generated");
 		}
 		ArrayList<Question> generateQuestions = new ArrayList<Question>();
@@ -81,7 +81,7 @@ public class ArithmeticTest {
 	}
 	
 	public void generateSubtractionQuestions() {
-		if (!getOperator().equals("-")) {
+		if (!getOperator().equals(Operator.SUBTRACT)) {
 			throw new RuntimeException("Operator does not match the type of question about to be generated");
 		}
 		ArrayList<Question> generateQuestions = new ArrayList<Question>();
@@ -94,7 +94,7 @@ public class ArithmeticTest {
 	}
 	
 	public void generateMultiplicationQuestions() {
-		if (!getOperator().equals("*")) {
+		if (!getOperator().equals(Operator.MULTIPLY)) {
 			throw new RuntimeException("Operator does not match the type of question about to be generated");
 		}
 		ArrayList<Question> generateQuestions = new ArrayList<Question>();
@@ -107,7 +107,7 @@ public class ArithmeticTest {
 	}
 	
 	public void generateDivisionQuestions() {
-		if (!getOperator().equals("/")) {
+		if (!getOperator().equals(Operator.DIVIDE)) {
 			throw new RuntimeException("Operator does not match the type of question about to be generated");
 		}
 		ArrayList<Question> generateQuestions = new ArrayList<Question>();

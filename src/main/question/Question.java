@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Question {
 	
-	private String operator;
+	private Operator operator;
 	private int difficulty;
 	private boolean correct;
 	private int firstNumber;
@@ -24,16 +24,39 @@ public class Question {
 	
 	public static final int SUBTRACT_LOWER = 2;
 	
-	public String getOperator() {
+	public enum Operator {
+		ADD {
+			@Override
+			public String toString() {
+				return "+";
+			}
+		},
+		SUBTRACT {
+			@Override
+			public String toString() {
+				return "-";
+			}
+		},
+		MULTIPLY {
+			@Override
+			public String toString() {
+				return "*";
+			}
+		},
+		DIVIDE {
+			@Override
+			public String toString() {
+				return "/";
+			}
+		}
+	}
+	
+	public Operator getOperator() {
 		return operator;
 	}
 
-	public void setOperator(String operator) {
-		if (operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/")) {
-			this.operator = operator;
-		} else {
-			throw new IllegalArgumentException("Only +, -, *, or / is allowed");
-		}
+	public void setOperator(Operator operator) {
+		this.operator = operator;
 	}
 
 	public int getDifficulty() {
@@ -96,7 +119,7 @@ public class Question {
 	}
 	
 	public void generateAdditionQuestion(int difficulty) {
-		setOperator("+");
+		setOperator(Operator.ADD);
 		setDifficulty(difficulty);
 		switch(difficulty) {
 		case 1:
@@ -116,7 +139,7 @@ public class Question {
 	}
 	
 	public void generateSubtractionQuestion(int difficulty) {
-		setOperator("-");
+		setOperator(Operator.SUBTRACT);
 		setDifficulty(difficulty);
 		switch(difficulty) {
 		case 1:
@@ -136,7 +159,7 @@ public class Question {
 	}
 	
 	public void generateMultiplicationQuestion(int difficulty) {
-		setOperator("*");
+		setOperator(Operator.MULTIPLY);
 		setDifficulty(difficulty);
 		switch(difficulty) {
 		case 1:
@@ -156,7 +179,7 @@ public class Question {
 	}
 	
 	public void generateDivisionQuestion(int difficulty) {
-		setOperator("/");
+		setOperator(Operator.DIVIDE);
 		setDifficulty(difficulty);
 		switch(difficulty) {
 		case 1:
@@ -193,7 +216,19 @@ public class Question {
 	
 	@Override
 	public String toString() {
-		return firstNumber + " " + operator + " " + secondNumber;
+		switch(operator) {
+			case ADD:
+				return firstNumber + " " + operator + " " + secondNumber;
+				//return firstNumber + " + " + secondNumber;
+			case SUBTRACT:
+				return firstNumber + " - " + secondNumber;
+			case MULTIPLY:
+				return firstNumber + " * " + secondNumber;
+			case DIVIDE:
+				return firstNumber + " / " + secondNumber;
+			default:
+				return null;
+		}
 	}
 	
 }

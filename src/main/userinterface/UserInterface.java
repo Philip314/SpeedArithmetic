@@ -18,6 +18,7 @@ import javafx.stage.*;
 import main.arithmetictest.ArithmeticTest;
 import main.manager.ArithmeticTestManager;
 import main.manager.UserManager;
+import main.question.Question.Operator;
 
 /*
  * This class is for the GUI.
@@ -109,8 +110,8 @@ public class UserInterface {
 		// Select operator
 		Label operatorTitle = new Label("Operator");
 		Label operatorInfo = new Label("Please select which operation you would like to practice");
-		ChoiceBox<String> operators = new ChoiceBox<String>();
-		operators.getItems().addAll("+", "-", "*", "/");
+		ChoiceBox<Operator> operators = new ChoiceBox<Operator>();
+		operators.getItems().addAll(Operator.ADD, Operator.SUBTRACT, Operator.MULTIPLY, Operator.DIVIDE);
 		
 		// Create test
 		Button createTest = new Button("Create test");

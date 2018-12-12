@@ -3,6 +3,7 @@ package main.manager;
 import java.util.ArrayList;
 
 import main.arithmetictest.ArithmeticTest;
+import main.question.Question.Operator;
 
 /*
  * This class is for methods that interact with the ArithmeticTest class.
@@ -10,19 +11,19 @@ import main.arithmetictest.ArithmeticTest;
 
 public class ArithmeticTestManager {
 	
-	public static ArithmeticTest createTest(int difficulty, String operator) {
+	public static ArithmeticTest createTest(int difficulty, Operator operator) {
 		ArithmeticTest toReturn = new ArithmeticTest(difficulty, operator);
 		switch(operator) {
-			case "+":
+			case ADD:
 				toReturn.generateAdditionQuestions();
 				break;
-			case "-":
+			case SUBTRACT:
 				toReturn.generateSubtractionQuestions();
 				break;
-			case "*":
+			case MULTIPLY:
 				toReturn.generateMultiplicationQuestions();
 				break;
-			case "/":
+			case DIVIDE:
 				toReturn.generateDivisionQuestions();
 				break;
 			default:
