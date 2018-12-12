@@ -1,6 +1,7 @@
 package main.question;
 
 import java.util.Random;
+import main.enumeration.Operator;
 
 /*
  * This class is to hold the question for the ArithmeticTest class.
@@ -24,32 +25,7 @@ public class Question {
 	
 	public static final int SUBTRACT_LOWER = 2;
 	
-	public enum Operator {
-		ADD {
-			@Override
-			public String toString() {
-				return "+";
-			}
-		},
-		SUBTRACT {
-			@Override
-			public String toString() {
-				return "-";
-			}
-		},
-		MULTIPLY {
-			@Override
-			public String toString() {
-				return "*";
-			}
-		},
-		DIVIDE {
-			@Override
-			public String toString() {
-				return "/";
-			}
-		}
-	}
+	
 	
 	public Operator getOperator() {
 		return operator;

@@ -4,13 +4,14 @@ import org.junit.*;
 import org.junit.jupiter.api.Assertions;
 
 import main.question.Question;
+import main.enumeration.Operator;
 
 public class QuestionTest {
 	
 	@Test
 	public void assignValidOperatorExceptionNotThrown() {
 		Question q = new Question();
-		q.setOperator(Question.Operator.ADD);
+		q.setOperator(Operator.ADD);
 		Assert.assertTrue(true);
 	}
 	

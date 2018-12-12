@@ -3,7 +3,7 @@ package main.manager;
 import java.util.ArrayList;
 
 import main.arithmetictest.ArithmeticTest;
-import main.question.Question.Operator;
+import main.enumeration.Operator;
 
 /*
  * This class is for methods that interact with the ArithmeticTest class.

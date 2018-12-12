@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 
 import main.question.Question;
-import main.question.Question.Operator;
+import main.enumeration.Operator;
 
 public class ArithmeticTest {
 	

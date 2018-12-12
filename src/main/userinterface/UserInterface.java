@@ -18,7 +18,7 @@ import javafx.stage.*;
 import main.arithmetictest.ArithmeticTest;
 import main.manager.ArithmeticTestManager;
 import main.manager.UserManager;
-import main.question.Question.Operator;
+import main.enumeration.Operator;
 
 /*
  * This class is for the GUI.

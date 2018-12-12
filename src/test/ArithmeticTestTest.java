@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions;
 
 import main.arithmetictest.ArithmeticTest;
 import main.question.Question;
-import main.question.Question.Operator;
+import main.enumeration.Operator;
 
 public class ArithmeticTestTest {
 	
