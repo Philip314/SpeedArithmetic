@@ -191,6 +191,9 @@ public class UserInterface {
 				if (validInput) {
 					ArithmeticTestManager.assignAnswers(test, userAnswers);
 					UserManager.saveTest(test);
+					if (UserManager.getActiveUser() != null) {
+						DatabaseManager.insertTest(test, UserManager.getActiveUser().getUsername());
+					}
 					showResults(stage, test);
 				} else {
 					invalidInputWarning.setText("Answers must be a number");

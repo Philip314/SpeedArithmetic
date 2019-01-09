@@ -2,6 +2,8 @@ package main.database;
 
 import java.sql.*;
 
+import main.arithmetictest.ArithmeticTest;
+
 public class DatabaseManager {
 	
 	// Database variables
@@ -27,6 +29,8 @@ public class DatabaseManager {
 			+ " USER_ID INT NOT NULL, PRIMARY KEY(TEST_ID),"
 			+ " FOREIGN KEY(USER_ID) REFERENCES SPEEDARITHMETIC_USER(USER_ID))";
 	static String insertUser = "INSERT INTO " + userTableName + "(USER_ID, USERNAME) VALUES (DEFAULT, ?)";
+	static String insertTest = "INSERT INTO " + testTableName + "(TEST_ID, DIFFICULTY, NUM_CORRECT_ANSWERS, NUM_INCORRECT_ANSWERS, USER_ID) VALUES (DEFAULT, ?, ?, ?, ?)";
+	static String selectUserID = "SELECT USER_ID FROM " + userTableName + " WHERE USERNAME = ?";
 	
 	public static void connect() {
 		try {
@@ -71,6 +75,20 @@ public class DatabaseManager {
 		}
 	}
 	
+	public static void insertTest(ArithmeticTest test, String username) {
+		try {
+			int id = selectUserID(username);
+			pstate = conn.prepareStatement(insertTest);
+			pstate.setInt(1, test.getDifficulty());
+			pstate.setInt(2, test.getNumberOfCorrectAnswers());
+			pstate.setInt(3, test.getNumberOfIncorrectAnswers());
+			pstate.setInt(4, id);
+			pstate.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
 	private static boolean tablesExists() {
 		try {
 			ResultSet result = meta.getTables(null, null, userTableName, null);
@@ -83,6 +101,21 @@ public class DatabaseManager {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	private static int selectUserID(String username) {
+		int toReturn = -1;
+		try {
+			pstate = conn.prepareStatement(selectUserID);
+			pstate.setString(1, username);
+			ResultSet rs = pstate.executeQuery();
+			while(rs.next()) {
+				toReturn = rs.getInt(1);
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return toReturn;
 	}
 	
 	// TEMPORARY
