@@ -16,9 +16,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
 import main.arithmetictest.ArithmeticTest;
-import main.manager.ArithmeticTestManager;
-import main.manager.UserManager;
+import main.arithmetictest.ArithmeticTestManager;
 import main.enumeration.Operator;
+import main.user.UserManager;
 
 /*
  * This class is for the GUI.

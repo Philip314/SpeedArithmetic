@@ -1,7 +1,6 @@
-package main.manager;
+package main.user;
 
 import main.arithmetictest.ArithmeticTest;
-import main.user.User;
 
 /*
  * A class to interact with the User class

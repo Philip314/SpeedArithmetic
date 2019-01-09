@@ -1,8 +1,7 @@
-package main.manager;
+package main.arithmetictest;
 
 import java.util.ArrayList;
 
-import main.arithmetictest.ArithmeticTest;
 import main.enumeration.Operator;
 
 /*
