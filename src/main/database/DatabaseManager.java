@@ -10,12 +10,13 @@ public class DatabaseManager {
 	static String connectionURL = "jdbc:derby:" + dbName + ";create=true";
 	static Connection conn = null;
 	static Statement statement;
+	static PreparedStatement pstate;
 	static DatabaseMetaData meta = null;
 	
 	static String userTableName = "SPEEDARITHMETIC_USER";
 	static String testTableName = "SPEEDARITHMETIC_TEST";
 	
-	// SQL strings
+	// SQL statements
 	static String createUserTableString = "CREATE TABLE " + userTableName + " (USER_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
 			+ " USERNAME VARCHAR(250),"
 			+ " PRIMARY KEY(USER_ID))";
@@ -25,6 +26,7 @@ public class DatabaseManager {
 			+ " NUM_INCORRECT_ANSWERS INT,"
 			+ " USER_ID INT NOT NULL, PRIMARY KEY(TEST_ID),"
 			+ " FOREIGN KEY(USER_ID) REFERENCES SPEEDARITHMETIC_USER(USER_ID))";
+	static String insertUser = "INSERT INTO " + userTableName + "(USER_ID, USERNAME) VALUES (DEFAULT, ?)";
 	
 	public static void connect() {
 		try {
@@ -56,6 +58,16 @@ public class DatabaseManager {
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public static void insertUser(String username) {
+		try {
+			pstate = conn.prepareStatement(insertUser);
+			pstate.setString(1, username);
+			pstate.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
 	}
 	

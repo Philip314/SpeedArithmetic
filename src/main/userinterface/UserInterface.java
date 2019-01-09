@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.*;
 import main.arithmetictest.ArithmeticTest;
 import main.arithmetictest.ArithmeticTestManager;
+import main.database.DatabaseManager;
 import main.enumeration.Operator;
 import main.user.UserManager;
 
@@ -260,6 +261,7 @@ public class UserInterface {
 				warning.setText("Please enter a valid username");
 			} else {
 				UserManager.createUser(username);
+				DatabaseManager.insertUser(username);
 				mainMenu(stage);
 			}
 		});
