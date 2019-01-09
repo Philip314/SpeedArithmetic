@@ -13,9 +13,18 @@ public class DatabaseManager {
 	static DatabaseMetaData meta = null;
 	
 	static String userTableName = "SPEEDARITHMETIC_USER";
+	static String testTableName = "SPEEDARITHMETIC_TEST";
 	
 	// SQL strings
-	static String createUserTableString = "CREATE TABLE " + userTableName + " (USER_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY, USERNAME VARCHAR(250), PRIMARY KEY(USER_ID))";
+	static String createUserTableString = "CREATE TABLE " + userTableName + " (USER_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
+			+ " USERNAME VARCHAR(250),"
+			+ " PRIMARY KEY(USER_ID))";
+	static String createTestTableString = "CREATE TABLE " + testTableName + "(TEST_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
+			+ " DIFFICULTY VARCHAR(8),"
+			+ " NUM_CORRECT_ANSWERS INT,"
+			+ " NUM_INCORRECT_ANSWERS INT,"
+			+ " USER_ID INT NOT NULL, PRIMARY KEY(TEST_ID),"
+			+ " FOREIGN KEY(USER_ID) REFERENCES SPEEDARITHMETIC_USER(USER_ID))";
 	
 	public static void connect() {
 		try {
@@ -31,17 +40,11 @@ public class DatabaseManager {
 	}
 	
 	public static void createTable() {
-		// TEMPORARY
-		try {
-			statement.executeUpdate("DROP TABLE " + userTableName);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		if (!userTableExists()) {
+		dropTables();
+		if (!tablesExists()) {
 			try {
 				statement.execute(createUserTableString);
+				statement.execute(createTestTableString);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -56,7 +59,7 @@ public class DatabaseManager {
 		}
 	}
 	
-	private static boolean userTableExists() {
+	private static boolean tablesExists() {
 		try {
 			ResultSet result = meta.getTables(null, null, userTableName, null);
 			if (result.next()) {
@@ -68,6 +71,17 @@ public class DatabaseManager {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	// TEMPORARY
+	private static void dropTables() {
+		try {
+			statement.executeUpdate("DROP TABLE " + testTableName);
+			statement.executeUpdate("DROP TABLE " + userTableName);
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 }
