@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
@@ -290,6 +292,7 @@ public class UserInterface {
 		
 		Label accountDetailsTitle = new Label("Account details");
 		
+		// Get all tests belonging to a user
 		ResultSet result = null;
 		try {
 			result = DatabaseManager.getAllUserTests(UserManager.getActiveUser().getUsername());
@@ -308,8 +311,16 @@ public class UserInterface {
 			System.out.println("Null tests");
 		}
 		
+		// Display tests
+		TableView table = new TableView();
+		table.setEditable(false);
+		TableColumn difficulty = new TableColumn("Difficulty");
+		TableColumn numCorrect = new TableColumn("Number of Correct Answers");
+		TableColumn numIncorrect = new TableColumn("Number of Incorrect Answers");
+		table.getColumns().addAll(difficulty, numCorrect, numIncorrect);
+		
 		VBox mainV = new VBox();
-		mainV.getChildren().addAll(accountDetailsTitle);
+		mainV.getChildren().addAll(accountDetailsTitle, table);
 		mainV.setPadding(PADDING);
 		mainV.setSpacing(SPACING);
 		

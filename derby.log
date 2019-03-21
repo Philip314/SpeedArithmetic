@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Thu Mar 21 20:27:42 GMT 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0169-a1f0-1ef8-00000663d8e0 
+Thu Mar 21 20:37:17 GMT 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0169-a1f8-e4e0-00000663d870 
 on database directory C:\Users\Philip\workspace\SpeedArithmetic\SpeedArithmetic with class loader sun.misc.Launcher$AppClassLoader@4e25154f 
 Loaded from file:/C:/Derby_10/lib/derby.jar
 java.vendor=Oracle Corporation
