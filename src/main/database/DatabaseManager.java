@@ -28,6 +28,7 @@ public class DatabaseManager {
 			+ " NUM_INCORRECT_ANSWERS INT,"
 			+ " USER_ID INT NOT NULL, PRIMARY KEY(TEST_ID),"
 			+ " FOREIGN KEY(USER_ID) REFERENCES SPEEDARITHMETIC_USER(USER_ID))";
+	static String getAllUserTests = "SELECT * FROM " + testTableName + " WHERE USER_ID = ";
 	static String insertUser = "INSERT INTO " + userTableName + "(USER_ID, USERNAME) VALUES (DEFAULT, ?)";
 	static String insertTest = "INSERT INTO " + testTableName + "(TEST_ID, DIFFICULTY, NUM_CORRECT_ANSWERS, NUM_INCORRECT_ANSWERS, USER_ID) VALUES (DEFAULT, ?, ?, ?, ?)";
 	static String selectUserID = "SELECT USER_ID FROM " + userTableName + " WHERE USERNAME = ?";
@@ -87,6 +88,18 @@ public class DatabaseManager {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+	}
+	
+	public static ResultSet getAllUserTests(String username) {
+		ResultSet result = null;
+		try {
+			int id = selectUserID(username);
+			pstate = conn.prepareStatement(getAllUserTests + id);
+			result = pstate.executeQuery();
+		} catch (SQLException el) {
+			el.printStackTrace();
+		}
+		return result;
 	}
 	
 	private static boolean tablesExists() {

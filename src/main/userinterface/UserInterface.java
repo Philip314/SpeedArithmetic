@@ -1,5 +1,7 @@
 package main.userinterface;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javafx.geometry.Insets;
@@ -288,6 +290,23 @@ public class UserInterface {
 		
 		Label accountDetailsTitle = new Label("Account details");
 		
+		ResultSet result = null;
+		try {
+			result = DatabaseManager.getAllUserTests(UserManager.getActiveUser().getUsername());
+		} catch (NullPointerException e) {
+			System.out.println("Null user");
+		}
+		if (result != null) {
+			try {
+				while(result.next()) {
+					System.out.println(result.getInt("NUM_CORRECT_ANSWERS"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Null tests");
+		}
 		
 		VBox mainV = new VBox();
 		mainV.getChildren().addAll(accountDetailsTitle);
