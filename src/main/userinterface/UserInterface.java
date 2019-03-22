@@ -166,20 +166,8 @@ public class UserInterface {
 			InterfaceManager.getUserAnswersFromTextField(textFieldAnswers, userAnswers);
 			
 			boolean validInput = true;
-			for (TextField field: textFieldAnswers) {
-				String answer = field.getText();
-				try {
-					if (!answer.equals("")) {
-						Integer.parseInt(answer);
-						userAnswers.add(answer);
-					} else if (answer.equals("")) {
-						userAnswers.add(null);
-					}
-				} catch (Exception e) {
-					validInput = false;
-					break;
-				}
-			}
+			validInput = InterfaceManager.validateUserAnswers(userAnswers);
+			InterfaceManager.adjustAnswers(userAnswers);
 			if (validInput) {
 				ArithmeticTestManager.assignAnswers(test, userAnswers);
 				UserManager.saveTest(test);

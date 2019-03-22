@@ -36,8 +36,31 @@ public class InterfaceManager {
 		}
 	}
 	
-	public static boolean validateUserAnswers(ArrayList<TextField> userAnswers) {
-		return false;
+	public static boolean validateUserAnswers(ArrayList<String> userAnswers) {
+		for (String answer : userAnswers) {
+			if (answer.equals("")) {
+			} else if (!isInteger(answer)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private static boolean isInteger(String test) {
+		try {
+			Integer.parseInt(test);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public static void adjustAnswers(ArrayList<String> userAnswers) {
+		for (int i=0 ; i<userAnswers.size() ; i++) {
+			if (userAnswers.get(i).equals("")) {
+				userAnswers.set(i, null);
+			}
+		}
 	}
 	
 }
