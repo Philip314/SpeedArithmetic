@@ -98,16 +98,7 @@ public class UserInterface {
 		Label levelInfo = new Label("");
 		ChoiceBox<Integer> difficulty = new ChoiceBox<Integer>();
 		difficulty.getItems().addAll(1, 2, 3);
-		difficulty.setOnAction(actionEvent -> {
-			switch(difficulty.getValue()) {
-				case 1: levelInfo.setText("Numbers will be 1 to 10");
-					break;
-				case 2: levelInfo.setText("Numbers will be 1 to 100");
-					break;
-				case 3: levelInfo.setText("Numbers will be 1 to 1000");
-					break;
-			}
-		});
+		difficulty.setOnAction(actionEvent -> levelInfo.setText(InterfaceManager.setDifficultyText(difficulty.getValue())));
 		HBox difficultyRow = new HBox();
 		difficultyRow.getChildren().addAll(difficulty, levelInfo);
 		difficultyRow.setSpacing(SPACING);
