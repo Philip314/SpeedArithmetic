@@ -1,5 +1,8 @@
 package main.userinterface;
 
+import java.util.ArrayList;
+
+import javafx.scene.control.TextField;
 import main.arithmetictest.ArithmeticTest;
 import main.arithmetictest.ArithmeticTestManager;
 import main.enumeration.Operator;
@@ -25,6 +28,16 @@ public class InterfaceManager {
 		} else {
 			throw new NullPointerException("Something is null");
 		}
+	}
+	
+	public static void getUserAnswersFromTextField(ArrayList<TextField> textField, ArrayList<String> userAnswers) {
+		for (TextField field : textField) {
+			userAnswers.add(field.getText());
+		}
+	}
+	
+	public static boolean validateUserAnswers(ArrayList<TextField> userAnswers) {
+		return false;
 	}
 	
 }

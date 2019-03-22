@@ -127,8 +127,6 @@ public class UserInterface {
 		mainV.setPadding(PADDING);
 		mainV.setSpacing(SPACING);
 		
-		
-		
 		borderPane.setTop(header(stage));
 		borderPane.setCenter(mainV);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
@@ -149,9 +147,11 @@ public class UserInterface {
 		mainV.setSpacing(SPACING);
 		
 		// List questions and textfields
+		ArrayList<TextField> textFieldAnswers = new ArrayList<TextField>();
 		for (int i=0; i< test.getQuestions().size(); i++) {
 			Label label = new Label("Question " + (i+1) + ": " + test.getQuestions().get(i));
 			TextField textField = new TextField();
+			textFieldAnswers.add(textField);
 			HBox question = new HBox();
 			question.setSpacing(SPACING);
 			question.getChildren().addAll(label, textField);
@@ -163,37 +163,33 @@ public class UserInterface {
 		Button submitTest = new Button("Submit");
 		submitTest.setOnAction(actionEvent -> {
 			ArrayList<String> userAnswers = new ArrayList<String>();
-				boolean validInput = true;
-				for (Node nodeHBox : mainV.getChildren()) {
-					if (nodeHBox instanceof HBox) {
-						for (Node nodeTextField : ((HBox) nodeHBox).getChildren()) {
-							if (nodeTextField instanceof TextField) {
-								String answer = ((TextField) nodeTextField).getText();
-								try {
-									if (!answer.equals("")) {
-										Integer.parseInt(answer);
-										userAnswers.add(answer);
-									} else if (answer.equals("")) {
-										userAnswers.add(null);
-									}
-								} catch (Exception e) {
-									validInput = false;
-									break;
-								}
-							}
-						}
+			InterfaceManager.getUserAnswersFromTextField(textFieldAnswers, userAnswers);
+			
+			boolean validInput = true;
+			for (TextField field: textFieldAnswers) {
+				String answer = field.getText();
+				try {
+					if (!answer.equals("")) {
+						Integer.parseInt(answer);
+						userAnswers.add(answer);
+					} else if (answer.equals("")) {
+						userAnswers.add(null);
 					}
+				} catch (Exception e) {
+					validInput = false;
+					break;
 				}
-				if (validInput) {
-					ArithmeticTestManager.assignAnswers(test, userAnswers);
-					UserManager.saveTest(test);
-					if (UserManager.getActiveUser() != null) {
-						DatabaseManager.insertTest(test, UserManager.getActiveUser().getUsername());
-					}
-					showResults(stage, test);
-				} else {
-					invalidInputWarning.setText("Answers must be a number");
+			}
+			if (validInput) {
+				ArithmeticTestManager.assignAnswers(test, userAnswers);
+				UserManager.saveTest(test);
+				if (UserManager.getActiveUser() != null) {
+					DatabaseManager.insertTest(test, UserManager.getActiveUser().getUsername());
 				}
+				showResults(stage, test);
+			} else {
+				invalidInputWarning.setText("Answers must be a number");
+			}
 		});
 		
 		mainV.getChildren().addAll(submitTest, invalidInputWarning);
