@@ -113,10 +113,11 @@ public class UserInterface {
 		Button createTest = new Button("Create test");
 		Label warning = new Label();
 		createTest.setOnAction(actionEvent -> {
-			if (difficulty.getValue() != null && operators.getValue() != null) {
-				ArithmeticTest test = ArithmeticTestManager.createTest(difficulty.getValue(), operators.getValue());
+			ArithmeticTest test;
+			try {
+				test = InterfaceManager.createTest(difficulty.getValue(), operators.getValue());
 				showTest(stage, test);
-			} else {
+			} catch (NullPointerException e) {
 				warning.setText("Please select a difficulty and operator");
 			}
 		});
