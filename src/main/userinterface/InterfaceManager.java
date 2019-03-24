@@ -76,4 +76,12 @@ public class InterfaceManager {
 		}
 	}
 	
+	public static boolean validateUsername(String username) {
+		if (username.equals("") || username.trim().length() == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 }
