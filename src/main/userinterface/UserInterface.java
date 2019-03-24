@@ -149,7 +149,7 @@ public class UserInterface {
 		// List questions and textfields
 		ArrayList<TextField> textFieldAnswers = new ArrayList<TextField>();
 		for (int i=0; i< test.getQuestions().size(); i++) {
-			Label label = new Label("Question " + (i+1) + ": " + test.getQuestions().get(i));
+			Label label = new Label(InterfaceManager.displayQuestion(i+1, test.getQuestions().get(i)));
 			TextField textField = new TextField();
 			textFieldAnswers.add(textField);
 			HBox question = new HBox();
@@ -203,7 +203,7 @@ public class UserInterface {
 		// Display questions and answers
 		for (int i=0; i< test.getQuestions().size(); i++) {
 			String correctAnswer = Integer.toString(test.getQuestions().get(i).getAnswer());
-			Label label = new Label("Question " + (i+1) + ": " + test.getQuestions().get(i) + " = " + correctAnswer);
+			Label label = new Label(InterfaceManager.displayQuestion(i+1, test.getQuestions().get(i)) + " = " + correctAnswer);
 			int userAnswerInt = test.getQuestions().get(i).getUserAnswer();
 			Label userAnswer = new Label();
 			if (userAnswerInt == -1) {

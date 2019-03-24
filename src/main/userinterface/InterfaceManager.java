@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import main.arithmetictest.ArithmeticTest;
 import main.arithmetictest.ArithmeticTestManager;
 import main.enumeration.Operator;
+import main.question.Question;
 
 /*
  * This class contains the logic for the GUI.
@@ -61,6 +62,10 @@ public class InterfaceManager {
 				userAnswers.set(i, null);
 			}
 		}
+	}
+	
+	public static String displayQuestion(int questionNumber, Question question) {
+		return "Question " + questionNumber + ": " + question;
 	}
 	
 }
