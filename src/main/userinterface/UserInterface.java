@@ -206,11 +206,7 @@ public class UserInterface {
 			Label label = new Label(InterfaceManager.displayQuestion(i+1, test.getQuestions().get(i)) + " = " + correctAnswer);
 			int userAnswerInt = test.getQuestions().get(i).getUserAnswer();
 			Label userAnswer = new Label();
-			if (userAnswerInt == -1) {
-				userAnswer.setText("Your answer is: N/A");
-			} else {
-				userAnswer.setText("Your answer is: " + Integer.toString(test.getQuestions().get(i).getUserAnswer()));
-			}
+			userAnswer.setText(InterfaceManager.generateAnswerLabelText(userAnswerInt));
 			
 			HBox question = new HBox();
 			question.setSpacing(SPACING);

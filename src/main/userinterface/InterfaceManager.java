@@ -68,4 +68,12 @@ public class InterfaceManager {
 		return "Question " + questionNumber + ": " + question;
 	}
 	
+	public static String generateAnswerLabelText(int userAnswerInt) {
+		if (userAnswerInt == -1) {
+			return "Your answer is: N/A";
+		} else {
+			return "Your answer is: " + Integer.toString(userAnswerInt);
+		}
+	}
+	
 }
