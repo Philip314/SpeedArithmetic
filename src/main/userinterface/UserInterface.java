@@ -236,7 +236,7 @@ public class UserInterface {
 		Button submitUsername = new Button("Create account");
 		submitUsername.setOnAction(actionEvent -> {
 			String username = usernameInput.getText();
-			if (InterfaceManager.validateUsername(username)) {
+			if (!InterfaceManager.validateUsername(username)) {
 				warning.setText("Please enter a valid username");
 			} else {
 				UserManager.createUser(username);
