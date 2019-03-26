@@ -4,7 +4,7 @@ import java.sql.*;
 
 import main.arithmetictest.ArithmeticTest;
 
-public class DatabaseManager {
+public class DatabaseLogic {
 	
 	// Database variables
 	static String driver = "org.apache.derby.jdbc.EmbeddedDriver";

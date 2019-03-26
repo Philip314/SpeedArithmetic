@@ -5,7 +5,7 @@ import java.util.Scanner;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import main.arithmetictest.ArithmeticTest;
-import main.database.DatabaseManager;
+import main.database.DatabaseLogic;
 import main.question.Question;
 import main.userinterface.UserInterface;
 
@@ -17,10 +17,10 @@ public class SpeedArithmetic extends Application {
 	}
 	
 	public static void main (String[] args) {
-		DatabaseManager.connect();
-		DatabaseManager.createTable();
+		DatabaseLogic.connect();
+		DatabaseLogic.createTable();
 		launch(args);
-		DatabaseManager.closeDatabase();
+		DatabaseLogic.closeDatabase();
 		/*
 		System.out.println("Welcome to SpeedArithmetic");
 		

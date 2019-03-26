@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 import javafx.scene.control.TextField;
 import main.arithmetictest.ArithmeticTest;
-import main.arithmetictest.ArithmeticTestManager;
+import main.arithmetictest.ArithmeticTestLogic;
 import main.enumeration.Operator;
 import main.question.Question;
 
 /*
- * This class contains the logic for the GUI.
+ * This class is for the logic of UserInterface class.
  */
 
-public class InterfaceManager {
+public class UserInterfaceLogic {
 	
 	public static String setDifficultyText(int difficulty) {
 		switch (difficulty) {
@@ -25,7 +25,7 @@ public class InterfaceManager {
 	
 	public static ArithmeticTest createTest(Integer difficulty, Operator operators) throws NullPointerException {
 		if (difficulty != null && operators != null) {
-			return ArithmeticTestManager.createTest(difficulty, operators);
+			return ArithmeticTestLogic.createTest(difficulty, operators);
 		} else {
 			throw new NullPointerException("Something is null");
 		}

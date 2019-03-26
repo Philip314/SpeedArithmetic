@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import main.enumeration.Operator;
 
 /*
- * This class is for methods that interact with the ArithmeticTest class.
+ * This class is for the logic of ArithmeticTest class.
  */
 
-public class ArithmeticTestManager {
+public class ArithmeticTestLogic {
 	
 	public static ArithmeticTest createTest(int difficulty, Operator operator) {
 		ArithmeticTest toReturn = new ArithmeticTest(difficulty, operator);

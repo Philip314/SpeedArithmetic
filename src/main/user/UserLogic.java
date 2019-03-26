@@ -3,10 +3,10 @@ package main.user;
 import main.arithmetictest.ArithmeticTest;
 
 /*
- * A class to interact with the User class
+ * This class is for the logic of user class.
  */
 
-public class UserManager {
+public class UserLogic {
 	
 	private static User activeUser = null;
 	

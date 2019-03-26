@@ -20,10 +20,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
 import main.arithmetictest.ArithmeticTest;
-import main.arithmetictest.ArithmeticTestManager;
-import main.database.DatabaseManager;
+import main.arithmetictest.ArithmeticTestLogic;
+import main.database.DatabaseLogic;
 import main.enumeration.Operator;
-import main.user.UserManager;
+import main.user.UserLogic;
 
 /*
  * This class is for the GUI.
@@ -47,7 +47,7 @@ public class UserInterface {
 		// Username on the left
 		String username = "(No account)";
 		try {
-			username = UserManager.getActiveUser().getUsername();
+			username = UserLogic.getActiveUser().getUsername();
 		} catch (NullPointerException e) {
 		}
 		Label usernameLabel = new Label(username);
@@ -98,7 +98,7 @@ public class UserInterface {
 		Label levelInfo = new Label("");
 		ChoiceBox<Integer> difficulty = new ChoiceBox<Integer>();
 		difficulty.getItems().addAll(1, 2, 3);
-		difficulty.setOnAction(actionEvent -> levelInfo.setText(InterfaceManager.setDifficultyText(difficulty.getValue())));
+		difficulty.setOnAction(actionEvent -> levelInfo.setText(UserInterfaceLogic.setDifficultyText(difficulty.getValue())));
 		HBox difficultyRow = new HBox();
 		difficultyRow.getChildren().addAll(difficulty, levelInfo);
 		difficultyRow.setSpacing(SPACING);
@@ -115,7 +115,7 @@ public class UserInterface {
 		createTest.setOnAction(actionEvent -> {
 			ArithmeticTest test;
 			try {
-				test = InterfaceManager.createTest(difficulty.getValue(), operators.getValue());
+				test = UserInterfaceLogic.createTest(difficulty.getValue(), operators.getValue());
 				showTest(stage, test);
 			} catch (NullPointerException e) {
 				warning.setText("Please select a difficulty and operator");
@@ -149,7 +149,7 @@ public class UserInterface {
 		// List questions and textfields
 		ArrayList<TextField> textFieldAnswers = new ArrayList<TextField>();
 		for (int i=0; i< test.getQuestions().size(); i++) {
-			Label label = new Label(InterfaceManager.displayQuestion(i+1, test.getQuestions().get(i)));
+			Label label = new Label(UserInterfaceLogic.displayQuestion(i+1, test.getQuestions().get(i)));
 			TextField textField = new TextField();
 			textFieldAnswers.add(textField);
 			HBox question = new HBox();
@@ -163,16 +163,16 @@ public class UserInterface {
 		Button submitTest = new Button("Submit");
 		submitTest.setOnAction(actionEvent -> {
 			ArrayList<String> userAnswers = new ArrayList<String>();
-			InterfaceManager.getUserAnswersFromTextField(textFieldAnswers, userAnswers);
+			UserInterfaceLogic.getUserAnswersFromTextField(textFieldAnswers, userAnswers);
 			
 			boolean validInput = true;
-			validInput = InterfaceManager.validateUserAnswers(userAnswers);
-			InterfaceManager.adjustAnswers(userAnswers);
+			validInput = UserInterfaceLogic.validateUserAnswers(userAnswers);
+			UserInterfaceLogic.adjustAnswers(userAnswers);
 			if (validInput) {
-				ArithmeticTestManager.assignAnswers(test, userAnswers);
-				UserManager.saveTest(test);
-				if (UserManager.getActiveUser() != null) {
-					DatabaseManager.insertTest(test, UserManager.getActiveUser().getUsername());
+				ArithmeticTestLogic.assignAnswers(test, userAnswers);
+				UserLogic.saveTest(test);
+				if (UserLogic.getActiveUser() != null) {
+					DatabaseLogic.insertTest(test, UserLogic.getActiveUser().getUsername());
 				}
 				showResults(stage, test);
 			} else {
@@ -203,10 +203,10 @@ public class UserInterface {
 		// Display questions and answers
 		for (int i=0; i< test.getQuestions().size(); i++) {
 			String correctAnswer = Integer.toString(test.getQuestions().get(i).getAnswer());
-			Label label = new Label(InterfaceManager.displayQuestion(i+1, test.getQuestions().get(i)) + " = " + correctAnswer);
+			Label label = new Label(UserInterfaceLogic.displayQuestion(i+1, test.getQuestions().get(i)) + " = " + correctAnswer);
 			int userAnswerInt = test.getQuestions().get(i).getUserAnswer();
 			Label userAnswer = new Label();
-			userAnswer.setText(InterfaceManager.generateAnswerLabelText(userAnswerInt));
+			userAnswer.setText(UserInterfaceLogic.generateAnswerLabelText(userAnswerInt));
 			
 			HBox question = new HBox();
 			question.setSpacing(SPACING);
@@ -236,11 +236,11 @@ public class UserInterface {
 		Button submitUsername = new Button("Create account");
 		submitUsername.setOnAction(actionEvent -> {
 			String username = usernameInput.getText();
-			if (!InterfaceManager.validateUsername(username)) {
+			if (!UserInterfaceLogic.validateUsername(username)) {
 				warning.setText("Please enter a valid username");
 			} else {
-				UserManager.createUser(username);
-				DatabaseManager.insertUser(username);
+				UserLogic.createUser(username);
+				DatabaseLogic.insertUser(username);
 				mainMenu(stage);
 			}
 		});
@@ -267,7 +267,7 @@ public class UserInterface {
 		// Get all tests belonging to a user
 		ResultSet result = null;
 		try {
-			result = DatabaseManager.getAllUserTests(UserManager.getActiveUser().getUsername());
+			result = DatabaseLogic.getAllUserTests(UserLogic.getActiveUser().getUsername());
 		} catch (NullPointerException e) {
 			System.out.println("Null user");
 		}
