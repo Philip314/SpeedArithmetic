@@ -19,7 +19,9 @@ public class ArithmeticTestLogic {
 	}
 	
 	public static ArithmeticTest createTest(int difficulty, Operator operator) {
-		ArithmeticTest toReturn = new ArithmeticTest(difficulty, operator);
+		ArithmeticTest toReturn = new ArithmeticTest();
+		toReturn.setDifficulty(difficulty);
+		toReturn.setOperator(operator);
 		switch(operator) {
 			case ADD:
 				toReturn.generateAdditionQuestions();

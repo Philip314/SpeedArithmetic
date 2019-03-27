@@ -21,11 +21,6 @@ public class ArithmeticTest {
 	
 	private ArrayList<Question> questions;
 	
-	public ArithmeticTest(int difficulty, Operator operator) {
-		setDifficulty(difficulty);
-		setOperator(operator);
-	}
-	
 	public int getDifficulty() {
 		return difficulty;
 	}

@@ -27,7 +27,9 @@ public class UserTest {
 	@Test
 	public void addTestExceptionNotThrown() {
 		User user = new User();
-		ArithmeticTest test = new ArithmeticTest(1, Operator.ADD);
+		ArithmeticTest test = new ArithmeticTest();
+		test.setDifficulty(1);
+		test.setOperator(Operator.ADD);
 		test.generateAdditionQuestions();
 		user.addTest(test);
 		Assertions.assertEquals(1, user.getTests().size());
@@ -37,7 +39,9 @@ public class UserTest {
 	public void addEmptyTestExceptionThrown() {
 		Assertions.assertThrows(NullPointerException.class, () -> {
 			User user = new User();
-			ArithmeticTest test = new ArithmeticTest(1, Operator.ADD);
+			ArithmeticTest test = new ArithmeticTest();
+			test.setDifficulty(1);
+			test.setOperator(Operator.ADD);
 			user.addTest(test);
 		});
 	}

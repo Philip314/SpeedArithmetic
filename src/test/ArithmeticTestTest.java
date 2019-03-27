@@ -23,26 +23,34 @@ public class ArithmeticTestTest {
 	
 	@Test
 	public void assignValidOperatorExceptionNotThrown() {
-		ArithmeticTest test = new ArithmeticTest(1, Operator.ADD);
+		ArithmeticTest test = new ArithmeticTest();
+		test.setDifficulty(1);
+		test.setOperator(Operator.ADD);
 		Assert.assertTrue(true);
 	}
 	
 	@Test
 	public void assignValidDifficultyExceptionNotThrown() {
-		ArithmeticTest test = new ArithmeticTest(1, Operator.ADD);
+		ArithmeticTest test = new ArithmeticTest();
+		test.setDifficulty(1);
+		test.setOperator(Operator.ADD);
 		Assert.assertTrue(true);
 	}
 	
 	@Test
 	public void assignInvalidDifficultyExceptionThrown() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			ArithmeticTest test = new ArithmeticTest(4, Operator.ADD);
+			ArithmeticTest test = new ArithmeticTest();
+			test.setDifficulty(1);
+			test.setOperator(Operator.ADD);
 		});
 	}
 	
 	@Test
 	public void generateAdditionQuestionsWithSameOperatorExceptionNotThrown() {
-		ArithmeticTest test = new ArithmeticTest(1, Operator.ADD);
+		ArithmeticTest test = new ArithmeticTest();
+		test.setDifficulty(1);
+		test.setOperator(Operator.ADD);
 		test.generateAdditionQuestions();
 		Assert.assertTrue(true);
 	}
@@ -50,14 +58,18 @@ public class ArithmeticTestTest {
 	@Test
 	public void generateAdditionQuestionsWithDifferentOperatorExceptionThrown() {
 		Assertions.assertThrows(RuntimeException.class, () -> {
-			ArithmeticTest test = new ArithmeticTest(1, Operator.SUBTRACT);
+			ArithmeticTest test = new ArithmeticTest();
+			test.setDifficulty(1);
+			test.setOperator(Operator.SUBTRACT);
 			test.generateAdditionQuestions();
 		});
 	}
 	
 	@Test
 	public void generateSubtractionQuestionsWithSameOperatorExceptionNotThrown() {
-		ArithmeticTest test = new ArithmeticTest(1, Operator.SUBTRACT);
+		ArithmeticTest test = new ArithmeticTest();
+		test.setDifficulty(1);
+		test.setOperator(Operator.SUBTRACT);
 		test.generateSubtractionQuestions();
 		Assert.assertTrue(true);
 	}
@@ -65,14 +77,18 @@ public class ArithmeticTestTest {
 	@Test
 	public void generateSubtractionQuestionsWithDifferentOperatorExceptionThrown() {
 		Assertions.assertThrows(RuntimeException.class, () -> {
-			ArithmeticTest test = new ArithmeticTest(1, Operator.MULTIPLY);
+			ArithmeticTest test = new ArithmeticTest();
+			test.setDifficulty(1);
+			test.setOperator(Operator.MULTIPLY);
 			test.generateSubtractionQuestions();
 		});
 	}
 	
 	@Test
 	public void generateMultiplicationQuestionsWithSameOperatorExceptionNotThrown() {
-		ArithmeticTest test = new ArithmeticTest(1, Operator.MULTIPLY);
+		ArithmeticTest test = new ArithmeticTest();
+		test.setDifficulty(1);
+		test.setOperator(Operator.MULTIPLY);
 		test.generateMultiplicationQuestions();
 		Assert.assertTrue(true);
 	}
@@ -80,14 +96,18 @@ public class ArithmeticTestTest {
 	@Test
 	public void generateMultiplicationQuestionsWithDifferentOperatorExceptionThrown() {
 		Assertions.assertThrows(RuntimeException.class, () -> {
-			ArithmeticTest test = new ArithmeticTest(1, Operator.DIVIDE);
+			ArithmeticTest test = new ArithmeticTest();
+			test.setDifficulty(1);
+			test.setOperator(Operator.DIVIDE);
 			test.generateMultiplicationQuestions();
 		});
 	}
 	
 	@Test
 	public void generateDivisionQuestionsWithSameOperatorExceptionNotThrown() {
-		ArithmeticTest test = new ArithmeticTest(1, Operator.DIVIDE);
+		ArithmeticTest test = new ArithmeticTest();
+		test.setDifficulty(1);
+		test.setOperator(Operator.DIVIDE);
 		test.generateDivisionQuestions();
 		Assert.assertTrue(true);
 	}
@@ -95,14 +115,18 @@ public class ArithmeticTestTest {
 	@Test
 	public void generateDivisionQuestionsWithDifferentOperatorExceptionThrown() {
 		Assertions.assertThrows(RuntimeException.class, () -> {
-			ArithmeticTest test = new ArithmeticTest(1, Operator.ADD);
+			ArithmeticTest test = new ArithmeticTest();
+			test.setDifficulty(1);
+			test.setOperator(Operator.ADD);
 			test.generateDivisionQuestions();
 		});
 	}
 	
 	@Test
 	public void markTestCorrectlySameNumberOfCorrectAndIncorrectAnswers() {
-		ArithmeticTest test = new ArithmeticTest(1, Operator.ADD);
+		ArithmeticTest test = new ArithmeticTest();
+		test.setDifficulty(1);
+		test.setOperator(Operator.ADD);
 		test.generateAdditionQuestions();
 		for (Question q : test.getQuestions()) {
 			q.setUserAnswer(q.getAnswer());
