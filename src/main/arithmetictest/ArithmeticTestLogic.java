@@ -10,6 +10,14 @@ import main.enumeration.Operator;
 
 public class ArithmeticTestLogic {
 	
+	public static boolean validDifficulty(int difficulty) {
+		if (difficulty == 1 || difficulty == 2 || difficulty == 3) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public static ArithmeticTest createTest(int difficulty, Operator operator) {
 		ArithmeticTest toReturn = new ArithmeticTest(difficulty, operator);
 		switch(operator) {

@@ -1,13 +1,25 @@
 package test;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 import main.arithmetictest.ArithmeticTest;
+import main.arithmetictest.ArithmeticTestLogic;
 import main.question.Question;
 import main.enumeration.Operator;
 
 public class ArithmeticTestTest {
+	
+	@Test
+	public void testValidDifficultyReturnTrue() {
+		Assert.assertTrue(ArithmeticTestLogic.validDifficulty(1));
+	}
+	
+	@Test
+	public void testInvalidDifficultyReturnFalse() {
+		Assert.assertFalse(ArithmeticTestLogic.validDifficulty(4));
+	}
 	
 	@Test
 	public void assignValidOperatorExceptionNotThrown() {
