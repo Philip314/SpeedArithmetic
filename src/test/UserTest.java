@@ -4,6 +4,7 @@ import org.junit.*;
 import org.junit.jupiter.api.Assertions;
 
 import main.arithmetictest.ArithmeticTest;
+import main.arithmetictest.ArithmeticTestLogic;
 import main.enumeration.Operator;
 import main.user.User;
 
@@ -30,7 +31,7 @@ public class UserTest {
 		ArithmeticTest test = new ArithmeticTest();
 		test.setDifficulty(1);
 		test.setOperator(Operator.ADD);
-		test.generateAdditionQuestions();
+		test.setQuestions(ArithmeticTestLogic.generateAdditionQuestions(test.getDifficulty()));
 		user.addTest(test);
 		Assertions.assertEquals(1, user.getTests().size());
 	}

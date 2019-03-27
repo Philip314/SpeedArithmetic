@@ -30,22 +30,13 @@ public class ArithmeticTestTest {
 	}
 	
 	@Test
-	public void generateAdditionQuestionsWithSameOperatorExceptionNotThrown() {
-		ArithmeticTest test = new ArithmeticTest();
-		test.setDifficulty(1);
-		test.setOperator(Operator.ADD);
-		test.generateAdditionQuestions();
-		Assert.assertTrue(true);
+	public void testValidOperatorReturnTrue() {
+		Assert.assertTrue(ArithmeticTestLogic.validateOperator(Operator.ADD, Operator.ADD));
 	}
 	
 	@Test
-	public void generateAdditionQuestionsWithDifferentOperatorExceptionThrown() {
-		Assertions.assertThrows(RuntimeException.class, () -> {
-			ArithmeticTest test = new ArithmeticTest();
-			test.setDifficulty(1);
-			test.setOperator(Operator.SUBTRACT);
-			test.generateAdditionQuestions();
-		});
+	public void testInvalidOperatorThrowException() {
+		Assert.assertFalse(ArithmeticTestLogic.validateOperator(Operator.ADD, Operator.MULTIPLY));
 	}
 	
 	@Test
@@ -110,7 +101,7 @@ public class ArithmeticTestTest {
 		ArithmeticTest test = new ArithmeticTest();
 		test.setDifficulty(1);
 		test.setOperator(Operator.ADD);
-		test.generateAdditionQuestions();
+		test.setQuestions(ArithmeticTestLogic.generateAdditionQuestions(test.getDifficulty()));
 		for (Question q : test.getQuestions()) {
 			q.setUserAnswer(q.getAnswer());
 		}

@@ -3,6 +3,7 @@ package main.arithmetictest;
 import java.util.ArrayList;
 
 import main.enumeration.Operator;
+import main.question.Question;
 
 /*
  * This class is for the logic of ArithmeticTest class.
@@ -18,13 +19,31 @@ public class ArithmeticTestLogic {
 		}
 	}
 	
+	public static boolean validateOperator(Operator operator, Operator expectedOperator) {
+		if (operator.equals(expectedOperator)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static ArrayList<Question> generateAdditionQuestions(int difficulty) {
+		ArrayList<Question> generateQuestions = new ArrayList<Question>();
+		for (int i=0; i<10; i++) {
+			Question q = new Question();
+			q.generateAdditionQuestion(difficulty);
+			generateQuestions.add(q);
+		}
+		return generateQuestions;
+	}
+	
 	public static ArithmeticTest createTest(int difficulty, Operator operator) {
 		ArithmeticTest toReturn = new ArithmeticTest();
 		toReturn.setDifficulty(difficulty);
 		toReturn.setOperator(operator);
 		switch(operator) {
 			case ADD:
-				toReturn.generateAdditionQuestions();
+				toReturn.setQuestions(generateAdditionQuestions(difficulty));
 				break;
 			case SUBTRACT:
 				toReturn.generateSubtractionQuestions();
