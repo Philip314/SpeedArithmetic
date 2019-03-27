@@ -58,19 +58,6 @@ public class ArithmeticTest {
 		this.questions = questions;
 	}
 	
-	public void generateSubtractionQuestions() {
-		if (!getOperator().equals(Operator.SUBTRACT)) {
-			throw new RuntimeException("Operator does not match the type of question about to be generated");
-		}
-		ArrayList<Question> generateQuestions = new ArrayList<Question>();
-		for (int i=0; i<10; i++) {
-			Question q = new Question();
-			q.generateSubtractionQuestion(getDifficulty());
-			generateQuestions.add(q);
-		}
-		setQuestions(generateQuestions);
-	}
-	
 	public void generateMultiplicationQuestions() {
 		if (!getOperator().equals(Operator.MULTIPLY)) {
 			throw new RuntimeException("Operator does not match the type of question about to be generated");
