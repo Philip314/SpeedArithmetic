@@ -162,18 +162,8 @@ public class UserInterface {
 		Label invalidInputWarning = new Label();
 		Button submitTest = new Button("Submit");
 		submitTest.setOnAction(actionEvent -> {
-			ArrayList<String> userAnswers = new ArrayList<String>();
-			UserInterfaceLogic.getUserAnswersFromTextField(textFieldAnswers, userAnswers);
-			
-			boolean validInput = true;
-			validInput = UserInterfaceLogic.validateUserAnswers(userAnswers);
-			UserInterfaceLogic.adjustAnswers(userAnswers);
-			if (validInput) {
-				ArithmeticTestLogic.assignAnswers(test, userAnswers);
-				UserLogic.saveTest(test);
-				if (UserLogic.getActiveUser() != null) {
-					DatabaseLogic.insertTest(test, UserLogic.getActiveUser().getUsername());
-				}
+			boolean processResult = UserInterfaceLogic.processTestSubmission(textFieldAnswers, test);
+			if (processResult) {
 				showResults(stage, test);
 			} else {
 				invalidInputWarning.setText("Answers must be a number");

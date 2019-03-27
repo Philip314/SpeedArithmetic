@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import javafx.scene.control.TextField;
 import main.arithmetictest.ArithmeticTest;
 import main.arithmetictest.ArithmeticTestLogic;
+import main.database.DatabaseLogic;
 import main.enumeration.Operator;
 import main.question.Question;
+import main.user.UserLogic;
 
 /*
  * This class is for the logic of UserInterface class.
@@ -31,10 +33,29 @@ public class UserInterfaceLogic {
 		}
 	}
 	
-	public static void getUserAnswersFromTextField(ArrayList<TextField> textField, ArrayList<String> userAnswers) {
+	public static boolean processTestSubmission(ArrayList<TextField> textFieldAnswers, ArithmeticTest test) {
+		ArrayList<String> userAnswers = getUserAnswersFromTextField(textFieldAnswers);
+		boolean validInput = true;
+		validInput = validateUserAnswers(userAnswers);
+		userAnswers = adjustAnswers(userAnswers);
+		if (validInput) {
+			ArithmeticTestLogic.assignAnswers(test, userAnswers);
+			UserLogic.saveTest(test);
+			if (UserLogic.getActiveUser() != null) {
+				DatabaseLogic.insertTest(test, UserLogic.getActiveUser().getUsername());
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static ArrayList<String> getUserAnswersFromTextField(ArrayList<TextField> textField) {
+		ArrayList<String> userAnswers = new ArrayList<String>();
 		for (TextField field : textField) {
 			userAnswers.add(field.getText());
 		}
+		return userAnswers;
 	}
 	
 	public static boolean validateUserAnswers(ArrayList<String> userAnswers) {
@@ -56,12 +77,13 @@ public class UserInterfaceLogic {
 		}
 	}
 	
-	public static void adjustAnswers(ArrayList<String> userAnswers) {
+	public static ArrayList<String> adjustAnswers(ArrayList<String> userAnswers) {
 		for (int i=0 ; i<userAnswers.size() ; i++) {
 			if (userAnswers.get(i).equals("")) {
 				userAnswers.set(i, null);
 			}
 		}
+		return userAnswers;
 	}
 	
 	public static String displayQuestion(int questionNumber, Question question) {
