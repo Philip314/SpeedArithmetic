@@ -57,6 +57,16 @@ public class ArithmeticTestLogic {
 		return generateQuestions;
 	}
 	
+	public static ArrayList<Question> generateDivisionQuestions(int difficulty) {
+		ArrayList<Question> generateQuestions = new ArrayList<Question>();
+		for (int i=0; i<10; i++) {
+			Question q = new Question();
+			q.generateDivisionQuestion(difficulty);
+			generateQuestions.add(q);
+		}
+		return generateQuestions;
+	}
+	
 	public static ArithmeticTest createTest(int difficulty, Operator operator) {
 		ArithmeticTest toReturn = new ArithmeticTest();
 		toReturn.setDifficulty(difficulty);
@@ -72,7 +82,7 @@ public class ArithmeticTestLogic {
 				toReturn.setQuestions(generateMultiplicationQuestions(difficulty));
 				break;
 			case DIVIDE:
-				toReturn.generateDivisionQuestions();
+				toReturn.setQuestions(generateDivisionQuestions(difficulty));
 				break;
 			default:
 				break;

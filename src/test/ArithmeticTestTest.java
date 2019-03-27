@@ -2,7 +2,6 @@ package test;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 import main.arithmetictest.ArithmeticTest;
 import main.arithmetictest.ArithmeticTestLogic;
@@ -37,25 +36,6 @@ public class ArithmeticTestTest {
 	@Test
 	public void testInvalidOperatorThrowException() {
 		Assert.assertFalse(ArithmeticTestLogic.validateOperator(Operator.ADD, Operator.MULTIPLY));
-	}
-	
-	@Test
-	public void generateDivisionQuestionsWithSameOperatorExceptionNotThrown() {
-		ArithmeticTest test = new ArithmeticTest();
-		test.setDifficulty(1);
-		test.setOperator(Operator.DIVIDE);
-		test.generateDivisionQuestions();
-		Assert.assertTrue(true);
-	}
-	
-	@Test
-	public void generateDivisionQuestionsWithDifferentOperatorExceptionThrown() {
-		Assertions.assertThrows(RuntimeException.class, () -> {
-			ArithmeticTest test = new ArithmeticTest();
-			test.setDifficulty(1);
-			test.setOperator(Operator.ADD);
-			test.generateDivisionQuestions();
-		});
 	}
 	
 	@Test
