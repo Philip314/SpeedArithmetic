@@ -40,25 +40,6 @@ public class ArithmeticTestTest {
 	}
 	
 	@Test
-	public void generateMultiplicationQuestionsWithSameOperatorExceptionNotThrown() {
-		ArithmeticTest test = new ArithmeticTest();
-		test.setDifficulty(1);
-		test.setOperator(Operator.MULTIPLY);
-		test.generateMultiplicationQuestions();
-		Assert.assertTrue(true);
-	}
-	
-	@Test
-	public void generateMultiplicationQuestionsWithDifferentOperatorExceptionThrown() {
-		Assertions.assertThrows(RuntimeException.class, () -> {
-			ArithmeticTest test = new ArithmeticTest();
-			test.setDifficulty(1);
-			test.setOperator(Operator.DIVIDE);
-			test.generateMultiplicationQuestions();
-		});
-	}
-	
-	@Test
 	public void generateDivisionQuestionsWithSameOperatorExceptionNotThrown() {
 		ArithmeticTest test = new ArithmeticTest();
 		test.setDifficulty(1);
