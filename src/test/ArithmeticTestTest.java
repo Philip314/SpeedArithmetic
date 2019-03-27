@@ -30,23 +30,6 @@ public class ArithmeticTestTest {
 	}
 	
 	@Test
-	public void assignValidDifficultyExceptionNotThrown() {
-		ArithmeticTest test = new ArithmeticTest();
-		test.setDifficulty(1);
-		test.setOperator(Operator.ADD);
-		Assert.assertTrue(true);
-	}
-	
-	@Test
-	public void assignInvalidDifficultyExceptionThrown() {
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			ArithmeticTest test = new ArithmeticTest();
-			test.setDifficulty(1);
-			test.setOperator(Operator.ADD);
-		});
-	}
-	
-	@Test
 	public void generateAdditionQuestionsWithSameOperatorExceptionNotThrown() {
 		ArithmeticTest test = new ArithmeticTest();
 		test.setDifficulty(1);
