@@ -87,6 +87,12 @@ public class UserInterfaceLogic {
 		return true;
 	}
 	
+	/**
+	 * Checks whether the string input is a number.
+	 * 
+	 * @param test String value to be checked.
+	 * @return True if the input is an integer. False otherwise.
+	 */
 	private static boolean isInteger(String test) {
 		try {
 			Integer.parseInt(test);
