@@ -91,13 +91,19 @@ public class ArithmeticTestLogic {
 	}
 	
 	public static ArithmeticTest assignAnswers(ArithmeticTest test, ArrayList<String> answers) {
+		int numberOfCorrectAnswers = 0;
+		int numberOfIncorrectAnswers = 0;
 		for (int i=0; i<test.getQuestions().size(); i++) {
 			if (answers.get(i) == null) {
 				test.getQuestions().get(i).setUserAnswer(-1);
+				numberOfCorrectAnswers++;
 			} else {
 				test.getQuestions().get(i).setUserAnswer(Integer.parseInt(answers.get(i)));
+				numberOfIncorrectAnswers++;
 			}
 		}
+		test.setNumberOfCorrectAnswers(numberOfCorrectAnswers);
+		test.setNumberOfIncorrectAnswers(numberOfIncorrectAnswers);
 		return test;
 	}
 	
