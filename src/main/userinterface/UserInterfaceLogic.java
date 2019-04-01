@@ -33,6 +33,13 @@ public class UserInterfaceLogic {
 		}
 	}
 	
+	/**
+	 * Processes the test once it has been submitted.
+	 * 
+	 * @param textFieldAnswers ArrayList of TextFields that contain the answers of the user that needs to be extracted.
+	 * @param test The ArithmeticTest that needs to be saved.
+	 * @return boolean value of whether the test was successfully processed.
+	 */
 	public static boolean processTestSubmission(ArrayList<TextField> textFieldAnswers, ArithmeticTest test) {
 		ArrayList<String> userAnswers = getUserAnswersFromTextField(textFieldAnswers);
 		boolean validInput = true;
