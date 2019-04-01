@@ -102,6 +102,12 @@ public class UserInterfaceLogic {
 		}
 	}
 	
+	/**
+	 * Iterates through ArrayList of string to change empty string to null.
+	 * 
+	 * @param userAnswers ArrayList of string to be iterated through
+	 * @return
+	 */
 	public static ArrayList<String> adjustAnswers(ArrayList<String> userAnswers) {
 		for (int i=0 ; i<userAnswers.size() ; i++) {
 			if (userAnswers.get(i).equals("")) {
