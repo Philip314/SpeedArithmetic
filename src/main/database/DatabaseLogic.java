@@ -1,8 +1,10 @@
 package main.database;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import main.arithmetictest.ArithmeticTest;
+import main.enumeration.Operator;
 
 public class DatabaseLogic {
 	
@@ -90,7 +92,7 @@ public class DatabaseLogic {
 		}
 	}
 	
-	public static ResultSet getAllUserTests(String username) {
+	public static ArrayList<ArithmeticTest> getAllUserTests(String username) {
 		ResultSet result = null;
 		try {
 			int id = selectUserID(username);
@@ -99,7 +101,27 @@ public class DatabaseLogic {
 		} catch (SQLException el) {
 			el.printStackTrace();
 		}
-		return result;
+		if (result == null) {
+			return null;
+		} else {
+			return convertToTest(result);
+		}
+	}
+	
+	private static ArrayList<ArithmeticTest> convertToTest(ResultSet rs) {
+		ArrayList<ArithmeticTest> toReturn = new ArrayList<ArithmeticTest>();
+		try {
+			while (rs.next()) {
+				ArithmeticTest test = new ArithmeticTest();
+				test.setDifficulty(rs.getInt("DIFFICULTY"));
+				test.setNumberOfCorrectAnswers(rs.getInt("NUM_CORRECT_ANSWERS"));
+				test.setNumberOfIncorrectAnswers(rs.getInt("NUM_INCORRECT_ANSWERS"));
+				toReturn.add(test);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return toReturn;
 	}
 	
 	private static boolean tablesExists() {

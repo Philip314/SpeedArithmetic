@@ -1,7 +1,11 @@
 package main.userinterface;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 import main.arithmetictest.ArithmeticTest;
 import main.arithmetictest.ArithmeticTestLogic;
@@ -135,6 +139,13 @@ public class UserInterfaceLogic {
 		} else {
 			return true;
 		}
+	}
+	
+	public static ObservableList<ArithmeticTest> getAllUserTests() {
+		ArrayList<ArithmeticTest> result = DatabaseLogic.getAllUserTests(UserLogic.getActiveUser().getUsername());
+		ObservableList<ArithmeticTest> obList = FXCollections.observableArrayList();
+		obList.addAll(result);
+		return obList;
 	}
 	
 }

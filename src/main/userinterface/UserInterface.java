@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -254,31 +256,18 @@ public class UserInterface {
 		
 		Label accountDetailsTitle = new Label("Account details");
 		
-		// Get all tests belonging to a user
-		ResultSet result = null;
-		try {
-			result = DatabaseLogic.getAllUserTests(UserLogic.getActiveUser().getUsername());
-		} catch (NullPointerException e) {
-			System.out.println("Null user");
-		}
-		if (result != null) {
-			try {
-				while(result.next()) {
-					System.out.println(result.getInt("NUM_CORRECT_ANSWERS"));
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} else {
-			System.out.println("Null tests");
-		}
+		ObservableList<ArithmeticTest> tests = UserInterfaceLogic.getAllUserTests();
 		
 		// Display tests
-		TableView table = new TableView();
+		TableView<ArithmeticTest> table = new TableView<ArithmeticTest>();
 		table.setEditable(false);
-		TableColumn difficulty = new TableColumn("Difficulty");
-		TableColumn numCorrect = new TableColumn("Number of Correct Answers");
-		TableColumn numIncorrect = new TableColumn("Number of Incorrect Answers");
+		TableColumn<ArithmeticTest, Integer> difficulty = new TableColumn<ArithmeticTest, Integer>("Difficulty");
+		TableColumn<ArithmeticTest, Integer> numCorrect = new TableColumn<ArithmeticTest, Integer>("Number of Correct Answers");
+		TableColumn<ArithmeticTest, Integer> numIncorrect = new TableColumn<ArithmeticTest, Integer>("Number of Incorrect Answers");
+		difficulty.setCellValueFactory(new PropertyValueFactory<ArithmeticTest, Integer>("difficulty"));
+		numCorrect.setCellValueFactory(new PropertyValueFactory<ArithmeticTest, Integer>("numberOfCorrectAnswers"));
+		numIncorrect.setCellValueFactory(new PropertyValueFactory<ArithmeticTest, Integer>("numberOfIncorrectAnswers"));
+		table.setItems(tests);
 		table.getColumns().addAll(difficulty, numCorrect, numIncorrect);
 		
 		VBox mainV = new VBox();
