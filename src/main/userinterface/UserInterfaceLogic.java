@@ -71,6 +71,12 @@ public class UserInterfaceLogic {
 		return userAnswers;
 	}
 	
+	/**
+	 * Validate that the ArrayList of string contain only integer answers or empty string.
+	 * 
+	 * @param userAnswers ArrayList of string answers.
+	 * @return True if the input only contains integer or empty string. False otherwise.
+	 */
 	public static boolean validateUserAnswers(ArrayList<String> userAnswers) {
 		for (String answer : userAnswers) {
 			if (answer.equals("")) {
