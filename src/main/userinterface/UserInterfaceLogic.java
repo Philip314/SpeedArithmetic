@@ -91,7 +91,7 @@ public class UserInterfaceLogic {
 	 * Checks whether the string input is a number.
 	 * 
 	 * @param test string value to be checked
-	 * @return true if the input is an integer, false otherwise.
+	 * @return true if the input is an integer, false otherwise
 	 */
 	private static boolean isInteger(String test) {
 		try {
