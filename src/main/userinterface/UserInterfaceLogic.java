@@ -34,11 +34,11 @@ public class UserInterfaceLogic {
 	}
 	
 	/**
-	 * Processes the test once it has been submitted.
+	 * Call other methods to validate and adjust the test and saves the test.
 	 * 
-	 * @param textFieldAnswers ArrayList of TextFields that contain the answers of the user that needs to be extracted.
-	 * @param test The ArithmeticTest that needs to be saved.
-	 * @return boolean value of whether the test was successfully processed.
+	 * @param textFieldAnswers ArrayList of TextFields that contain the answers of the user that needs to be extracted
+	 * @param test the ArithmeticTest that needs to be saved
+	 * @return true if the test was successfully processed, false otherwise
 	 */
 	public static boolean processTestSubmission(ArrayList<TextField> textFieldAnswers, ArithmeticTest test) {
 		ArrayList<String> userAnswers = getUserAnswersFromTextField(textFieldAnswers);
@@ -58,10 +58,10 @@ public class UserInterfaceLogic {
 	}
 	
 	/**
-	 * Extracts the answers from the ArrayList of Textfields into ArrayList of string.
+	 * Extracts the answers from the ArrayList of Textfields into an ArrayList of string.
 	 * 
-	 * @param textField ArrayList of TextFields.
-	 * @return ArrayList of answers as string.
+	 * @param textField ArrayList of TextFields
+	 * @return ArrayList of answers as string
 	 */
 	public static ArrayList<String> getUserAnswersFromTextField(ArrayList<TextField> textField) {
 		ArrayList<String> userAnswers = new ArrayList<String>();
@@ -74,8 +74,8 @@ public class UserInterfaceLogic {
 	/**
 	 * Validate that the ArrayList of string contain only integer answers or empty string.
 	 * 
-	 * @param userAnswers ArrayList of string answers.
-	 * @return True if the input only contains integer or empty string. False otherwise.
+	 * @param userAnswers ArrayList of string answers
+	 * @return true if the input only contains integer or empty string, false otherwise
 	 */
 	public static boolean validateUserAnswers(ArrayList<String> userAnswers) {
 		for (String answer : userAnswers) {
@@ -90,8 +90,8 @@ public class UserInterfaceLogic {
 	/**
 	 * Checks whether the string input is a number.
 	 * 
-	 * @param test String value to be checked.
-	 * @return True if the input is an integer. False otherwise.
+	 * @param test string value to be checked
+	 * @return true if the input is an integer, false otherwise.
 	 */
 	private static boolean isInteger(String test) {
 		try {
@@ -103,10 +103,10 @@ public class UserInterfaceLogic {
 	}
 	
 	/**
-	 * Iterates through ArrayList of string to change empty string to null.
+	 * Iterates through ArrayList of string to change empty string elements to null.
 	 * 
 	 * @param userAnswers ArrayList of string to be iterated through
-	 * @return
+	 * @return ArrayList of string
 	 */
 	public static ArrayList<String> adjustAnswers(ArrayList<String> userAnswers) {
 		for (int i=0 ; i<userAnswers.size() ; i++) {
