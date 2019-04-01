@@ -57,6 +57,12 @@ public class UserInterfaceLogic {
 		}
 	}
 	
+	/**
+	 * Extracts the answers from the ArrayList of Textfields into ArrayList of string.
+	 * 
+	 * @param textField ArrayList of TextFields.
+	 * @return ArrayList of answers as string.
+	 */
 	public static ArrayList<String> getUserAnswersFromTextField(ArrayList<TextField> textField) {
 		ArrayList<String> userAnswers = new ArrayList<String>();
 		for (TextField field : textField) {
