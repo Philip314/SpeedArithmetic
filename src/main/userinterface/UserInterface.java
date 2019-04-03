@@ -71,6 +71,7 @@ public class UserInterface {
 		Button createAccount = new Button("Create account");
 		createAccount.setOnAction(actionEvent -> createUser(stage));
 		Button accountDetails = new Button("Account details");
+		UserInterfaceLogic.setAccountDetailsButtonStatus(accountDetails);
 		accountDetails.setOnAction(actionEvent -> accountDetails(stage));
 		hbox.getChildren().addAll(createTest, createAccount, accountDetails);
 		hbox.setPadding(PADDING);

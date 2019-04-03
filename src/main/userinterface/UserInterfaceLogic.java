@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import main.arithmetictest.ArithmeticTest;
 import main.arithmetictest.ArithmeticTestLogic;
@@ -146,6 +147,14 @@ public class UserInterfaceLogic {
 		ObservableList<ArithmeticTest> obList = FXCollections.observableArrayList();
 		obList.addAll(result);
 		return obList;
+	}
+	
+	public static void setAccountDetailsButtonStatus(Button button) {
+		if (UserLogic.getActiveUser() == null) {
+			button.setDisable(true);
+		} else {
+			button.setDisable(false);
+		}
 	}
 	
 }
