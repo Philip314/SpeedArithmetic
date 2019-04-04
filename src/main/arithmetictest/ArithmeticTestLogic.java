@@ -96,10 +96,10 @@ public class ArithmeticTestLogic {
 		for (int i=0; i<test.getQuestions().size(); i++) {
 			if (answers.get(i) == null) {
 				test.getQuestions().get(i).setUserAnswer(-1);
-				numberOfCorrectAnswers++;
+				numberOfIncorrectAnswers++;
 			} else {
 				test.getQuestions().get(i).setUserAnswer(Integer.parseInt(answers.get(i)));
-				numberOfIncorrectAnswers++;
+				numberOfCorrectAnswers++;
 			}
 		}
 		test.setNumberOfCorrectAnswers(numberOfCorrectAnswers);
