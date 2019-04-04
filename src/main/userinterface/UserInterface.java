@@ -1,12 +1,9 @@
 package main.userinterface;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -22,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
 import main.arithmetictest.ArithmeticTest;
-import main.arithmetictest.ArithmeticTestLogic;
 import main.database.DatabaseLogic;
 import main.enumeration.Operator;
 import main.user.UserLogic;

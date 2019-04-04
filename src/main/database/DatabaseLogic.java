@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import main.arithmetictest.ArithmeticTest;
-import main.enumeration.Operator;
 
 public class DatabaseLogic {
 	
@@ -17,23 +16,23 @@ public class DatabaseLogic {
 	static PreparedStatement pstate;
 	static DatabaseMetaData meta = null;
 	
-	static String userTableName = "SPEEDARITHMETIC_USER";
-	static String testTableName = "SPEEDARITHMETIC_TEST";
+	static String userTableName = "speed_arithmetic_user";
+	static String testTableName = "speed_arithmetic_test";
 	
 	// SQL statements
-	static String createUserTableString = "CREATE TABLE " + userTableName + " (USER_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
-			+ " USERNAME VARCHAR(250),"
-			+ " PRIMARY KEY(USER_ID))";
-	static String createTestTableString = "CREATE TABLE " + testTableName + "(TEST_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
-			+ " DIFFICULTY VARCHAR(8),"
-			+ " NUM_CORRECT_ANSWERS INT,"
-			+ " NUM_INCORRECT_ANSWERS INT,"
-			+ " USER_ID INT NOT NULL, PRIMARY KEY(TEST_ID),"
-			+ " FOREIGN KEY(USER_ID) REFERENCES SPEEDARITHMETIC_USER(USER_ID))";
-	static String getAllUserTests = "SELECT * FROM " + testTableName + " WHERE USER_ID = ";
-	static String insertUser = "INSERT INTO " + userTableName + "(USER_ID, USERNAME) VALUES (DEFAULT, ?)";
-	static String insertTest = "INSERT INTO " + testTableName + "(TEST_ID, DIFFICULTY, NUM_CORRECT_ANSWERS, NUM_INCORRECT_ANSWERS, USER_ID) VALUES (DEFAULT, ?, ?, ?, ?)";
-	static String selectUserID = "SELECT USER_ID FROM " + userTableName + " WHERE USERNAME = ?";
+	static String createUserTableString = "CREATE TABLE " + userTableName + " (user_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
+			+ " username VARCHAR(250),"
+			+ " PRIMARY KEY(user_id))";
+	static String createTestTableString = "CREATE TABLE " + testTableName + "(test_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
+			+ " difficulty INT,"
+			+ " num_correct_answers INT,"
+			+ " num_incorrect_answers INT,"
+			+ " user_id INT NOT NULL, PRIMARY KEY(test_id),"
+			+ " FOREIGN KEY(user_id) REFERENCES speed_arithmetic_user(user_id))";
+	static String getAllUserTests = "SELECT * FROM " + testTableName + " WHERE user_id = ";
+	static String insertUser = "INSERT INTO " + userTableName + "(user_id, username) VALUES (DEFAULT, ?)";
+	static String insertTest = "INSERT INTO " + testTableName + "(test_id, difficulty, num_correct_answers, num_incorrect_answers, user_id) VALUES (DEFAULT, ?, ?, ?, ?)";
+	static String selectUserID = "SELECT user_id FROM " + userTableName + " WHERE username = ?";
 	
 	public static void connect() {
 		try {
@@ -113,9 +112,9 @@ public class DatabaseLogic {
 		try {
 			while (rs.next()) {
 				ArithmeticTest test = new ArithmeticTest();
-				test.setDifficulty(rs.getInt("DIFFICULTY"));
-				test.setNumberOfCorrectAnswers(rs.getInt("NUM_CORRECT_ANSWERS"));
-				test.setNumberOfIncorrectAnswers(rs.getInt("NUM_INCORRECT_ANSWERS"));
+				test.setDifficulty(rs.getInt("difficulty"));
+				test.setNumberOfCorrectAnswers(rs.getInt("num_correct_answers"));
+				test.setNumberOfIncorrectAnswers(rs.getInt("num_incorrect_answers"));
 				toReturn.add(test);
 			}
 		} catch (SQLException e) {
