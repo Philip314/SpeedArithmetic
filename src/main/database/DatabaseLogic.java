@@ -18,6 +18,7 @@ public class DatabaseLogic {
 	
 	static String userTableName = "speed_arithmetic_user";
 	static String testTableName = "speed_arithmetic_test";
+	static String questionTableName = "speed_arithmetic_question";
 	
 	// SQL statements
 	static String createUserTableString = "CREATE TABLE " + userTableName + " (user_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
@@ -29,6 +30,14 @@ public class DatabaseLogic {
 			+ " num_incorrect_answers INT,"
 			+ " user_id INT NOT NULL, PRIMARY KEY(test_id),"
 			+ " FOREIGN KEY(user_id) REFERENCES speed_arithmetic_user(user_id))";
+	static String createQuestionTableString = String.format("CREATE TABLE %s (question_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
+			+ "difficulty INT,"
+			+ "correct BOOLEAN,"
+			+ "first_number INT,"
+			+ "second_number INT,"
+			+ "answer INT,"
+			+ "user_answer INT,"
+			+ "PRIMARY KEY(question_id))", questionTableName);
 	static String getAllUserTests = "SELECT * FROM " + testTableName + " WHERE user_id = ";
 	static String insertUser = "INSERT INTO " + userTableName + "(user_id, username) VALUES (DEFAULT, ?)";
 	static String insertTest = "INSERT INTO " + testTableName + "(test_id, difficulty, num_correct_answers, num_incorrect_answers, user_id) VALUES (DEFAULT, ?, ?, ?, ?)";
@@ -53,6 +62,7 @@ public class DatabaseLogic {
 			try {
 				statement.execute(createUserTableString);
 				statement.execute(createTestTableString);
+				statement.execute(createQuestionTableString);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
