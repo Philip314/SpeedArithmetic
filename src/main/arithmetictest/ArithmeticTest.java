@@ -57,16 +57,4 @@ public class ArithmeticTest {
 	public void setQuestions(ArrayList<Question> questions) {
 		this.questions = questions;
 	}
-	
-	public void markTest() {
-		for (Question q : questions) {
-			q.markQuestion();
-			if (q.isCorrect()) {
-				numberOfCorrectAnswers++;
-			} else {
-				numberOfIncorrectAnswers++;
-			}
-		}
-	}
-	
 }

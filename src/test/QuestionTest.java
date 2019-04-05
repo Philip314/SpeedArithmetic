@@ -4,6 +4,7 @@ import org.junit.*;
 import org.junit.jupiter.api.Assertions;
 
 import main.question.Question;
+import main.question.QuestionLogic;
 import main.enumeration.Operator;
 
 public class QuestionTest {
@@ -32,8 +33,7 @@ public class QuestionTest {
 	
 	@Test
 	public void generateNumberCorrectlyBetweenUpperAndLowerBoundExceptionNotThrown() {
-		Question q = new Question();
-		int number = q.generateNumber(1, 11);
+		int number = QuestionLogic.generateNumber(1, 11);
 		Assert.assertTrue(number >= 1);
 		Assert.assertTrue(number <= 10);
 	}
@@ -41,16 +41,14 @@ public class QuestionTest {
 	@Test
 	public void generateNumberIncorrectlyWithSmallerBoundNumberExceptionThrown() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Question q = new Question();
-			q.generateNumber(5, 1);
+			QuestionLogic.generateNumber(5, 1);
 		});
 	}
 	
 	@Test
 	public void generateNumberIncorrectlyWithEqualNumbersExceptionThrown() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Question q = new Question();
-			q.generateNumber(5, 5);
+			QuestionLogic.generateNumber(5, 5);
 		});
 	}
 	

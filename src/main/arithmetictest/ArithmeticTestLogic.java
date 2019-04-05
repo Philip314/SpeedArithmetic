@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import main.enumeration.Operator;
 import main.question.Question;
+import main.question.QuestionLogic;
 
 /*
  * This class is for the logic of ArithmeticTest class.
@@ -31,7 +32,7 @@ public class ArithmeticTestLogic {
 		ArrayList<Question> generateQuestions = new ArrayList<Question>();
 		for (int i=0; i<10; i++) {
 			Question q = new Question();
-			q.generateAdditionQuestion(difficulty);
+			QuestionLogic.generateAdditionQuestion(q, difficulty);
 			generateQuestions.add(q);
 		}
 		return generateQuestions;
@@ -41,7 +42,7 @@ public class ArithmeticTestLogic {
 		ArrayList<Question> generateQuestions = new ArrayList<Question>();
 		for (int i=0; i<10; i++) {
 			Question q = new Question();
-			q.generateSubtractionQuestion(difficulty);
+			QuestionLogic.generateSubtractionQuestion(q, difficulty);
 			generateQuestions.add(q);
 		}
 		return generateQuestions;
@@ -51,7 +52,7 @@ public class ArithmeticTestLogic {
 		ArrayList<Question> generateQuestions = new ArrayList<Question>();
 		for (int i=0; i<10; i++) {
 			Question q = new Question();
-			q.generateMultiplicationQuestion(difficulty);
+			QuestionLogic.generateMultiplicationQuestion(q, difficulty);
 			generateQuestions.add(q);
 		}
 		return generateQuestions;
@@ -61,7 +62,7 @@ public class ArithmeticTestLogic {
 		ArrayList<Question> generateQuestions = new ArrayList<Question>();
 		for (int i=0; i<10; i++) {
 			Question q = new Question();
-			q.generateDivisionQuestion(difficulty);
+			QuestionLogic.generateDivisionQuestion(q, difficulty);
 			generateQuestions.add(q);
 		}
 		return generateQuestions;

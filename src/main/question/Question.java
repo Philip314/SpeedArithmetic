@@ -1,6 +1,5 @@
 package main.question;
 
-import java.util.Random;
 import main.enumeration.Operator;
 
 /*
@@ -85,109 +84,6 @@ public class Question {
 
 	public void setUserAnswer(int userAnswer) {
 		this.userAnswer = userAnswer;
-	}
-	
-	public int generateNumber(int lower, int upper) {
-		
-		Random random = new Random();
-		
-		return random.ints(lower, upper).findFirst().getAsInt();
-	}
-	
-	public void generateAdditionQuestion(int difficulty) {
-		setOperator(Operator.ADD);
-		setDifficulty(difficulty);
-		switch(difficulty) {
-		case 1:
-			setFirstNumber(generateNumber(LOWER, EASY_UPPER));
-			setSecondNumber(generateNumber(LOWER, EASY_UPPER));
-			break;
-		case 2:
-			setFirstNumber(generateNumber(LOWER, MED_UPPER));
-			setSecondNumber(generateNumber(LOWER, MED_UPPER));
-			break;
-		case 3:
-			setFirstNumber(generateNumber(LOWER, HARD_UPPER));
-			setSecondNumber(generateNumber(LOWER, HARD_UPPER));
-			break;
-		}
-		setAnswer(getFirstNumber() + getSecondNumber());
-	}
-	
-	public void generateSubtractionQuestion(int difficulty) {
-		setOperator(Operator.SUBTRACT);
-		setDifficulty(difficulty);
-		switch(difficulty) {
-		case 1:
-			setFirstNumber(generateNumber(SUBTRACT_LOWER, EASY_UPPER));
-			setSecondNumber(generateNumber(LOWER, getFirstNumber()));
-			break;
-		case 2:
-			setFirstNumber(generateNumber(SUBTRACT_LOWER, MED_UPPER));
-			setSecondNumber(generateNumber(LOWER, getFirstNumber()));
-			break;
-		case 3:
-			setFirstNumber(generateNumber(SUBTRACT_LOWER, HARD_UPPER));
-			setSecondNumber(generateNumber(LOWER, getFirstNumber()));
-			break;
-		}
-		setAnswer(getFirstNumber() - getSecondNumber());
-	}
-	
-	public void generateMultiplicationQuestion(int difficulty) {
-		setOperator(Operator.MULTIPLY);
-		setDifficulty(difficulty);
-		switch(difficulty) {
-		case 1:
-			setFirstNumber(generateNumber(LOWER, EASY_UPPER));
-			setSecondNumber(generateNumber(LOWER, EASY_UPPER));
-			break;
-		case 2:
-			setFirstNumber(generateNumber(LOWER, MED_UPPER));
-			setSecondNumber(generateNumber(LOWER, MED_UPPER));
-			break;
-		case 3:
-			setFirstNumber(generateNumber(LOWER, HARD_UPPER));
-			setSecondNumber(generateNumber(LOWER, HARD_UPPER));
-			break;
-		}
-		setAnswer(getFirstNumber() * getSecondNumber());
-	}
-	
-	public void generateDivisionQuestion(int difficulty) {
-		setOperator(Operator.DIVIDE);
-		setDifficulty(difficulty);
-		switch(difficulty) {
-		case 1:
-			generateDivisibleNumbers(generateNumber(LOWER, EASY_UPPER), generateNumber(LOWER, EASY_UPPER), EASY_UPPER);
-			break;
-		case 2:
-			generateDivisibleNumbers(generateNumber(LOWER, MED_UPPER), generateNumber(LOWER, MED_UPPER), MED_UPPER);
-			break;
-		case 3:
-			generateDivisibleNumbers(generateNumber(LOWER, HARD_UPPER), generateNumber(LOWER, HARD_UPPER), HARD_UPPER);
-			break;
-		}
-		setAnswer(getFirstNumber() / getSecondNumber());
-	}
-	
-	private void generateDivisibleNumbers(int first, int second, int upper) {
-		if (first % second == 0 && first != second) {
-			setFirstNumber(first);
-			setSecondNumber(second);
-		} else {
-			first = generateNumber(LOWER, upper);
-			second = generateNumber(LOWER, upper);
-			generateDivisibleNumbers(first, second, upper);
-		}
-	}
-	
-	public void markQuestion() {
-		if (userAnswer == answer) {
-			correct = true;
-		} else {
-			correct = false;
-		}
 	}
 	
 	@Override
