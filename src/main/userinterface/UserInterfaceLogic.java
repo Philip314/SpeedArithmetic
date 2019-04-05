@@ -52,7 +52,9 @@ public class UserInterfaceLogic {
 			ArithmeticTestLogic.assignAnswers(test, userAnswers);
 			UserLogic.saveTest(test);
 			if (UserLogic.getActiveUser() != null) {
-				DatabaseLogic.insertTest(test, UserLogic.getActiveUser().getUsername());
+				String username = UserLogic.getActiveUser().getUsername();
+				DatabaseLogic.insertTest(test, username);
+				DatabaseLogic.insertQuestions(test.getQuestions());
 			}
 			return true;
 		} else {

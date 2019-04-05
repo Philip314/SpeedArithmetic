@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import main.arithmetictest.ArithmeticTest;
+import main.question.Question;
 
 public class DatabaseLogic {
 	
@@ -41,6 +42,7 @@ public class DatabaseLogic {
 	static String getAllUserTests = "SELECT * FROM " + testTableName + " WHERE user_id = ";
 	static String insertUser = "INSERT INTO " + userTableName + "(user_id, username) VALUES (DEFAULT, ?)";
 	static String insertTest = "INSERT INTO " + testTableName + "(test_id, difficulty, num_correct_answers, num_incorrect_answers, user_id) VALUES (DEFAULT, ?, ?, ?, ?)";
+	static String insertQuestions = String.format("INSERT INTO %s (question_id, difficulty, correct, first_number, second_number, answer, user_answer) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)", questionTableName);
 	static String selectUserID = "SELECT user_id FROM " + userTableName + " WHERE username = ?";
 	
 	public static void connect() {
@@ -98,6 +100,22 @@ public class DatabaseLogic {
 			pstate.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
+		}
+	}
+	
+	public static void insertQuestions(ArrayList<Question> questions) {
+		try {
+			for (Question question : questions) {
+				pstate = conn.prepareStatement(insertQuestions);
+				pstate.setInt(1, question.getDifficulty());
+				pstate.setBoolean(2, question.isCorrect());
+				pstate.setInt(3, question.getFirstNumber());
+				pstate.setInt(4, question.getSecondNumber());
+				pstate.setInt(5, question.getAnswer());
+				pstate.setInt(6, question.getUserAnswer());
+			} 
+		}catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -167,7 +185,7 @@ public class DatabaseLogic {
 		try {
 			statement.executeUpdate("DROP TABLE " + testTableName);
 			statement.executeUpdate("DROP TABLE " + userTableName);
-			
+			statement.executeUpdate("DROP TABLE " + questionTableName);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
