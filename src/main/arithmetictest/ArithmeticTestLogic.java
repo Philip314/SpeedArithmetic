@@ -1,6 +1,7 @@
 package main.arithmetictest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import main.enumeration.Operator;
 import main.question.Question;
@@ -28,8 +29,8 @@ public class ArithmeticTestLogic {
 		}
 	}
 	
-	public static ArrayList<Question> generateAdditionQuestions(int difficulty) {
-		ArrayList<Question> generateQuestions = new ArrayList<Question>();
+	public static List<Question> generateAdditionQuestions(int difficulty) {
+		List<Question> generateQuestions = new ArrayList<Question>();
 		for (int i=0; i<10; i++) {
 			Question q = new Question();
 			QuestionLogic.generateAdditionQuestion(q, difficulty);
@@ -38,8 +39,8 @@ public class ArithmeticTestLogic {
 		return generateQuestions;
 	}
 	
-	public static ArrayList<Question> generateSubtractionQuestions(int difficulty) {
-		ArrayList<Question> generateQuestions = new ArrayList<Question>();
+	public static List<Question> generateSubtractionQuestions(int difficulty) {
+		List<Question> generateQuestions = new ArrayList<Question>();
 		for (int i=0; i<10; i++) {
 			Question q = new Question();
 			QuestionLogic.generateSubtractionQuestion(q, difficulty);
@@ -48,8 +49,8 @@ public class ArithmeticTestLogic {
 		return generateQuestions;
 	}
 	
-	public static ArrayList<Question> generateMultiplicationQuestions(int difficulty) {
-		ArrayList<Question> generateQuestions = new ArrayList<Question>();
+	public static List<Question> generateMultiplicationQuestions(int difficulty) {
+		List<Question> generateQuestions = new ArrayList<Question>();
 		for (int i=0; i<10; i++) {
 			Question q = new Question();
 			QuestionLogic.generateMultiplicationQuestion(q, difficulty);
@@ -58,8 +59,8 @@ public class ArithmeticTestLogic {
 		return generateQuestions;
 	}
 	
-	public static ArrayList<Question> generateDivisionQuestions(int difficulty) {
-		ArrayList<Question> generateQuestions = new ArrayList<Question>();
+	public static List<Question> generateDivisionQuestions(int difficulty) {
+		List<Question> generateQuestions = new ArrayList<Question>();
 		for (int i=0; i<10; i++) {
 			Question q = new Question();
 			QuestionLogic.generateDivisionQuestion(q, difficulty);
@@ -91,7 +92,7 @@ public class ArithmeticTestLogic {
 		return toReturn;
 	}
 	
-	public static ArithmeticTest assignAnswers(ArithmeticTest test, ArrayList<String> answers) {
+	public static ArithmeticTest assignAnswers(ArithmeticTest test, List<String> answers) {
 		int numberOfCorrectAnswers = 0;
 		int numberOfIncorrectAnswers = 0;
 		for (int i=0; i<test.getQuestions().size(); i++) {

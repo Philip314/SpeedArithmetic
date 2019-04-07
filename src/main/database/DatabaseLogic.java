@@ -2,6 +2,7 @@ package main.database;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import main.arithmetictest.ArithmeticTest;
 import main.question.Question;
@@ -103,7 +104,7 @@ public class DatabaseLogic {
 		}
 	}
 	
-	public static void insertQuestions(ArrayList<Question> questions) {
+	public static void insertQuestions(List<Question> questions) {
 		try {
 			for (Question question : questions) {
 				pstate = conn.prepareStatement(insertQuestions);
@@ -119,7 +120,7 @@ public class DatabaseLogic {
 		}
 	}
 	
-	public static ArrayList<ArithmeticTest> getAllUserTests(String username) {
+	public static List<ArithmeticTest> getAllUserTests(String username) {
 		ResultSet result = null;
 		try {
 			int id = selectUserID(username);
@@ -135,8 +136,8 @@ public class DatabaseLogic {
 		}
 	}
 	
-	private static ArrayList<ArithmeticTest> convertToTest(ResultSet rs) {
-		ArrayList<ArithmeticTest> toReturn = new ArrayList<ArithmeticTest>();
+	private static List<ArithmeticTest> convertToTest(ResultSet rs) {
+		List<ArithmeticTest> toReturn = new ArrayList<ArithmeticTest>();
 		try {
 			while (rs.next()) {
 				ArithmeticTest test = new ArithmeticTest();

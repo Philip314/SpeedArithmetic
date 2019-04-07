@@ -1,13 +1,14 @@
 package main.user;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import main.arithmetictest.ArithmeticTest;
 
 public class User {
 	
 	private String username;
-	private ArrayList<ArithmeticTest> tests = new ArrayList<ArithmeticTest>();
+	private List<ArithmeticTest> tests = new ArrayList<ArithmeticTest>();
 
 	public User() {
 	}
@@ -23,7 +24,7 @@ public class User {
 		this.username = username;
 	}
 	
-	public ArrayList<ArithmeticTest> getTests() {
+	public List<ArithmeticTest> getTests() {
 		return tests;
 	}
 	

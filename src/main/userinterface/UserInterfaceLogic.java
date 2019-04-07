@@ -1,6 +1,7 @@
 package main.userinterface;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,12 +40,12 @@ public class UserInterfaceLogic {
 	/**
 	 * Call other methods to validate and adjust the test and saves the test.
 	 * 
-	 * @param textFieldAnswers ArrayList of TextFields that contain the answers of the user that needs to be extracted
+	 * @param textFieldAnswers list of TextFields that contain the answers of the user that needs to be extracted
 	 * @param test the ArithmeticTest that needs to be saved
 	 * @return true if the test was successfully processed, false otherwise
 	 */
-	public static boolean processTestSubmission(ArrayList<TextField> textFieldAnswers, ArithmeticTest test) {
-		ArrayList<String> userAnswers = getUserAnswersFromTextField(textFieldAnswers);
+	public static boolean processTestSubmission(List<TextField> textFieldAnswers, ArithmeticTest test) {
+		List<String> userAnswers = getUserAnswersFromTextField(textFieldAnswers);
 		boolean validInput = true;
 		validInput = validateUserAnswers(userAnswers);
 		userAnswers = adjustAnswers(userAnswers);
@@ -63,13 +64,13 @@ public class UserInterfaceLogic {
 	}
 	
 	/**
-	 * Extracts the answers from the ArrayList of Textfields into an ArrayList of string.
+	 * Extracts the answers from the list of Textfields into a list of string.
 	 * 
-	 * @param textField ArrayList of TextFields
-	 * @return ArrayList of answers as string
+	 * @param textField list of TextFields
+	 * @return list of answers as string
 	 */
-	public static ArrayList<String> getUserAnswersFromTextField(ArrayList<TextField> textField) {
-		ArrayList<String> userAnswers = new ArrayList<String>();
+	public static List<String> getUserAnswersFromTextField(List<TextField> textField) {
+		List<String> userAnswers = new ArrayList<String>();
 		for (TextField field : textField) {
 			userAnswers.add(field.getText());
 		}
@@ -77,12 +78,12 @@ public class UserInterfaceLogic {
 	}
 	
 	/**
-	 * Validate that the ArrayList of string contain only integer answers or empty string.
+	 * Validate that the list of string contain only integer answers or empty string.
 	 * 
-	 * @param userAnswers ArrayList of string answers
+	 * @param userAnswers list of string answers
 	 * @return true if the input only contains integer or empty string, false otherwise
 	 */
-	public static boolean validateUserAnswers(ArrayList<String> userAnswers) {
+	public static boolean validateUserAnswers(List<String> userAnswers) {
 		for (String answer : userAnswers) {
 			if (answer.equals("")) {
 			} else if (!isInteger(answer)) {
@@ -108,12 +109,12 @@ public class UserInterfaceLogic {
 	}
 	
 	/**
-	 * Iterates through ArrayList of string to change empty string elements to null.
+	 * Iterates through list of string to change empty string elements to null.
 	 * 
-	 * @param userAnswers ArrayList of string to be iterated through
-	 * @return ArrayList of string
+	 * @param userAnswers list of string to be iterated through
+	 * @return list of string
 	 */
-	public static ArrayList<String> adjustAnswers(ArrayList<String> userAnswers) {
+	public static List<String> adjustAnswers(List<String> userAnswers) {
 		for (int i=0 ; i<userAnswers.size() ; i++) {
 			if (userAnswers.get(i).equals("")) {
 				userAnswers.set(i, null);
@@ -143,7 +144,7 @@ public class UserInterfaceLogic {
 	}
 	
 	public static ObservableList<ArithmeticTest> getAllUserTests() {
-		ArrayList<ArithmeticTest> result = DatabaseLogic.getAllUserTests(UserLogic.getActiveUser().getUsername());
+		List<ArithmeticTest> result = DatabaseLogic.getAllUserTests(UserLogic.getActiveUser().getUsername());
 		ObservableList<ArithmeticTest> obList = FXCollections.observableArrayList();
 		obList.addAll(result);
 		return obList;

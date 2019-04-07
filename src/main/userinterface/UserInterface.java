@@ -1,6 +1,7 @@
 package main.userinterface;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -146,7 +147,7 @@ public class UserInterface {
 		mainV.setSpacing(SPACING);
 		
 		// List questions and textfields
-		ArrayList<TextField> textFieldAnswers = new ArrayList<TextField>();
+		List<TextField> textFieldAnswers = new ArrayList<TextField>();
 		for (int i=0; i< test.getQuestions().size(); i++) {
 			Label label = new Label(UserInterfaceLogic.displayQuestion(i+1, test.getQuestions().get(i)));
 			TextField textField = new TextField();

@@ -1,6 +1,6 @@
 package main.arithmetictest;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /*
  * This is the main class that holds the arithmetic test.
@@ -19,7 +19,7 @@ public class ArithmeticTest {
 	private int numberOfCorrectAnswers;
 	private int numberOfIncorrectAnswers;
 	
-	private ArrayList<Question> questions;
+	private List<Question> questions;
 	
 	public int getDifficulty() {
 		return difficulty;
@@ -50,11 +50,11 @@ public class ArithmeticTest {
 		this.numberOfIncorrectAnswers = numberOfIncorrectAnswers;
 	}
 
-	public ArrayList<Question> getQuestions() {
+	public List<Question> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(ArrayList<Question> questions) {
+	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 }
