@@ -18,20 +18,22 @@ public class DatabaseLogic {
 	static PreparedStatement pstate;
 	static DatabaseMetaData meta = null;
 	
+	// Table names
 	static String userTableName = "speed_arithmetic_user";
 	static String testTableName = "speed_arithmetic_test";
 	static String questionTableName = "speed_arithmetic_question";
 	
 	// SQL statements
-	static String createUserTableString = "CREATE TABLE " + userTableName + " (user_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
+	// Create strings
+	static String createUserTableString = String.format("CREATE TABLE %s (user_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
 			+ " username VARCHAR(250),"
-			+ " PRIMARY KEY(user_id))";
-	static String createTestTableString = "CREATE TABLE " + testTableName + "(test_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
+			+ " PRIMARY KEY(user_id))", userTableName);
+	static String createTestTableString = String.format("CREATE TABLE %s (test_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
 			+ " difficulty INT,"
 			+ " num_correct_answers INT,"
 			+ " num_incorrect_answers INT,"
 			+ " user_id INT NOT NULL, PRIMARY KEY(test_id),"
-			+ " FOREIGN KEY(user_id) REFERENCES speed_arithmetic_user(user_id))";
+			+ " FOREIGN KEY(user_id) REFERENCES speed_arithmetic_user(user_id))", testTableName);
 	static String createQuestionTableString = String.format("CREATE TABLE %s (question_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
 			+ "difficulty INT,"
 			+ "correct BOOLEAN,"
@@ -40,11 +42,14 @@ public class DatabaseLogic {
 			+ "answer INT,"
 			+ "user_answer INT,"
 			+ "PRIMARY KEY(question_id))", questionTableName);
-	static String getAllUserTests = "SELECT * FROM " + testTableName + " WHERE user_id = ";
-	static String insertUser = "INSERT INTO " + userTableName + "(user_id, username) VALUES (DEFAULT, ?)";
-	static String insertTest = "INSERT INTO " + testTableName + "(test_id, difficulty, num_correct_answers, num_incorrect_answers, user_id) VALUES (DEFAULT, ?, ?, ?, ?)";
+	// Select strings
+	static String getAllUserTests = String.format("SELECT * FROM %s WHERE user_id = ", testTableName);
+	static String selectUserID = String.format("SELECT user_id FROM %s WHERE username = ?", userTableName);
+	// Insert strings
+	static String insertUser = String.format("INSERT INTO %s (user_id, username) VALUES (DEFAULT, ?)", userTableName) ;
+	static String insertTest = String.format("INSERT INTO %s (test_id, difficulty, num_correct_answers, num_incorrect_answers, user_id) VALUES (DEFAULT, ?, ?, ?, ?)", testTableName);
 	static String insertQuestions = String.format("INSERT INTO %s (question_id, difficulty, correct, first_number, second_number, answer, user_answer) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)", questionTableName);
-	static String selectUserID = "SELECT user_id FROM " + userTableName + " WHERE username = ?";
+	
 	
 	public static void connect() {
 		try {
