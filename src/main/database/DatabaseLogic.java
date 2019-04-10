@@ -26,14 +26,15 @@ public class DatabaseLogic {
 	// SQL statements
 	// Create strings
 	static String createUserTableString = String.format("CREATE TABLE %s (user_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
-			+ " username VARCHAR(250),"
-			+ " PRIMARY KEY(user_id))", userTableName);
+			+ "username VARCHAR(250),"
+			+ "PRIMARY KEY(user_id))", userTableName);
 	static String createTestTableString = String.format("CREATE TABLE %s (test_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
-			+ " difficulty INT,"
-			+ " num_correct_answers INT,"
-			+ " num_incorrect_answers INT,"
-			+ " user_id INT NOT NULL, PRIMARY KEY(test_id),"
-			+ " FOREIGN KEY(user_id) REFERENCES speed_arithmetic_user(user_id))", testTableName);
+			+ "difficulty INT,"
+			+ "num_correct_answers INT,"
+			+ "num_incorrect_answers INT,"
+			+ "user_id INT NOT NULL,"
+			+ "PRIMARY KEY(test_id),"
+			+ "FOREIGN KEY(user_id) REFERENCES %s (user_id))", testTableName, userTableName);
 	static String createQuestionTableString = String.format("CREATE TABLE %s (question_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
 			+ "difficulty INT,"
 			+ "correct BOOLEAN,"
@@ -41,14 +42,17 @@ public class DatabaseLogic {
 			+ "second_number INT,"
 			+ "answer INT,"
 			+ "user_answer INT,"
-			+ "PRIMARY KEY(question_id))", questionTableName);
+			+ "test_id INT NOT NULL,"
+			+ "PRIMARY KEY(question_id),"
+			+ "FOREIGN KEY(test_id) REFERENCES %s (test_id))", questionTableName, testTableName);
 	// Select strings
-	static String getAllUserTests = String.format("SELECT * FROM %s WHERE user_id = ", testTableName);
+	static String getAllUserTests = String.format("SELECT * FROM %s WHERE user_id = ?", testTableName);
+	static String getLatestTestID = String.format("SELECT MAX(test_id) FROM %s", testTableName);
 	static String selectUserID = String.format("SELECT user_id FROM %s WHERE username = ?", userTableName);
 	// Insert strings
 	static String insertUser = String.format("INSERT INTO %s (user_id, username) VALUES (DEFAULT, ?)", userTableName) ;
 	static String insertTest = String.format("INSERT INTO %s (test_id, difficulty, num_correct_answers, num_incorrect_answers, user_id) VALUES (DEFAULT, ?, ?, ?, ?)", testTableName);
-	static String insertQuestions = String.format("INSERT INTO %s (question_id, difficulty, correct, first_number, second_number, answer, user_answer) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)", questionTableName);
+	static String insertQuestions = String.format("INSERT INTO %s (question_id, difficulty, correct, first_number, second_number, answer, user_answer, test_id) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)", questionTableName);
 	
 	
 	public static void connect() {
@@ -119,6 +123,7 @@ public class DatabaseLogic {
 				pstate.setInt(4, question.getSecondNumber());
 				pstate.setInt(5, question.getAnswer());
 				pstate.setInt(6, question.getUserAnswer());
+				pstate.setInt(7, getLatestTestID());
 			} 
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -129,7 +134,8 @@ public class DatabaseLogic {
 		ResultSet result = null;
 		try {
 			int id = selectUserID(username);
-			pstate = conn.prepareStatement(getAllUserTests + id);
+			pstate = conn.prepareStatement(getAllUserTests);
+			pstate.setInt(1, id);
 			result = pstate.executeQuery();
 		} catch (SQLException el) {
 			el.printStackTrace();
@@ -139,6 +145,21 @@ public class DatabaseLogic {
 		} else {
 			return convertToTest(result);
 		}
+	}
+	
+	private static int getLatestTestID() {
+		ResultSet result = null;
+		int toReturn = 0;
+		try {
+			pstate = conn.prepareStatement(getLatestTestID);
+			result = pstate.executeQuery();
+			while (result.next()) {
+				toReturn = result.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return toReturn;
 	}
 	
 	private static List<ArithmeticTest> convertToTest(ResultSet rs) {
@@ -189,9 +210,9 @@ public class DatabaseLogic {
 	// TEMPORARY
 	private static void dropTables() {
 		try {
+			statement.executeUpdate("DROP TABLE " + questionTableName);
 			statement.executeUpdate("DROP TABLE " + testTableName);
 			statement.executeUpdate("DROP TABLE " + userTableName);
-			statement.executeUpdate("DROP TABLE " + questionTableName);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
