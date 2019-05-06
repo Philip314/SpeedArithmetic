@@ -20,6 +20,12 @@ import main.user.UserLogic;
 
 public class UserInterfaceLogic {
 	
+	/**
+	 * Decides which text should be set based on difficulty.
+	 * 
+	 * @param difficulty integer which decides what string is to be returned
+	 * @return string of description
+	 */
 	public static String setDifficultyText(int difficulty) {
 		switch (difficulty) {
 				case 1: return "Numbers will be 1 to 10";
@@ -29,6 +35,14 @@ public class UserInterfaceLogic {
 		}
 	}
 	
+	/**
+	 * Creates a test if the parameters are not null.
+	 * 
+	 * @param difficulty integer of the difficulty
+	 * @param operators enum of the operator
+	 * @return test that was created
+	 * @throws NullPointerException
+	 */
 	public static ArithmeticTest createTest(Integer difficulty, Operator operators) throws NullPointerException {
 		if (difficulty != null && operators != null) {
 			return ArithmeticTestLogic.createTest(difficulty, operators);
@@ -123,10 +137,23 @@ public class UserInterfaceLogic {
 		return userAnswers;
 	}
 	
+	/**
+	 * Constructs the question in a readable format.
+	 * 
+	 * @param questionNumber integer to be used as part of the string
+	 * @param question the entire question to be used as part of the string
+	 * @return string of the question
+	 */
 	public static String displayQuestion(int questionNumber, Question question) {
 		return "Question " + questionNumber + ": " + question;
 	}
 	
+	/**
+	 * Generates the text for the labels from the user's answers. This is used after the user has finished the test and the results need to be displayed.
+	 * 
+	 * @param userAnswerInt integer of the user's answers. -1 if the user did not answer the question
+	 * @return string for the label of the user's answer
+	 */
 	public static String generateAnswerLabelText(int userAnswerInt) {
 		if (userAnswerInt == -1) {
 			return "Your answer is: N/A";
@@ -135,6 +162,12 @@ public class UserInterfaceLogic {
 		}
 	}
 	
+	/**
+	 * Validates the username.
+	 * 
+	 * @param username string to be validated
+	 * @return true if the username is valid, false otherwise
+	 */
 	public static boolean validateUsername(String username) {
 		if (username.equals("") || username.trim().length() == 0) {
 			return false;
@@ -143,6 +176,11 @@ public class UserInterfaceLogic {
 		}
 	}
 	
+	/**
+	 * Gets all of the tests belonging to the active user.
+	 * 
+	 * @return ObservableList of the tests.
+	 */
 	public static ObservableList<ArithmeticTest> getAllUserTests() {
 		List<ArithmeticTest> result = DatabaseLogic.getAllUserTests(UserLogic.getActiveUser().getUsername());
 		ObservableList<ArithmeticTest> obList = FXCollections.observableArrayList();
@@ -150,6 +188,12 @@ public class UserInterfaceLogic {
 		return obList;
 	}
 	
+	/**
+	 * Decides whether the account details button should be enabled or not.
+	 * Disabled if there is no active user, otherwise enable.
+	 * 
+	 * @param button button which will be disabled or enabled.
+	 */
 	public static void setAccountDetailsButtonStatus(Button button) {
 		if (UserLogic.getActiveUser() == null) {
 			button.setDisable(true);
