@@ -148,17 +148,20 @@ public class ArithmeticTestLogic {
 	public static ArithmeticTest assignAnswers(ArithmeticTest test, List<String> answers) {
 		int numberOfCorrectAnswers = 0;
 		int numberOfIncorrectAnswers = 0;
+		List<Integer> intList = convertStringListToInt(answers);
 		for (int i=0; i<test.getQuestions().size(); i++) {
-			if (answers.get(i) == null) {
-				test.getQuestions().get(i).setUserAnswer(-1);
+			int userAnswer = intList.get(i);
+			int correctAnswer = test.getQuestions().get(i).getAnswer();
+			int toAssign = userAnswer;
+			if (userAnswer == -1) {
+				toAssign = -1;
 				numberOfIncorrectAnswers++;
-			} else if (test.getQuestions().get(i).getAnswer() != Integer.parseInt(answers.get(i))) {
-				test.getQuestions().get(i).setUserAnswer(Integer.parseInt(answers.get(i)));
+			} else if (correctAnswer != userAnswer) {
 				numberOfIncorrectAnswers++;
 			} else {
-				test.getQuestions().get(i).setUserAnswer(Integer.parseInt(answers.get(i)));
 				numberOfCorrectAnswers++;
 			}
+			test.getQuestions().get(i).setUserAnswer(toAssign);
 		}
 		test.setNumberOfCorrectAnswers(numberOfCorrectAnswers);
 		test.setNumberOfIncorrectAnswers(numberOfIncorrectAnswers);
