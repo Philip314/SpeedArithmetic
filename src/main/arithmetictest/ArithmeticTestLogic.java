@@ -7,12 +7,20 @@ import main.enumeration.Operator;
 import main.question.Question;
 import main.question.QuestionLogic;
 
-/*
+/**
  * This class is for the logic of ArithmeticTest class.
+ * 
+ * @author Philip
+ *
  */
-
 public class ArithmeticTestLogic {
 	
+	/**
+	 * Validates whether the given integer is a valid difficulty.
+	 * 
+	 * @param difficulty integer to be validated
+	 * @return true if the integer is a valid difficulty, false otherwise
+	 */
 	public static boolean validDifficulty(int difficulty) {
 		if (difficulty == 1 || difficulty == 2 || difficulty == 3) {
 			return true;
@@ -21,6 +29,13 @@ public class ArithmeticTestLogic {
 		}
 	}
 	
+	/**
+	 * Checks whether the two operator are equal to each other.
+	 * 
+	 * @param operator Operator to be checked
+	 * @param expectedOperator Operator which is expected
+	 * @return true if they are equal, false otherwise
+	 */
 	public static boolean validateOperator(Operator operator, Operator expectedOperator) {
 		if (operator.equals(expectedOperator)) {
 			return true;
@@ -29,6 +44,12 @@ public class ArithmeticTestLogic {
 		}
 	}
 	
+	/**
+	 * Generate a list of addition questions.
+	 * 
+	 * @param difficulty integer to decide the difficulty of the questions
+	 * @return list of questions
+	 */
 	public static List<Question> generateAdditionQuestions(int difficulty) {
 		List<Question> generateQuestions = new ArrayList<Question>();
 		for (int i=0; i<10; i++) {
@@ -39,6 +60,12 @@ public class ArithmeticTestLogic {
 		return generateQuestions;
 	}
 	
+	/**
+	 * Generate a list of subtraction questions.
+	 * 
+	 * @param difficulty integer to decide the difficulty of the questions
+	 * @return list of questions
+	 */
 	public static List<Question> generateSubtractionQuestions(int difficulty) {
 		List<Question> generateQuestions = new ArrayList<Question>();
 		for (int i=0; i<10; i++) {
@@ -49,6 +76,12 @@ public class ArithmeticTestLogic {
 		return generateQuestions;
 	}
 	
+	/**
+	 * Generate a list of multiplication questions.
+	 * 
+	 * @param difficulty integer to decide the difficulty of the questions
+	 * @return list of questions
+	 */
 	public static List<Question> generateMultiplicationQuestions(int difficulty) {
 		List<Question> generateQuestions = new ArrayList<Question>();
 		for (int i=0; i<10; i++) {
@@ -59,6 +92,12 @@ public class ArithmeticTestLogic {
 		return generateQuestions;
 	}
 	
+	/**
+	 * Generate a list of division questions.
+	 * 
+	 * @param difficulty integer to decide the difficulty of the questions
+	 * @return list of questions
+	 */
 	public static List<Question> generateDivisionQuestions(int difficulty) {
 		List<Question> generateQuestions = new ArrayList<Question>();
 		for (int i=0; i<10; i++) {
@@ -69,6 +108,13 @@ public class ArithmeticTestLogic {
 		return generateQuestions;
 	}
 	
+	/**
+	 * Creates an ArithmeticTest.
+	 * 
+	 * @param difficulty integer to decide the difficulty of the questions and test
+	 * @param operator decides which questions are to be generated
+	 * @return ArithmeticTest that was created
+	 */
 	public static ArithmeticTest createTest(int difficulty, Operator operator) {
 		ArithmeticTest toReturn = new ArithmeticTest();
 		toReturn.setDifficulty(difficulty);
@@ -92,6 +138,13 @@ public class ArithmeticTestLogic {
 		return toReturn;
 	}
 	
+	/**
+	 * Assign the user answers to the ArithmeticTest. If the answer is null then -1 is assigned. Calculates the total number of correct and incorrect answers and assigns that to ArithmeticTest.
+	 * 
+	 * @param test ArithmeticTest that will be assigned values
+	 * @param answers list of user's answers
+	 * @return ArithmeticTest that was assigned values
+	 */
 	public static ArithmeticTest assignAnswers(ArithmeticTest test, List<String> answers) {
 		int numberOfCorrectAnswers = 0;
 		int numberOfIncorrectAnswers = 0;
