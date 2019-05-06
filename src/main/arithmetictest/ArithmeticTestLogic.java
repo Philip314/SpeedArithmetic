@@ -165,4 +165,18 @@ public class ArithmeticTestLogic {
 		return test;
 	}
 	
+	private static List<Integer> convertStringListToInt(List<String> stringList) {
+		List<Integer> intList = new ArrayList<Integer>();
+		int toAdd = 0;
+		for (String e : stringList) {
+			try {
+				toAdd = Integer.parseInt(e);
+			} catch (NumberFormatException exception) {
+				toAdd = -1;
+			}
+			intList.add(toAdd);
+		}
+		return intList;
+	}
+	
 }
