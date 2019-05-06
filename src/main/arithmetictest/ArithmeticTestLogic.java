@@ -165,6 +165,12 @@ public class ArithmeticTestLogic {
 		return test;
 	}
 	
+	/**
+	 * Converts a list of string to a list of integers.
+	 * 
+	 * @param stringList list to be converted
+	 * @return list of integer
+	 */
 	private static List<Integer> convertStringListToInt(List<String> stringList) {
 		List<Integer> intList = new ArrayList<Integer>();
 		int toAdd = 0;
