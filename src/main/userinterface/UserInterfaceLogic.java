@@ -14,10 +14,12 @@ import main.enumeration.Operator;
 import main.question.Question;
 import main.user.UserLogic;
 
-/*
- * This class is for the logic of UserInterface class.
+/**
+ * This class contains the logic of UserInterface class.
+ * 
+ * @author Philip
+ *
  */
-
 public class UserInterfaceLogic {
 	
 	/**
