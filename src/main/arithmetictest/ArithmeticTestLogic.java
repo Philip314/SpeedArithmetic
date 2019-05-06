@@ -152,6 +152,9 @@ public class ArithmeticTestLogic {
 			if (answers.get(i) == null) {
 				test.getQuestions().get(i).setUserAnswer(-1);
 				numberOfIncorrectAnswers++;
+			} else if (test.getQuestions().get(i).getAnswer() != Integer.parseInt(answers.get(i))) {
+				test.getQuestions().get(i).setUserAnswer(Integer.parseInt(answers.get(i)));
+				numberOfIncorrectAnswers++;
 			} else {
 				test.getQuestions().get(i).setUserAnswer(Integer.parseInt(answers.get(i)));
 				numberOfCorrectAnswers++;
