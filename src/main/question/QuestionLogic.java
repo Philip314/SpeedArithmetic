@@ -6,11 +6,24 @@ import main.enumeration.Operator;
 
 public class QuestionLogic {
 	
+	/**
+	 * Generates a random number with the given bounds.
+	 * 
+	 * @param lower the lower bound, inclusive
+	 * @param upper the upper bound, exclusive
+	 * @return a randam integer
+	 */
 	public static int generateNumber(int lower, int upper) {
 		Random random = new Random();
 		return random.ints(lower, upper).findFirst().getAsInt();
 	}
 	
+	/**
+	 * Generates an addition question. Sets the relevant details to the given Question.
+	 * 
+	 * @param question the object that will be assigned the values
+	 * @param difficulty the value which decides what numbers will be generated
+	 */
 	public static void generateAdditionQuestion(Question question, int difficulty) {
 		question.setOperator(Operator.ADD);
 		question.setDifficulty(difficulty);
@@ -31,6 +44,12 @@ public class QuestionLogic {
 		question.setAnswer(question.getFirstNumber() + question.getSecondNumber());
 	}
 	
+	/**
+	 * Generates a subtraction question. Sets the relevant details to the given Question.
+	 * 
+	 * @param question the object that will be assigned the values
+	 * @param difficulty the value which decides what numbers will be generated
+	 */
 	public static void generateSubtractionQuestion(Question question, int difficulty) {
 		question.setOperator(Operator.SUBTRACT);
 		question.setDifficulty(difficulty);
@@ -51,6 +70,12 @@ public class QuestionLogic {
 		question.setAnswer(question.getFirstNumber() - question.getSecondNumber());
 	}
 	
+	/**
+	 * Generates a multiplication question. Sets the relevant details to the given Question.
+	 * 
+	 * @param question the object that will be assigned the values
+	 * @param difficulty the value which decides what numbers will be generated
+	 */
 	public static void generateMultiplicationQuestion(Question question, int difficulty) {
 		question.setOperator(Operator.MULTIPLY);
 		question.setDifficulty(difficulty);
@@ -71,6 +96,12 @@ public class QuestionLogic {
 		question.setAnswer(question.getFirstNumber() * question.getSecondNumber());
 	}
 	
+	/**
+	 * Generates a division question. Sets the relevant details to the given Question.
+	 * 
+	 * @param question the object that will be assigned the values
+	 * @param difficulty the value which decides what numbers will be generated
+	 */
 	public static void generateDivisionQuestion(Question question, int difficulty) {
 		question.setOperator(Operator.DIVIDE);
 		question.setDifficulty(difficulty);
@@ -88,6 +119,14 @@ public class QuestionLogic {
 		question.setAnswer(question.getFirstNumber() / question.getSecondNumber());
 	}
 	
+	/**
+	 * Generates random numbers that is easily divisible so that there will be no remainders and are not the same numbers. Will continue to find suitable numbers recursively.
+	 * 
+	 * @param question the object that will be assigned the values
+	 * @param first the first number of the question
+	 * @param second the second number of the question
+	 * @param upper the upper bound, exclusive
+	 */
 	private static void generateDivisibleNumbers(Question question, int first, int second, int upper) {
 		if (first % second == 0 && first != second) {
 			question.setFirstNumber(first);
