@@ -139,7 +139,7 @@ public class ArithmeticTestLogic {
 	}
 	
 	/**
-	 * Assign the user answers to the ArithmeticTest. If the answer is null then -1 is assigned. Calculates the total number of correct and incorrect answers and assigns that to ArithmeticTest.
+	 * Assign the user answers to the ArithmeticTest. Calculates the total number of correct and incorrect answers and assigns that to ArithmeticTest.
 	 * 
 	 * @param test ArithmeticTest that will be assigned values
 	 * @param answers list of user's answers
@@ -169,7 +169,7 @@ public class ArithmeticTestLogic {
 	}
 	
 	/**
-	 * Converts a list of string to a list of integers.
+	 * Converts a list of string to a list of integers. If the value is null then -1 is assigned.
 	 * 
 	 * @param stringList list to be converted
 	 * @return list of integer
