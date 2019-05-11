@@ -7,6 +7,12 @@ import java.util.List;
 import main.arithmetictest.ArithmeticTest;
 import main.question.Question;
 
+/**
+ * This class handles all the database operations.
+ * 
+ * @author Philip
+ *
+ */
 public class DatabaseLogic {
 	
 	// Database variables
@@ -54,7 +60,9 @@ public class DatabaseLogic {
 	static String insertTest = String.format("INSERT INTO %s (test_id, difficulty, num_correct_answers, num_incorrect_answers, user_id) VALUES (DEFAULT, ?, ?, ?, ?)", testTableName);
 	static String insertQuestions = String.format("INSERT INTO %s (question_id, difficulty, correct, first_number, second_number, answer, user_answer, test_id) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)", questionTableName);
 	
-	
+	/**
+	 * Connects to the database.
+	 */
 	public static void connect() {
 		try {
 			Class.forName(driver);
@@ -68,6 +76,9 @@ public class DatabaseLogic {
 		}
 	}
 	
+	/**
+	 * Creates all the tables and delete existing tables.
+	 */
 	public static void createTable() {
 		dropTables();
 		if (!tablesExists()) {
@@ -81,6 +92,9 @@ public class DatabaseLogic {
 		}
 	}
 	
+	/**
+	 * Closes the database.
+	 */
 	public static void closeDatabase() {
 		try {
 			conn.close();
@@ -89,6 +103,11 @@ public class DatabaseLogic {
 		}
 	}
 	
+	/**
+	 * Inserts a user with the given username
+	 * 
+	 * @param username string of the user's name
+	 */
 	public static void insertUser(String username) {
 		try {
 			pstate = conn.prepareStatement(insertUser);
@@ -99,6 +118,12 @@ public class DatabaseLogic {
 		}
 	}
 	
+	/**
+	 * Inserts an ArithmeticTest that belongs to a user.
+	 * 
+	 * @param test ArithmeticTest to be inserted
+	 * @param username string of username which the test belongs to
+	 */
 	public static void insertTest(ArithmeticTest test, String username) {
 		try {
 			int id = selectUserID(username);
@@ -113,6 +138,11 @@ public class DatabaseLogic {
 		}
 	}
 	
+	/**
+	 * Inserts a list of question.
+	 * 
+	 * @param questions list of questions to be inserted
+	 */
 	public static void insertQuestions(List<Question> questions) {
 		try {
 			for (Question question : questions) {
@@ -130,6 +160,12 @@ public class DatabaseLogic {
 		}
 	}
 	
+	/**
+	 * Gets all the ArithmeticTest that belong to a user.
+	 * 
+	 * @param username user that owns all requested ArithmeticTests
+	 * @return list of ArithmeticTest
+	 */
 	public static List<ArithmeticTest> getAllUserTests(String username) {
 		ResultSet result = null;
 		try {
@@ -147,6 +183,11 @@ public class DatabaseLogic {
 		}
 	}
 	
+	/**
+	 * Gets the id of the latest ArithmeticTest that was inserted.
+	 * 
+	 * @return int id of the latest ArithmeticTest
+	 */
 	private static int getLatestTestID() {
 		ResultSet result = null;
 		int toReturn = 0;
@@ -162,6 +203,12 @@ public class DatabaseLogic {
 		return toReturn;
 	}
 	
+	/**
+	 * Converts a ResultSet of ArithmeticTest to a list of ArithmeticTest.
+	 * 
+	 * @param rs ResultSet of the ArithmeticTest
+	 * @return list of ArithmeticTest
+	 */
 	private static List<ArithmeticTest> convertToTest(ResultSet rs) {
 		List<ArithmeticTest> toReturn = new ArrayList<ArithmeticTest>();
 		try {
@@ -178,6 +225,11 @@ public class DatabaseLogic {
 		return toReturn;
 	}
 	
+	/**
+	 * Checks if a table exist.
+	 * 
+	 * @return true if the table exists, false otherwise
+	 */
 	private static boolean tablesExists() {
 		try {
 			ResultSet result = meta.getTables(null, null, userTableName, null);
@@ -192,6 +244,12 @@ public class DatabaseLogic {
 		return false;
 	}
 	
+	/**
+	 * Gets the id of a user from the given username.
+	 * 
+	 * @param username string username that the id is needed from
+	 * @return int id of the user
+	 */
 	private static int selectUserID(String username) {
 		int toReturn = -1;
 		try {
@@ -207,7 +265,9 @@ public class DatabaseLogic {
 		return toReturn;
 	}
 	
-	// TEMPORARY
+	/**
+	 * Drops all the tables.
+	 */
 	private static void dropTables() {
 		try {
 			statement.executeUpdate("DROP TABLE " + questionTableName);
