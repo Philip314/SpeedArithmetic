@@ -204,6 +204,10 @@ public class UserInterface {
 			mainV.getChildren().add(question);
 		}
 		
+		Label numCorrectAnswers = new Label("Number of correct answers: " + test.getNumberOfCorrectAnswers());
+		Label numIncorrectAnswers = new Label("Number of incorrect answers: " + test.getNumberOfIncorrectAnswers());
+		mainV.getChildren().addAll(numCorrectAnswers, numIncorrectAnswers);
+		
 		borderPane.setTop(header(stage));
 		borderPane.setCenter(mainV);
 		Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
