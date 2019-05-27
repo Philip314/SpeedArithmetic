@@ -44,12 +44,7 @@ public class UserInterface {
 		mainMenu.setOnAction(actionEvent -> mainMenu(stage));
 		
 		// Username on the left
-		String username = "(No account)";
-		try {
-			username = UserLogic.getActiveUser().getUsername();
-		} catch (NullPointerException e) {
-		}
-		Label usernameLabel = new Label(username);
+		Label usernameLabel = new Label(UserInterfaceLogic.getUsernameLabel());
 		
 		ToolBar toolBar = new ToolBar();
 		toolBar.getItems().addAll(usernameLabel, new Separator(), mainMenu);

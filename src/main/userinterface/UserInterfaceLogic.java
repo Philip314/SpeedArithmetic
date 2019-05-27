@@ -23,6 +23,20 @@ import main.user.UserLogic;
 public class UserInterfaceLogic {
 	
 	/**
+	 * Gets the username of the active user if there is an active user. Returns a placeholder if there isn't.
+	 * 
+	 * @return string username of the active user
+	 */
+	public static String getUsernameLabel() {
+		String username = "(No account)";
+		try {
+			username = UserLogic.getActiveUser().getUsername();
+		} catch (NullPointerException e) {
+		}
+		return username;
+	}
+	
+	/**
 	 * Decides which text should be set based on difficulty.
 	 * 
 	 * @param difficulty integer which decides what string is to be returned
