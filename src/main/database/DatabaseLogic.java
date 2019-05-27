@@ -55,6 +55,7 @@ public class DatabaseLogic {
 	static String getAllUserTests = String.format("SELECT * FROM %s WHERE user_id = ?", testTableName);
 	static String getLatestTestID = String.format("SELECT MAX(test_id) FROM %s", testTableName);
 	static String selectUserID = String.format("SELECT user_id FROM %s WHERE username = ?", userTableName);
+	static String selectUsername = String.format("SELECT username FROM %s WHERE username = ?", userTableName);
 	// Insert strings
 	static String insertUser = String.format("INSERT INTO %s (user_id, username) VALUES (DEFAULT, ?)", userTableName) ;
 	static String insertTest = String.format("INSERT INTO %s (test_id, difficulty, num_correct_answers, num_incorrect_answers, user_id) VALUES (DEFAULT, ?, ?, ?, ?)", testTableName);
@@ -263,6 +264,26 @@ public class DatabaseLogic {
 			e1.printStackTrace();
 		}
 		return toReturn;
+	}
+	
+	/**
+	 * Checks if the requested username exists in the database.
+	 * 
+	 * @param requestedUsername username to be checked
+	 * @return true is the username already exists, false otherwise
+	 */
+	public static boolean usernameExists(String requestedUsername) {
+		try {
+			pstate = conn.prepareStatement(selectUsername);
+			pstate.setString(1, requestedUsername);
+			ResultSet rs = pstate.executeQuery();
+			while (rs.next()) {
+				return true;
+			}
+		} catch(SQLException el) {
+			el.printStackTrace();
+		}
+		return false;
 	}
 	
 	/**

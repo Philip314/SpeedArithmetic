@@ -179,7 +179,7 @@ public class UserInterfaceLogic {
 	}
 	
 	/**
-	 * Validates the username.
+	 * Validates the username. Must not be empty and must not already exists.
 	 * 
 	 * @param username string to be validated
 	 * @return true if the username is valid, false otherwise
@@ -187,9 +187,10 @@ public class UserInterfaceLogic {
 	public static boolean validateUsername(String username) {
 		if (username.equals("") || username.trim().length() == 0) {
 			return false;
-		} else {
-			return true;
+		} else if (DatabaseLogic.usernameExists(username)) {
+			return false;
 		}
+		return true;
 	}
 	
 	/**
