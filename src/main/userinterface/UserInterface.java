@@ -260,8 +260,8 @@ public class UserInterface {
 		TableView<ArithmeticTest> table = new TableView<ArithmeticTest>();
 		table.setEditable(false);
 		TableColumn<ArithmeticTest, Integer> difficulty = new TableColumn<ArithmeticTest, Integer>("Difficulty");
-		TableColumn<ArithmeticTest, Integer> numCorrect = new TableColumn<ArithmeticTest, Integer>("Number of Correct Answers");
-		TableColumn<ArithmeticTest, Integer> numIncorrect = new TableColumn<ArithmeticTest, Integer>("Number of Incorrect Answers");
+		TableColumn<ArithmeticTest, Integer> numCorrect = new TableColumn<ArithmeticTest, Integer>("Correct Answers");
+		TableColumn<ArithmeticTest, Integer> numIncorrect = new TableColumn<ArithmeticTest, Integer>("Incorrect Answers");
 		difficulty.setCellValueFactory(new PropertyValueFactory<ArithmeticTest, Integer>("difficulty"));
 		numCorrect.setCellValueFactory(new PropertyValueFactory<ArithmeticTest, Integer>("numberOfCorrectAnswers"));
 		numIncorrect.setCellValueFactory(new PropertyValueFactory<ArithmeticTest, Integer>("numberOfIncorrectAnswers"));
